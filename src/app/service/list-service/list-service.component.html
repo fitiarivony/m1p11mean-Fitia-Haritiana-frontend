@@ -1,0 +1,20 @@
+<a routerLink="/services/create">Créer un service</a>
+<table>
+  <thead>
+    <th>Nom </th>
+    <th>Prix </th>
+    <th>Durée </th>
+    <th>Comission</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let service of services">
+      <td> {{ service.nom_service }}</td>
+      <td> {{ service.prix }}</td>
+      <td> {{ service.duree }}</td>
+      <td> {{ service.comission }}</td>
+      <td><a [routerLink]="'/services/update/' + service._id">Mettre à jour</a></td>
+      <td><button (click)="deleteService(service._id)">Supprimer le service</button></td>
+    </tr>
+  </tbody>
+</table>
+
