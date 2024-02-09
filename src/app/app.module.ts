@@ -9,6 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListPersonnelComponent } from './manager/list-personnel/list-personnel.component';
 import { AddPersonnelComponent } from './manager/add-personnel/add-personnel.component';
 import { UpdatePersonnelComponent } from './manager/update-personnel/update-personnel.component';
+import { LoginManagerComponent } from './manager/login-manager/login-manager.component';
+import { ListServiceComponent } from './service/list-service/list-service.component';
+import { CreateServiceComponent } from './service/create-service/create-service.component';
+import { UpdateServiceComponent } from './service/update-service/update-service.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +21,10 @@ import { UpdatePersonnelComponent } from './manager/update-personnel/update-pers
     ListPersonnelComponent,
     AddPersonnelComponent,
     UpdatePersonnelComponent
+    LoginManagerComponent,
+    ListServiceComponent,
+    CreateServiceComponent,
+    UpdateServiceComponent,
   ],
   imports: [
     BrowserModule,
