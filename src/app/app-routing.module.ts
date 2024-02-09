@@ -19,6 +19,7 @@ const routes: Routes = [
   {path:'services/list',component: ListServiceComponent},
   {path:'services/create',component: CreateServiceComponent},
   {path:'services/update/:id',component: UpdateServiceComponent},
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

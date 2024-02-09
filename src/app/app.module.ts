@@ -20,11 +20,11 @@ import { UpdateServiceComponent } from './service/update-service/update-service.
     LoginEmpComponent,
     ListPersonnelComponent,
     AddPersonnelComponent,
-    UpdatePersonnelComponent
+    UpdatePersonnelComponent,
     LoginManagerComponent,
     ListServiceComponent,
     CreateServiceComponent,
-    UpdateServiceComponent,
+    UpdateServiceComponent
   ],
   imports: [
     BrowserModule,
