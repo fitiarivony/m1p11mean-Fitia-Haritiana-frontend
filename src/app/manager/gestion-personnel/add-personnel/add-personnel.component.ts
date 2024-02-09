@@ -1,7 +1,7 @@
-import { EmpService } from 'src/app/service/emp.service';
+import { EmpService } from 'src/app/services/emp.service';
 import { Component } from '@angular/core'
 import { FormEmploye, Genre } from 'src/app/model'
-import { GenreService } from 'src/app/service/genre.service'
+import { GenreService } from 'src/app/services/genre.service'
 
 @Component({
   selector: 'app-add-personnel',

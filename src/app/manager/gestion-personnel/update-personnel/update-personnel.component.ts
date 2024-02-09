@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormEmploye, Genre } from 'src/app/model'
-import { EmpService } from 'src/app/service/emp.service'
-import { GenreService } from 'src/app/service/genre.service'
+import { EmpService } from 'src/app/services/emp.service'
+import { GenreService } from 'src/app/services/genre.service'
 
 import { ActivatedRoute } from '@angular/router'
 @Component({

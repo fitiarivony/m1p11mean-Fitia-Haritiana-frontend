@@ -1,9 +1,9 @@
 import { LoginEmpComponent } from './emp/login-emp/login-emp.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListPersonnelComponent } from './manager/list-personnel/list-personnel.component';
-import { AddPersonnelComponent } from './manager/add-personnel/add-personnel.component';
-import { UpdatePersonnelComponent } from './manager/update-personnel/update-personnel.component';
+import { ListPersonnelComponent } from './manager/gestion-personnel/list-personnel/list-personnel.component';
+import { AddPersonnelComponent } from './manager/gestion-personnel/add-personnel/add-personnel.component';
+import { UpdatePersonnelComponent } from './manager/gestion-personnel/update-personnel/update-personnel.component';
 
 import { LoginManagerComponent } from './manager/login-manager/login-manager.component';
 import { ListServiceComponent } from './service/list-service/list-service.component';

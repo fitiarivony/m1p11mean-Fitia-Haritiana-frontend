@@ -1,4 +1,4 @@
-import { EmpService } from 'src/app/service/emp.service'
+import { EmpService } from 'src/app/services/emp.service'
 import { Component } from '@angular/core'
 import { Employe } from 'src/app/model'
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { Login } from 'src/app/model'
 import { LoginEmpService } from '../login-emp.service'
-import { EmpService } from 'src/app/service/emp.service'
+import { EmpService } from 'src/app/services/emp.service'
 @Component({
   selector: 'app-login-emp',
   templateUrl: './login-emp.component.html',
