@@ -1,0 +1,7 @@
+
+Nom service:<input type="text"[(ngModel)]="service.nom_service">
+Prix :<input type="number"[(ngModel)]="service.prix">
+Durée :<input (keypress)="onlyNumber()" type="number"[(ngModel)]="service.duree">
+Comission :<input type="number"[(ngModel)]="service.comission">
+<input type="submit" value="Valider" (click)="createService()">
+
