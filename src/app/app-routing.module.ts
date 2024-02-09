@@ -7,7 +7,7 @@ import { CreateServiceComponent } from './service/create-service/create-service.
 import { UpdateServiceComponent } from './service/update-service/update-service.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginEmpComponent }
+  { path: 'login', component: LoginEmpComponent },
   { path: 'login-manager', component: LoginManagerComponent },
   {path:'services/list',component: ListServiceComponent},
   {path:'services/create',component: CreateServiceComponent},
