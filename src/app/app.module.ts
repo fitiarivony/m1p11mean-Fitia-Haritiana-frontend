@@ -15,6 +15,8 @@ import { CreateServiceComponent } from './service/create-service/create-service.
 import { UpdateServiceComponent } from './service/update-service/update-service.component';
 import { ShowPersonnelComponent } from './manager/gestion-personnel/show-personnel/show-personnel.component';
 import { FichePersonnelComponent } from './manager/gestion-personnel/fiche-personnel/fiche-personnel.component';
+import { GestionPreferenceComponent } from './clients/profil/gestion-preference/gestion-preference.component';
+import { GestionPreferenceServicesComponent } from './clients/profil/gestion-preference-services/gestion-preference-services.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { FichePersonnelComponent } from './manager/gestion-personnel/fiche-perso
     CreateServiceComponent,
     UpdateServiceComponent,
     ShowPersonnelComponent,
-    FichePersonnelComponent
+    FichePersonnelComponent,
+    GestionPreferenceComponent,
+    GestionPreferenceServicesComponent
   ],
   imports: [
     BrowserModule,
