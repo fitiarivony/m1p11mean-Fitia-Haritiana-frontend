@@ -1,16 +1,16 @@
 import { Component, Input } from '@angular/core'
-import { Location } from '@angular/common'
+import { ActivatedRoute } from '@angular/router'
+import { Service } from 'src/app/interfaces/service'
 import { FormEmploye, Genre } from 'src/app/model'
 import { EmpService } from 'src/app/services/emp.service'
 import { GenreService } from 'src/app/services/genre.service'
 
-import { ActivatedRoute } from '@angular/router'
 @Component({
-  selector: 'app-update-personnel',
-  templateUrl: './update-personnel.component.html',
-  styleUrls: ['./update-personnel.component.css']
+  selector: 'app-show-personnel',
+  templateUrl: './show-personnel.component.html',
+  styleUrls: ['./show-personnel.component.css']
 })
-export class UpdatePersonnelComponent {
+export class ShowPersonnelComponent {
   @Input() newEmp: FormEmploye = {
     identifiant: '',
     mdp: '',
@@ -19,16 +19,17 @@ export class UpdatePersonnelComponent {
     numeroCIN: '',
     prenom: '',
     genre: '',
-    services:[]
+    services: []
   }
-  // @Input() changeEditing()=>{}
   _id: string | null = ''
+  @Input() nomGenre: string = ''
   genres: Genre[] = []
+  @Input() services: Service[] = []
+  nomService: string[] = []
   constructor (
     private genreService: GenreService,
     private empService: EmpService,
-    private route: ActivatedRoute,
-    private location: Location
+    private route: ActivatedRoute
   ) {}
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
@@ -40,15 +41,24 @@ export class UpdatePersonnelComponent {
         console.log(err)
       }
     })
+    let serv = this.newEmp.services
+    let serviceDispo: string[] = []
+    serv.map(v => {
+      this.services.map(s => {
+        console.log(s._id, v)
+
+        if (s._id === v) {
+          serviceDispo.push(s.nom_service)
+        }
+      })
+    })
+    this.nomService = serviceDispo
   }
-
-
-  submit () {
+  submit (  ) {
     const data = this.newEmp
     this.empService.update(data, this._id!).subscribe({
       next: v => {
         console.log(v)
-        // this.location.
       },
       error: v => {
         console.log(v)

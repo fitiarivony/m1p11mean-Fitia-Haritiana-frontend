@@ -9,16 +9,19 @@ import { LoginManagerComponent } from './manager/login-manager/login-manager.com
 import { ListServiceComponent } from './service/list-service/list-service.component';
 import { CreateServiceComponent } from './service/create-service/create-service.component';
 import { UpdateServiceComponent } from './service/update-service/update-service.component';
+import { ShowPersonnelComponent } from './manager/gestion-personnel/show-personnel/show-personnel.component';
+import { FichePersonnelComponent } from './manager/gestion-personnel/fiche-personnel/fiche-personnel.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginEmpComponent },
+  { path: '', component: LoginEmpComponent },
   { path: 'emps', component: ListPersonnelComponent },
   { path: 'emps/add', component: AddPersonnelComponent },
+  { path: 'emps/show/:id', component: FichePersonnelComponent },
   { path: 'emps/edit/:id', component: UpdatePersonnelComponent },
   { path: 'login-manager', component: LoginManagerComponent },
-  {path:'services/list',component: ListServiceComponent},
-  {path:'services/create',component: CreateServiceComponent},
-  {path:'services/update/:id',component: UpdateServiceComponent},
+  { path:'services/list',component: ListServiceComponent},
+  { path:'services/create',component: CreateServiceComponent},
+  { path:'services/update/:id',component: UpdateServiceComponent},
 ]
 
 @NgModule({

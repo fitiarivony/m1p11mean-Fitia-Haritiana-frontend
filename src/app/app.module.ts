@@ -13,6 +13,8 @@ import { LoginManagerComponent } from './manager/login-manager/login-manager.com
 import { ListServiceComponent } from './service/list-service/list-service.component';
 import { CreateServiceComponent } from './service/create-service/create-service.component';
 import { UpdateServiceComponent } from './service/update-service/update-service.component';
+import { ShowPersonnelComponent } from './manager/gestion-personnel/show-personnel/show-personnel.component';
+import { FichePersonnelComponent } from './manager/gestion-personnel/fiche-personnel/fiche-personnel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,9 @@ import { UpdateServiceComponent } from './service/update-service/update-service.
     LoginManagerComponent,
     ListServiceComponent,
     CreateServiceComponent,
-    UpdateServiceComponent
+    UpdateServiceComponent,
+    ShowPersonnelComponent,
+    FichePersonnelComponent
   ],
   imports: [
     BrowserModule,

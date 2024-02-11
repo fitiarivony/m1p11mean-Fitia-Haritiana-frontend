@@ -2,13 +2,12 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Employe, FormEmploye, Genre, Login } from '../model'
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class EmpService {
   private apiUrl = 'http://localhost:8000/emp'
-
   constructor (private http: HttpClient) {}
 
   postData (data: Login): Observable<any> {

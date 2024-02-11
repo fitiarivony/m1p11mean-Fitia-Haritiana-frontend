@@ -16,7 +16,8 @@ export class AddPersonnelComponent {
     nom: '',
     numeroCIN: '',
     prenom: '',
-    genre: ''
+    genre: '',
+    services: []
   }
   genres: Genre[] = []
   constructor (private genreService: GenreService, private empService: EmpService) {
