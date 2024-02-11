@@ -20,6 +20,11 @@ export class EmpService {
     let val = this.http.get(postUrl)
     return val
   }
+  getAllNames (): Observable<any> {
+    const postUrl = `${this.apiUrl}`.concat('/names')
+    let val = this.http.get(postUrl)
+    return val
+  }
   inscription (data: FormEmploye): Observable<any> {
     const postUrl = `${this.apiUrl}`
     let val = this.http.post(postUrl, data)
@@ -40,5 +45,9 @@ export class EmpService {
     let val = this.http.delete(postUrl)
     return val
   }
-
+  getFavEmp():Observable<any>{
+    const postUrl = `${this.apiUrl}`.concat('/favs')
+    let val = this.http.get(postUrl)
+    return val
+  }
 }

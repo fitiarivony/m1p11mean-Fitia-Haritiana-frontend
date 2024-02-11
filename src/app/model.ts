@@ -3,11 +3,11 @@ export interface Login {
   mdp: string
 }
 export interface Genre {
-  _id:string
-  nomGenre:string
+  _id: string
+  nomGenre: string
 }
 export interface Employe {
-  _id:string
+  _id: string
   identifiant: string
   mdp: string
   dateDeNaissance: Date
@@ -16,7 +16,7 @@ export interface Employe {
   prenom: string
   genre: Genre
 }
-export interface FormEmploye{
+export interface FormEmploye {
   identifiant: string
   mdp: string
   dateDeNaissance: string
@@ -24,5 +24,10 @@ export interface FormEmploye{
   numeroCIN: string
   prenom: string
   genre: string
-  services:string[]
+  services: string[]
+}
+export interface EmployeName {
+  _id: string
+  nom: string
+  prenom: string
 }
