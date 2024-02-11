@@ -24,4 +24,5 @@ export interface FormEmploye{
   numeroCIN: string
   prenom: string
   genre: string
+  services:string[]
 }

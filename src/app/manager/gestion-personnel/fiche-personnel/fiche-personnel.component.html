@@ -1,6 +1,10 @@
-    <h1>Inscription</h1>
-    <div class="container">
-      <!-- <form> -->
+<div class="row my-5">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <ng-container *ngIf="editing; else elseTemplate">
+      <!-- <app-update-personnel [newEmp]="newEmp"></app-update-personnel> -->
+      <h1>Profil</h1>
+      <div class="container">
         <div class="mb-3 row">
           <label for="inputName" class="col-4 col-form-label">Nom</label>
           <div class="col-8">
@@ -43,7 +47,9 @@
           </div>
         </div>
         <div class="mb-3 row">
-          <label for="identifiant" class="col-4 col-form-label">Identifiant</label>
+          <label for="identifiant" class="col-4 col-form-label"
+            >Identifiant</label
+          >
           <div class="col-8">
             <input
               type="text"
@@ -84,9 +90,61 @@
           </div>
         </div>
         <div class="mb-3 row">
+          <label for="genre" class="col-4 col-form-label">Services</label>
+          <!-- <div class=""> -->
+          <div class="col-8">
+            <div *ngFor="let item of services">
+              <ng-container
+                *ngIf="newEmp.services.includes(item._id); else elseTemplate"
+              >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id=""
+                  (click)="add(item._id)"
+                  checked
+                />
+              </ng-container>
+              <ng-template #elseTemplate>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id=""
+                  (click)="add(item._id)"
+                />
+              </ng-template>
+
+              <label class="form-check-label" for="">
+                {{ item.nom_service }}
+              </label>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+        <div class="mb-3 row">
           <div class="offset-sm-4 col-sm-8">
-            <button type="submit" class="btn btn-primary" (click)="submit()">Enregistrer</button>
+            <button type="submit" class="btn btn-primary" (click)="submit()">
+              Enregistrer
+            </button>
           </div>
         </div>
-      <!-- </form> -->
-    </div>
+      </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <app-show-personnel
+        [newEmp]="newEmp"
+        [nomGenre]="nomGenre"
+        [services]="services"
+      ></app-show-personnel>
+    </ng-template>
+
+    <ng-container *ngIf="!editing">
+      <button class="btn btn-success" (click)="changeEditing()">
+        Modifier
+      </button>
+    </ng-container>
+  </div>
+  <div class="col-3"></div>
+</div>

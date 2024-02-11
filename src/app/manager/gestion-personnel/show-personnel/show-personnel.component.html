@@ -1,0 +1,52 @@
+<h1>Inscription</h1>
+<div class="container">
+  <!-- <form> -->
+  <div class="mb-3 row">
+    <label for="inputName" class="col-4 col-form-label">Nom</label>
+    <div class="col-8">
+      <label name="inputName" id="inputName">{{ newEmp.nom }}</label>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputLastName" class="col-4 col-form-label">Prenom</label>
+    <div class="col-8">
+      <p name="inputLastName" id="inputLastName">{{ newEmp.prenom }}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="ddn" class="col-4 col-form-label">Date de naissance</label>
+    <div class="col-8">
+      <p name="ddn" id="ddn">{{ newEmp.dateDeNaissance }}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="identifiant" class="col-4 col-form-label">Identifiant</label>
+    <div class="col-8">
+      <p name="identifiant" id="identifiant">{{ newEmp.identifiant }}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="cin" class="col-4 col-form-label">Numéro de CIN</label>
+    <div class="col-8">
+      <p name="cin" id="cin">{{ newEmp.numeroCIN }}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="genre" class="col-4 col-form-label">Genre</label>
+    <div class="col-8">
+      <p name="identifiant" id="identifiant">{{ nomGenre }}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="genre" class="col-4 col-form-label">Services</label>
+    <div class="col-8">
+      <ng-container *ngFor="let item of services">
+        <ng-container *ngIf="this.newEmp.services.includes(item._id)">
+          <p name="identifiant" id="identifiant">{{ item.nom_service }}</p>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- </form> -->
+</div>
