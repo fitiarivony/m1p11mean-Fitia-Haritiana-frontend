@@ -24,10 +24,11 @@ export class LoginClientComponent {
         console.log(client);
 
         localStorage.setItem('token',client.token.token)
-        this.router.navigate(['/prise-rdv']);
+        localStorage.setItem('id',client.admin._id)
+        // this.router.navigate(['/prise-rdv']);
       },
       error: (err) => console.log(err.error),
     });
- 
+
   }
 }

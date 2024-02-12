@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Service } from 'src/app/interfaces/service';
 import { EmployeName } from 'src/app/model';
+import { ClientService } from 'src/app/services/client.service';
 import { EmpService } from 'src/app/services/emp.service';
 import { ServeService } from 'src/app/services/serve.service';
 
@@ -11,10 +12,10 @@ import { ServeService } from 'src/app/services/serve.service';
 })
 export class GestionPreferenceServicesComponent {
   employeName: Service[] = []
-  editing: boolean = true
+  editing: boolean = false
   idPersonne: string = ''
   favoriteEmp: string[] = []
-  constructor (private serveService: ServeService) {}
+  constructor (private serveService: ServeService, private clientService: ClientService) {}
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
     this.serveService.listService().subscribe({
@@ -25,14 +26,14 @@ export class GestionPreferenceServicesComponent {
         console.log(err)
       }
     })
-    // this.serveService.getFavEmp().subscribe({
-    //   next: v => {
-    //     this.favoriteEmp = v
-    //   },
-    //   error: err => {
-    //     console.log(err)
-    //   }
-    // })
+    this.clientService.getFavServ(localStorage.getItem('id')!).subscribe({
+      next: v => {
+        this.favoriteEmp = v
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
   }
   add () {
     let id = this.idPersonne
@@ -40,5 +41,21 @@ export class GestionPreferenceServicesComponent {
   }
   delete (id: string) {
     this.favoriteEmp=this.favoriteEmp.filter(e => e !== id)
+  }
+  changeEditingStatus () {
+    this.editing = !this.editing
+  }
+  submit () {
+    this.clientService
+      .setFavServ(localStorage.getItem('id')!, this.favoriteEmp)
+      .subscribe({
+        next: v => {
+          console.log(v)
+          this.changeEditingStatus()
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
   }
 }

@@ -29,9 +29,9 @@
         class="table table-striped table-hover table-borderless table-primary align-middle"
       >
         <thead class="table-light">
-          <caption>
-            Mes employés préférés
-          </caption>
+          <h1>
+            Mes services préférés
+          </h1>
           <tr>
             <th>Noms</th>
             <th *ngIf="editing"></th>
@@ -48,6 +48,8 @@
         <tfoot></tfoot>
       </table>
     </div>
+    <button *ngIf="!editing" class="btn btn-success" (click)="changeEditingStatus()">Modifier</button>
+    <button *ngIf="editing" class="btn btn-success" (click)="submit()">Valider</button>
   </div>
   <div class="col-2"></div>
 </div>
