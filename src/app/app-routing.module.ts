@@ -12,6 +12,8 @@ import { UpdateServiceComponent } from './service/update-service/update-service.
 import { ShowPersonnelComponent } from './manager/gestion-personnel/show-personnel/show-personnel.component';
 import { FichePersonnelComponent } from './manager/gestion-personnel/fiche-personnel/fiche-personnel.component';
 import { GestionPreferenceComponent } from './clients/profil/gestion-preference/gestion-preference.component';
+import { InscriptionClientComponent } from './clients/inscription-client/inscription-client.component';
+import { LoginClientComponent } from './clients/login-client/login-client.component';
 
 const routes: Routes = [
   { path: '', component: LoginEmpComponent },
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path:'services/create',component: CreateServiceComponent},
   { path:'services/update/:id',component: UpdateServiceComponent},
   { path:'client/preference',component: GestionPreferenceComponent},
+  {path:'sign-up',component: InscriptionClientComponent},
+  {path:'sign-in',component: LoginClientComponent},
 ]
 
 @NgModule({
