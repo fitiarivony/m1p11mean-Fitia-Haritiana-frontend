@@ -33,3 +33,8 @@ export interface FormEmploye {
   services: string[]
   horaire: Horaire[]
 }
+export interface EmployeName {
+  _id: string
+  nom: string
+  prenom: string
+}
