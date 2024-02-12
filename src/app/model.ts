@@ -16,6 +16,12 @@ export interface Employe {
   prenom: string
   genre: Genre
 }
+export interface Horaire {
+  jour: number
+  debut: Date
+  fin: Date
+}
+
 export interface FormEmploye {
   identifiant: string
   mdp: string
@@ -25,9 +31,5 @@ export interface FormEmploye {
   prenom: string
   genre: string
   services: string[]
-}
-export interface EmployeName {
-  _id: string
-  nom: string
-  prenom: string
+  horaire: Horaire[]
 }
