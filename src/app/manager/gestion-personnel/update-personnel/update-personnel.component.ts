@@ -19,7 +19,8 @@ export class UpdatePersonnelComponent {
     numeroCIN: '',
     prenom: '',
     genre: '',
-    services:[]
+    services:[],
+    horaire: []
   }
   // @Input() changeEditing()=>{}
   _id: string | null = ''

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { FormEmploye, Genre } from 'src/app/model'
+import { FormEmploye, Genre, Horaire } from 'src/app/model'
 import { EmpService } from 'src/app/services/emp.service'
 import { GenreService } from 'src/app/services/genre.service'
 import { Injectable } from '@angular/core'
@@ -24,10 +24,13 @@ export class FichePersonnelComponent {
     numeroCIN: '',
     prenom: '',
     genre: '',
-    services: []
+    services: [],
+    horaire: []
   }
   services: Service[] = []
   nomGenre: string = ''
+  formHoraire:Horaire={debut:new Date(), fin:new Date(), jour:0}
+  jourDeLaSemaine: string[] = ['Dimanche','Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
   constructor (
     private genreService: GenreService,
     private empService: EmpService,
@@ -98,10 +101,7 @@ export class FichePersonnelComponent {
     this.editing = !this.editing
   }
   add (id: string) {
-    // if (id in this.newEmp.services){
-
     let temp = this.newEmp.services
-
     temp = temp.filter(v => v !== id)
     console.log(temp)
     if (this.newEmp.services.length === temp.length) {
@@ -110,5 +110,12 @@ export class FichePersonnelComponent {
     let tempEmp=this.newEmp
     tempEmp.services=temp
     this.newEmp=tempEmp
+  }
+  addHoraire(){
+    this.newEmp.horaire.push(this.formHoraire)
+  }
+  delete(horaire:Horaire){
+    let temp=this.newEmp.horaire
+    this.newEmp.horaire=temp.filter(v=>v!==horaire)
   }
 }

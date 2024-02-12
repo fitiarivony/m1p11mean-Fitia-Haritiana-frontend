@@ -17,6 +17,8 @@ import { ShowPersonnelComponent } from './manager/gestion-personnel/show-personn
 import { FichePersonnelComponent } from './manager/gestion-personnel/fiche-personnel/fiche-personnel.component';
 import { GestionPreferenceComponent } from './clients/profil/gestion-preference/gestion-preference.component';
 import { GestionPreferenceServicesComponent } from './clients/profil/gestion-preference-services/gestion-preference-services.component';
+import { InscriptionClientComponent } from './clients/inscription-client/inscription-client.component';
+import { LoginClientComponent } from './clients/login-client/login-client.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,9 @@ import { GestionPreferenceServicesComponent } from './clients/profil/gestion-pre
     ShowPersonnelComponent,
     FichePersonnelComponent,
     GestionPreferenceComponent,
-    GestionPreferenceServicesComponent
+    GestionPreferenceServicesComponent,
+    InscriptionClientComponent,
+    LoginClientComponent,
   ],
   imports: [
     BrowserModule,

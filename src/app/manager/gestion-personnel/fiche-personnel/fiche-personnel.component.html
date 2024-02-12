@@ -123,6 +123,95 @@
           </div>
           <!-- </div> -->
         </div>
+
+        <div class="mb-3 row">
+          <div class="col-4">
+            <label for="genre" class="col-form-label">Horaires</label>
+            <ng-container *ngIf="editing">
+              <div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Jour</label>
+                  <select
+                    class="form-select"
+                    name=""
+                    id=""
+                    [(ngModel)]="formHoraire.jour"
+                  >
+                    <option
+                      *ngFor="let item of jourDeLaSemaine; index as id"
+                      [value]="id"
+                    >
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Début</label>
+                  <input
+                    class="form-control"
+                    type="time"
+                    value=""
+                    id=""
+                    [(ngModel)]="formHoraire.debut"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Fin</label>
+                  <input
+                    class="form-control"
+                    type="time"
+                    value=""
+                    id=""
+                    [(ngModel)]="formHoraire.fin"
+                  />
+                </div>
+                <div class="d-grid gap-2">
+                  <button
+                    type="button"
+                    name=""
+                    id=""
+                    class="btn btn-primary"
+                    (click)="addHoraire()"
+                  >
+                    Ajouter
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="col-8">
+            <div class="table-responsive">
+              <table
+                class="table table-striped table-hover table-borderless table-primary align-middle"
+              >
+                <thead class="table-light">
+                  <tr>
+                    <th>Jour</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th *ngIf="editing"></th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <ng-container *ngFor="let item of newEmp.horaire">
+                    <tr class="table-primary">
+                      <td scope="row">{{ jourDeLaSemaine[item.jour] }}</td>
+                      <td scope="row">{{ item.debut }}</td>
+                      <td scope="row">{{ item.fin }}</td>
+                      <td *ngIf="editing">
+                        <button class="btn btn-danger" (click)="delete(item)">
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+                <tfoot></tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <div class="mb-3 row">
           <div class="offset-sm-4 col-sm-8">
             <button type="submit" class="btn btn-primary" (click)="submit()">
