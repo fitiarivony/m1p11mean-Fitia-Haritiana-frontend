@@ -19,13 +19,16 @@ export class ShowPersonnelComponent {
     numeroCIN: '',
     prenom: '',
     genre: '',
-    services: []
+    services: [],
+    horaire: []
   }
   _id: string | null = ''
   @Input() nomGenre: string = ''
   genres: Genre[] = []
   @Input() services: Service[] = []
   nomService: string[] = []
+  jourDeLaSemaine: string[] = ['Dimanche','Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+
   constructor (
     private genreService: GenreService,
     private empService: EmpService,
