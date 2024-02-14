@@ -1,0 +1,39 @@
+Date de rdv:<input type="datetime-local" [(ngModel)]="rdv.date_rdv" (change)="onChangeDateRDV()" />
+
+<table>
+  <thead>
+    <th>Employe</th>
+    <th>Service</th>
+    <th>Ordre</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rendez_vous of rdv.rdv_service; index as ind;">
+      <td>
+       {{ getSelectedEmp(rendez_vous.id_employe).nom }} {{ getSelectedEmp(rendez_vous.id_employe).prenom}}
+
+      <td>{{ getSelectedService(rendez_vous.id_service).nom_service }}</td>
+      <td>{{ ind+1 }}</td>
+      <td><button (click)="deleteSeance(rendez_vous)">Retirer</button></td>
+
+      <td *ngIf="ind!=0;"><button (click)="monterOrdre(ind)">Remonter</button></td>
+      <td *ngIf="ind!=rdv.rdv_service.length-1 && rdv.rdv_service.length>1"><button (click)="descendreOrdre(ind)">Descendre</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  Service:
+  <select [(ngModel)]="currentrdv.id_service"  (change)="onSelectService()">
+   <option *ngFor="let serve of service" [value]="serve._id">{{ serve.nom_service }}</option>
+   </select>
+   <div *ngIf="currentrdv.id_service">
+    Employe:<select [(ngModel)]="currentrdv.id_employe" >
+      <option *ngFor="let employee of fav_emp" [value]="employee._id">{{ employee.nom }} {{ employee.prenom }}</option>
+      </select>
+
+  </div>
+
+  <button (click)="addSeance()">Ajouter</button>
+</div>
+
+<button (click)="addRdv()">Ajouter Rdv</button>

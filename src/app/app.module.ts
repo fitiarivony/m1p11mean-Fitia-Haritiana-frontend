@@ -19,11 +19,12 @@ import { GestionPreferenceComponent } from './clients/profil/gestion-preference/
 import { GestionPreferenceServicesComponent } from './clients/profil/gestion-preference-services/gestion-preference-services.component';
 import { InscriptionClientComponent } from './clients/inscription-client/inscription-client.component';
 import { LoginClientComponent } from './clients/login-client/login-client.component';
+import { PriseRdvComponent } from './clients/prise-rdv/prise-rdv.component';
 import { ListeOffreComponent } from './manager/gestion-offre/liste-offre/liste-offre.component';
-
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddOffreComponent } from './manager/gestion-offre/add-offre/add-offre.component';
 import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offre.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offr
     GestionPreferenceServicesComponent,
     InscriptionClientComponent,
     LoginClientComponent,
+    PriseRdvComponent,
     ListeOffreComponent,
     AddOffreComponent,
     ShowOffreComponent,
