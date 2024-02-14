@@ -16,6 +16,11 @@ export class ClientService {
   loginClient(client:Client){
     return this.http.post('http://localhost:8000/clients/sign-in',client,{headers: {'Content-Type': 'application/json'}});
   }
+  getNames():Observable<any>{
+    const postUrl = `${this.apiUrl}`.concat('/names')
+    let val = this.http.get(postUrl,{headers: {'Content-Type': 'application/json'}})
+    return val
+  }
   getFavEmp(id:string):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/fav-emps/').concat(id)
     let val = this.http.get(postUrl,{headers: {'Content-Type': 'application/json'}})

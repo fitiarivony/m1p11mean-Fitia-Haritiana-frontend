@@ -20,6 +20,10 @@ import { GestionPreferenceServicesComponent } from './clients/profil/gestion-pre
 import { InscriptionClientComponent } from './clients/inscription-client/inscription-client.component';
 import { LoginClientComponent } from './clients/login-client/login-client.component';
 import { PriseRdvComponent } from './clients/prise-rdv/prise-rdv.component';
+import { ListeOffreComponent } from './manager/gestion-offre/liste-offre/liste-offre.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AddOffreComponent } from './manager/gestion-offre/add-offre/add-offre.component';
+import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offre.component';
 
 @NgModule({
   declarations: [
@@ -40,12 +44,16 @@ import { PriseRdvComponent } from './clients/prise-rdv/prise-rdv.component';
     InscriptionClientComponent,
     LoginClientComponent,
     PriseRdvComponent,
+    ListeOffreComponent,
+    AddOffreComponent,
+    ShowOffreComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,6 +16,9 @@ import { InscriptionClientComponent } from './clients/inscription-client/inscrip
 import { LoginClientComponent } from './clients/login-client/login-client.component'
 import { GestionPreferenceServicesComponent } from './clients/profil/gestion-preference-services/gestion-preference-services.component'
 import { PriseRdvComponent } from './clients/prise-rdv/prise-rdv.component';
+import { ListeOffreComponent } from './manager/gestion-offre/liste-offre/liste-offre.component'
+import { AddOffreComponent } from './manager/gestion-offre/add-offre/add-offre.component'
+import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offre.component'
 
 const routes: Routes = [
   { path: '', component: LoginEmpComponent },
@@ -32,7 +35,9 @@ const routes: Routes = [
   { path: 'sign-up', component: InscriptionClientComponent },
   { path: 'sign-in', component: LoginClientComponent },
   {path:'prise-rdv',component:PriseRdvComponent},
-
+  { path: 'offre/liste', component: ListeOffreComponent },
+  { path: 'offre/add', component: AddOffreComponent },
+  { path: 'offre/show/:id', component: ShowOffreComponent },
 ]
 
 @NgModule({
