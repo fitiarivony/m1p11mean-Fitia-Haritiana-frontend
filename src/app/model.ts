@@ -38,3 +38,21 @@ export interface EmployeName {
   nom: string
   prenom: string
 }
+export interface Emp {
+  _id: string
+  identifiant: string
+  mdp: string
+  dateDeNaissance: string
+  nom: string
+  numeroCIN: string
+  prenom: string
+  genre: string
+  services: string[]
+  horaire: HoraireString[]
+}
+export interface HoraireString {
+  jour: number
+  debut: String,
+  fin: String
+}
+

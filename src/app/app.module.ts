@@ -19,6 +19,8 @@ import { GestionPreferenceComponent } from './clients/profil/gestion-preference/
 import { GestionPreferenceServicesComponent } from './clients/profil/gestion-preference-services/gestion-preference-services.component';
 import { InscriptionClientComponent } from './clients/inscription-client/inscription-client.component';
 import { LoginClientComponent } from './clients/login-client/login-client.component';
+import { PriseRdvComponent } from './clients/prise-rdv/prise-rdv.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,7 @@ import { LoginClientComponent } from './clients/login-client/login-client.compon
     GestionPreferenceServicesComponent,
     InscriptionClientComponent,
     LoginClientComponent,
+    PriseRdvComponent,
   ],
   imports: [
     BrowserModule,
