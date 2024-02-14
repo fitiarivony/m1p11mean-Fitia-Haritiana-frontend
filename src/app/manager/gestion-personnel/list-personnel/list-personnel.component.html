@@ -26,7 +26,7 @@
             <td>{{ item.genre.nomGenre }}</td>
             <td>{{ item.numeroCIN }}</td>
             <td>
-              <a href="emps/edit/{{item._id}}"><button class="btn btn-success">Modifier</button></a>
+              <a href="emps/show/{{item._id}}"><button class="btn btn-success">Voir</button></a>
               <button class="btn btn-danger" (click)="delete(item._id)">Supprimer</button>
             </td>
           </tr>
