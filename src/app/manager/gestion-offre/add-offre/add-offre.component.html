@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <h1>Insertion offre spéciale</h1>
+    <div class="mb-3">
+      <label for="" class="form-label">Nom de l'offre</label>
+      <input
+        type="text"
+        class="form-control"
+        name=""
+        id=""
+        aria-describedby="helpId"
+        placeholder=""
+        [(ngModel)]="formOffre.nomOffreSpeciale"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Description</label>
+      <ckeditor
+        [editor]="Editor"
+        [(ngModel)]="formOffre.description"
+      ></ckeditor>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Service</label>
+      <select class="form-select" name="" id="" [(ngModel)]="formOffre.service">
+        <option *ngFor="let item of services" [value]="item._id">
+          {{ item.nom_service }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Réduction</label>
+      <input
+        type="number"
+        class="form-control"
+        name=""
+        id=""
+        aria-describedby="helpId"
+        placeholder=""
+        [(ngModel)]="formOffre.reduction"
+      />
+      <small id="helpId" class="form-text text-muted">% du prix total</small>
+    </div>
+
+    <label for="" class="form-label">Client(s) visé(s)</label>
+    <div *ngFor="let item of nomClients" class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id=""
+      (click)="add(item._id)" />
+      <label class="form-check-label" for=""> {{item.nom_client}} {{item.prenom_client}} </label>
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id=""
+      />
+      <label class="form-check-label" for=""> Checked checkbox </label>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button
+        type="button"
+        name=""
+        id=""
+        class="btn btn-primary mx-5"
+        (click)="submit()"
+      >
+        Valider
+      </button>
+    </div>
+
+
+  </div>
+  <div class="col-3"></div>
+</div>
