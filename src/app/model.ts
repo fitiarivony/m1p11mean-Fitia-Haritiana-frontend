@@ -1,3 +1,5 @@
+import { Service } from "./interfaces/service"
+
 export interface Login {
   identifiant: string
   mdp: string
@@ -37,4 +39,24 @@ export interface EmployeName {
   _id: string
   nom: string
   prenom: string
+}
+export interface ClientName {
+  _id: string
+  nom_client: string
+  prenom_client: string
+}
+
+export interface FormOffre {
+  nomOffreSpeciale: string
+  description: string
+  service: string
+  reduction: number
+  clientVises?:string[]
+}
+export interface Offre {
+  _id:string
+  nomOffreSpeciale: string
+  description: string
+  service: Service
+  reduction: number
 }
