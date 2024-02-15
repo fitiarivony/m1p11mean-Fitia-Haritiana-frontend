@@ -41,4 +41,9 @@ export class ClientService {
     let val = this.http.post(postUrl, fav_emps,{headers: {'Content-Type': 'application/json'}})
     return val
   }
+  getHistorique(id:string):Observable<any>{
+    const postUrl = `${this.apiUrl}`.concat('/histo/').concat(id)
+    let val = this.http.get(postUrl,{headers: {'Content-Type': 'application/json'}})
+    return val
+  }
 }

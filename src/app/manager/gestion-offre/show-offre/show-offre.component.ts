@@ -35,7 +35,7 @@ export class ShowOffreComponent {
     this.serveService.listService().subscribe(data => {
       this.services = data
     })
-    this._id = this.route.snapshot.paramMap.get('id')!
+    this._id = localStorage.getItem("id")!
     this.offreSpecialeService.getOne(this._id).subscribe(data => {
       this.formOffre = data
     })
