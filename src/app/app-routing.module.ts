@@ -19,6 +19,7 @@ import { PriseRdvComponent } from './clients/prise-rdv/prise-rdv.component'
 import { ListeOffreComponent } from './manager/gestion-offre/liste-offre/liste-offre.component'
 import { AddOffreComponent } from './manager/gestion-offre/add-offre/add-offre.component'
 import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offre.component'
+import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.component'
 
 const routes: Routes = [
   { path: '', component: LoginEmpComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'services/create', component: CreateServiceComponent },
   { path: 'services/update/:id', component: UpdateServiceComponent },
   { path: 'client/preference', component: GestionPreferenceComponent },
+  { path: 'client/histo', component: HistoriqueRdvComponent },
   {
     path: 'client/pref/service',
     component: GestionPreferenceServicesComponent

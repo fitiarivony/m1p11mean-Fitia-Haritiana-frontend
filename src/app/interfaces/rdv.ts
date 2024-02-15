@@ -14,6 +14,19 @@ export interface RdvService{
   datedebut:Date,
   datefin:Date
 }
+export interface FullRdv{
+  id_client:string;
+  date_rdv:string;
+  rdv_service:FullRdvService[]
+}
+
+export interface FullRdvService{
+  id_employe:Employe,
+  id_service:Service,
+  ordre:number,
+  datedebut:Date,
+  datefin:Date
+}
 
 
 
