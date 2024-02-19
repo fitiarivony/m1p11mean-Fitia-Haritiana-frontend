@@ -45,4 +45,10 @@ export class HistoriqueRdvComponent {
 
     });
   }
+  returnCancellable(date_rdv:string){
+    return new Date(date_rdv)>new Date();
+  }
+  updateLink(id_rdv:string){
+    return "/rdv/update/"+id_rdv
+  }
 }

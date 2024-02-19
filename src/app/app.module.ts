@@ -27,6 +27,7 @@ import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offr
 import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.component';
 import { AffichageRdvComponent } from './emp/affichage-rdv/affichage-rdv.component';
 import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component';
+import { UpdateRdvComponent } from './clients/update-rdv/update-rdv.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component';
     HistoriqueRdvComponent,
     AffichageRdvComponent,
     SuiviRdvComponent,
+    UpdateRdvComponent,
   ],
   imports: [
     BrowserModule,

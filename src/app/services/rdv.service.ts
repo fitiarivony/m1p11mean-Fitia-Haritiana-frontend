@@ -34,7 +34,7 @@ export class Rdv_Service {
     return a_start > b_start && a_end < b_end
   }
 
-  check_horaire (rdv: Rdv, emps: Emp[], services: Service[]) {
+  check_horaire (rdv: Rdv, emps: Emp[], services: Service[],idrdv: string|undefined) {
     let date = new Date(rdv.date_rdv)
     console.log('Taille', rdv.rdv_service.length)
 
@@ -70,7 +70,7 @@ export class Rdv_Service {
     }
     console.log('Nety horaire')
 
-    return this.check_disponibilite(rdv.rdv_service)
+    return this.check_disponibilite(rdv.rdv_service,idrdv)
   }
 
   add_rdv (rdv: Rdv, emps: Emp[], services: Service[]) {
@@ -79,7 +79,7 @@ export class Rdv_Service {
     }
     console.log(emps)
 
-    if (this.check_horaire(rdv, emps, services)) {
+    if (this.check_horaire(rdv, emps, services,undefined)) {
       console.log('Goooooo')
       return this.http.post<Rdv>('http://localhost:8000/rdv', rdv, {
         headers: {
@@ -96,8 +96,14 @@ export class Rdv_Service {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     })
   }
-  check_disponibilite (rdv_service: RdvService[]) {
-    return this.http.post('http://localhost:8000/rdv/dispo/', {
+  check_disponibilite (rdv_service: RdvService[],idrdv:string|undefined) {
+    if (!idrdv) {
+      return this.http.post('http://localhost:8000/rdv/dispo/', {
+        rdv_service: rdv_service
+      })
+    }
+    console.log("Update");
+    return this.http.post('http://localhost:8000/rdv/dispo/'+idrdv, {
       rdv_service: rdv_service
     })
   }
@@ -120,5 +126,30 @@ export class Rdv_Service {
           'Authorization': 'Bearer '+localStorage.getItem('token'),
         }
       })
+  }
+  getRdvById(idRdv:string){
+    return this.http.get<any>('http://localhost:8000/rdv/'+idRdv,{
+      headers:{
+        'Authorization': 'Bearer '+localStorage.getItem('token'),
+      }
+    })
+  }
+  update_rdv (rdv: Rdv, emps: Emp[], services: Service[],id_rdv:string) {
+    for (let index = 0; index < rdv.rdv_service.length; index++) {
+      rdv.rdv_service[index].ordre = index + 1
+    }
+    console.log(emps)
+
+    if (this.check_horaire(rdv, emps, services,id_rdv)) {
+      console.log('Goooooo')
+      return this.http.put<Rdv>('http://localhost:8000/rdv/'+id_rdv, rdv, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+    }
+
+    return null
   }
 }
