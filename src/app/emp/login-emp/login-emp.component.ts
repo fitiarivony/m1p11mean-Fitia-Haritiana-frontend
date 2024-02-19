@@ -21,6 +21,7 @@ export class LoginEmpComponent {
     this.dataService.postData(data).subscribe(
       {
         next: v => {
+          localStorage.setItem('token',v.token.token)
           console.log(v)
         },
         error: v => {
