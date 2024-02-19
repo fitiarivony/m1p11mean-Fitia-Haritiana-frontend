@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Service } from '../interfaces/service';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +24,7 @@ export class ServeService {
 
   getServiceById(id: string) {
     return this.http.get<Service>('http://localhost:8000/services/' + id, {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     });
   }
   updateService(service: Service) {

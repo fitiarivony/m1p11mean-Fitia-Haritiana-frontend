@@ -32,7 +32,7 @@ export class UpdateServiceComponent {
       let id_service = params['id']; // Access the 'id' parameter from the URL
       this.serveService.getServiceById(id_service).subscribe({
         next:valiny=>this.service=valiny,
-        error:err=>console.log(err.message)
+        error:err=>console.log(err.error)
       })
     });
     // this.serveService.getServiceById()
