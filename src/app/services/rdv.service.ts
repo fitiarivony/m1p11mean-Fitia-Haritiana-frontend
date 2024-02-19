@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Rdv, RdvFull, RdvService } from '../interfaces/rdv'
+import { Rdv, RdvFull, RdvFullSuivi, RdvService } from '../interfaces/rdv'
 import { Emp, Horaire, HoraireString } from '../model'
 import { Service } from '../interfaces/service'
 
@@ -101,9 +101,17 @@ export class Rdv_Service {
       rdv_service: rdv_service
     })
   }
-  getTaches () {
-    return this.http.get<RdvFull[]>('http://localhost:8000/rdv/today/', {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+  getTaches() {
+    return this.http.get<RdvFullSuivi>('http://localhost:8000/rdv/today/', {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    });
+  }
+  suivi_tache(id_rdv:string,id_employe:string,id_service:string,value:boolean){
+    return this.http.post<boolean>('http://localhost:8000/rdv/suivi-tache',{
+      id_rdv:id_rdv,
+      id_employe:id_employe,
+      id_service:id_service,
+      value:value
     })
   }
 }

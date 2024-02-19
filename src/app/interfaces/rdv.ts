@@ -37,7 +37,15 @@ export interface RdvFull{
   ordre:number,
   id_rdv:string,
   date_rdv:Date,
-  id_client:Client
+  id_client:Client,
+  is_done:boolean,
+  datedebut:Date,
+  datefin:Date,
 }
+export interface RdvFullSuivi{
+  rdv:RdvFull[],
+  total:number,
+}
+
 
 
