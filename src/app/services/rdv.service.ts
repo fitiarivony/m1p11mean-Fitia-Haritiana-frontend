@@ -114,4 +114,11 @@ export class Rdv_Service {
       value:value
     })
   }
+  annulerRdv(idRdv:string){
+      return this.http.delete('http://localhost:8000/rdv/'+idRdv,{
+        headers:{
+          'Authorization': 'Bearer '+localStorage.getItem('token'),
+        }
+      })
+  }
 }

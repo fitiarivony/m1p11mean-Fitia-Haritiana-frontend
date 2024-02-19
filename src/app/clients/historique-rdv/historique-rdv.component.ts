@@ -13,7 +13,7 @@ import { Rdv_Service } from 'src/app/services/rdv.service';
 export class HistoriqueRdvComponent {
   historique:FullRdv[]=[]
   _id:string=""
-  constructor(private clientService:ClientService,
+  constructor(private clientService:ClientService,private rdvservice:Rdv_Service,
     private route: ActivatedRoute) {
 
   }
@@ -32,5 +32,17 @@ export class HistoriqueRdvComponent {
         console.log(err)
       }
     })
+  }
+  annulerRdv(idRdv: string){
+    this.rdvservice.annulerRdv(idRdv).subscribe({
+      next: v => {
+        let historiques=[...this.historique]
+        this.historique=historiques.filter(h=>h._id!=idRdv);
+      },error: err => {
+        console.log(err.error);
+
+      }
+
+    });
   }
 }
