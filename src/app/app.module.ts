@@ -25,6 +25,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AddOffreComponent } from './manager/gestion-offre/add-offre/add-offre.component';
 import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offre.component';
 import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.component';
+import { AffichageRdvComponent } from './emp/affichage-rdv/affichage-rdv.component';
+import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.
     AddOffreComponent,
     ShowOffreComponent,
     HistoriqueRdvComponent,
+    AffichageRdvComponent,
+    SuiviRdvComponent,
   ],
   imports: [
     BrowserModule,

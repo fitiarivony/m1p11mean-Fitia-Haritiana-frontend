@@ -20,6 +20,8 @@ import { ListeOffreComponent } from './manager/gestion-offre/liste-offre/liste-o
 import { AddOffreComponent } from './manager/gestion-offre/add-offre/add-offre.component'
 import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offre.component'
 import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.component'
+import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component'
+import { AffichageRdvComponent } from './emp/affichage-rdv/affichage-rdv.component'
 
 const routes: Routes = [
   { path: '', component: LoginEmpComponent },
@@ -42,7 +44,9 @@ const routes: Routes = [
   { path: 'prise-rdv', component: PriseRdvComponent },
   { path: 'offre/liste', component: ListeOffreComponent },
   { path: 'offre/add', component: AddOffreComponent },
-  { path: 'offre/show/:id', component: ShowOffreComponent }
+  { path: 'offre/show/:id', component: ShowOffreComponent },
+  {path:'emp/rdv/suivi',component:SuiviRdvComponent},
+  { path: 'rdv/show', component: AffichageRdvComponent },
 ]
 
 @NgModule({
