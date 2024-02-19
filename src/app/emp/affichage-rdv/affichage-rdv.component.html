@@ -1,0 +1,21 @@
+<table >
+  <thead>
+    <th>Client</th>
+    <th>Date de rdv</th>
+    <th>Service</th>
+    <th>Etat</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of rdv">
+    <td>{{ item.id_client.nom_client }} {{ item.id_client.prenom_client }}</td>
+    <td>{{ item.date_rdv | date:'medium' }}</td>
+
+      <td>{{ item.id_service.nom_service }}</td>
+      <td *ngIf="item.is_done">Vita</td>
+      <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===1">Tokony efa vita</td>
+      <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===0">En cours normalement</td>
+      <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===-1">A venir</td>
+     </tr>
+
+  </tbody>
+</table>
