@@ -22,6 +22,7 @@ import { ShowOffreComponent } from './manager/gestion-offre/show-offre/show-offr
 import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.component'
 import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component'
 import { AffichageRdvComponent } from './emp/affichage-rdv/affichage-rdv.component'
+import { UpdateRdvComponent } from './clients/update-rdv/update-rdv.component'
 
 const routes: Routes = [
   { path: '', component: LoginEmpComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'offre/show/:id', component: ShowOffreComponent },
   {path:'emp/rdv/suivi',component:SuiviRdvComponent},
   { path: 'rdv/show', component: AffichageRdvComponent },
+  { path: 'rdv/update/:id', component: UpdateRdvComponent },
 ]
 
 @NgModule({

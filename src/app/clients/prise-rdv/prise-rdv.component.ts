@@ -41,7 +41,7 @@ export class PriseRdvComponent implements OnInit {
       };
 
     }else{
-      this.rendez_vous_service.check_horaire(rendez_vous,this.employe,this.service).subscribe(
+      this.rendez_vous_service.check_horaire(rendez_vous,this.employe,this.service,undefined).subscribe(
         {
           next: val=>{
             console.log("Mety eh");
@@ -58,8 +58,8 @@ export class PriseRdvComponent implements OnInit {
 
           },
           error: err=>{
-            console.log("Tsy mety ");
-           alert("Tsy mety eh")
+            console.log(err);
+           alert(err)
           }
         }
       )
@@ -79,7 +79,7 @@ export class PriseRdvComponent implements OnInit {
       };
 
     }else{
-      this.rendez_vous_service.check_horaire(rendez_vous,this.employe,this.service).subscribe(
+      this.rendez_vous_service.check_horaire(rendez_vous,this.employe,this.service,undefined).subscribe(
         {
           next: val=>{
             console.log("Mety eh");
@@ -95,7 +95,7 @@ export class PriseRdvComponent implements OnInit {
             };
 
           },
-          error: err=>{console.log("Tsy nety eh");
+          error: err=>{console.log(err);
           }
         }
       )
