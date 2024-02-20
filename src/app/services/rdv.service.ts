@@ -152,4 +152,11 @@ export class Rdv_Service {
 
     return null
   }
+  payerRdv(id_rdv:string){
+    return this.http.put("http://localhost:8000/rdv/payer/"+id_rdv,null,{
+      headers:{
+        Authorization:'Bearer ' + localStorage.getItem('token')
+      }
+    })
+  }
 }

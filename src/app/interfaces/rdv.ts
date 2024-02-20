@@ -18,6 +18,7 @@ export interface FullRdv{
   _id:string;
   id_client:string;
   date_rdv:string;
+  paye:boolean;
   rdv_service:FullRdvService[]
 }
 
