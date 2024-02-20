@@ -132,3 +132,4 @@ dist
 .angular
 
 .vscode
+.vscode/settings.json

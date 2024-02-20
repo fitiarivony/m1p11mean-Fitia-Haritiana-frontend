@@ -48,7 +48,13 @@ export class HistoriqueRdvComponent {
   returnCancellable(date_rdv:string){
     return new Date(date_rdv)>new Date();
   }
-  updateLink(id_rdv:string){
-    return "/rdv/update/"+id_rdv
+  payerRdv(idRdv:string){
+    console.log("Je paie");
+
+      this.rdvservice.payerRdv(idRdv).subscribe({
+        next:val=>console.log(val),
+        error:err=>console.log(err.error)
+      })
   }
+
 }

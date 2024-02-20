@@ -7,6 +7,10 @@
           <button  class="btn btn-danger" (click)="annulerRdv(item._id)">Annuler</button>
           <a class="btn btn-warning" [routerLink]="'/rdv/update/' + item._id">Modifier</a>
         </div>
+        <div style="float: right;"*ngIf="!returnCancellable(item.date_rdv)">
+          <button *ngIf="!item.paye" class="btn btn-success" (click)="payerRdv(item._id)">Payer</button>
+          <div *ngIf="item.paye">Payé</div>
+        </div>
         <h5 class="card-title">{{item.date_rdv.toLocaleString()}}</h5>
         <!-- <p class="card-text">Text</p> -->
         <ul class="list-group list-group-flush">
