@@ -28,6 +28,16 @@ import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.
 import { AffichageRdvComponent } from './emp/affichage-rdv/affichage-rdv.component';
 import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component';
 import { UpdateRdvComponent } from './clients/update-rdv/update-rdv.component';
+import { DragDropModule } from 'primeng/dragdrop';
+import { StyleClassModule } from 'primeng/styleclass';
+import { DropdownModule } from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TableModule } from 'primeng/table';
+import {  ButtonModule } from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -61,7 +71,17 @@ import { UpdateRdvComponent } from './clients/update-rdv/update-rdv.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CKEditorModule
+    CKEditorModule,
+    DragDropModule,
+    StyleClassModule,
+    AutoCompleteModule,
+    DropdownModule,
+    BrowserAnimationsModule,
+    TableModule,
+    DialogModule,
+    ButtonModule,
+    ToastModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

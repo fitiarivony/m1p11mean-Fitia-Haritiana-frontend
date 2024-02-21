@@ -1,39 +1,128 @@
-Date de rdv:<input type="datetime-local" [(ngModel)]="rdv.date_rdv" (change)="onChangeDateRDV()" />
+Date de rdv:<input
+  type="datetime-local"
+  [(ngModel)]="rdv.date_rdv"
+  (change)="onChangeDateRDV()"
+/>
 
-<table>
-  <thead>
-    <th>Employe</th>
-    <th>Service</th>
-    <th>Ordre</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let rendez_vous of rdv.rdv_service; index as ind;">
-      <td>
-       {{ getSelectedEmp(rendez_vous.id_employe).nom }} {{ getSelectedEmp(rendez_vous.id_employe).prenom}}
-
-      <td>{{ getSelectedService(rendez_vous.id_service).nom_service }}</td>
-      <td>{{ ind+1 }}</td>
-      <td><button (click)="deleteSeance(rendez_vous)">Retirer</button></td>
-
-      <td *ngIf="ind!=0;"><button (click)="monterOrdre(ind)">Remonter</button></td>
-      <td *ngIf="ind!=rdv.rdv_service.length-1 && rdv.rdv_service.length>1"><button (click)="descendreOrdre(ind)">Descendre</button></td>
-    </tr>
-  </tbody>
-</table>
-
-<div>
-  Service:
-  <select [(ngModel)]="currentrdv.id_service"  (change)="onSelectService()">
-   <option *ngFor="let serve of service" [value]="serve._id">{{ serve.nom_service }}</option>
-   </select>
-   <div *ngIf="currentrdv.id_service">
-    Employe:<select [(ngModel)]="currentrdv.id_employe" >
-      <option *ngFor="let employee of fav_emp" [value]="employee._id">{{ employee.nom }} {{ employee.prenom }}</option>
-      </select>
-
+<div class="row row-cols-1 row-cols-lg-2">
+  <div class="col mb-3">
+    <p-table [value]="service" [tableStyle]="{ width: '30rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Service</th>
+          <th>Prix</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-serve>
+        <tr
+          pDraggable
+          (onDragStart)="mydragStartServe(serve)"
+          (onDragEnd)="mydragEndServe()"
+        >
+          <td>{{ serve.nom_service }}</td>
+          <td>{{ serve.prix }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 
-  <button (click)="addSeance()">Ajouter</button>
+  <div class="col">
+    <p-table [value]="rdv.rdv_service" [tableStyle]="{ width: '30rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Service</th>
+          <th>Prix</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rendez_vous let-rowIndex="rowIndex">
+        <tr>
+          <td>
+            {{ getSelectedEmp(rendez_vous.id_employe).nom }}
+            {{ getSelectedEmp(rendez_vous.id_employe).prenom }}
+          </td>
+
+          <td>{{ getSelectedService(rendez_vous.id_service).nom_service }}</td>
+          <td>{{ rowIndex + 1 }}</td>
+          <td><button (click)="deleteSeance(rendez_vous)">Retirer</button></td>
+
+          <td *ngIf="rowIndex != 0">
+            <button (click)="monterOrdre(rowIndex)"><i class="pi pi-search" style="font-size: 2rem"></i></button>
+          </td>
+          <td
+            *ngIf="
+              rowIndex != rdv.rdv_service.length - 1 &&
+              rdv.rdv_service.length > 1
+            "
+          >
+            <button (click)="descendreOrdre(rowIndex)">Descendre</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <!-- <table>
+        <thead>
+          <th>Employe</th>
+          <th>Service</th>
+          <th>Ordre</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rendez_vous of rdv.rdv_service; index as ind;">
+            <td >
+             {{ getSelectedEmp(rendez_vous.id_employe).nom }} {{ getSelectedEmp(rendez_vous.id_employe).prenom}}
+
+            <td>{{ getSelectedService(rendez_vous.id_service).nom_service }}</td>
+            <td>{{ ind+1 }}</td>
+            <td><button (click)="deleteSeance(rendez_vous)">Retirer</button></td>
+
+            <td *ngIf="ind!=0;"><button (click)="monterOrdre(ind)">Remonter</button></td>
+            <td *ngIf="ind!=rdv.rdv_service.length-1 && rdv.rdv_service.length>1"><button (click)="descendreOrdre(ind)">Descendre</button></td>
+          </tr>
+        </tbody>
+      </table> -->
+
+    <div pDroppable (onDrop)="mydropServe()" style="width: 200px">
+      <p class="text-center surface-border border-bottom-1">
+        Drop service Zone
+      </p>
+      <p *ngIf="currentrdv.id_service">
+        {{ getSelectedService(currentrdv.id_service).nom_service }}
+      </p>
+    </div>
+    <p-dialog
+      header="Header"
+      [(visible)]="visible"
+      [modal]="true"
+      [style]="{ width: '50vw', height: '300px' }"
+    >
+      <div *ngIf="currentrdv.id_service">
+        <p-autoComplete
+          (onSelect)="onSelectEmp($event)"
+          [dropdown]="true"
+          [suggestions]="filteredEmp"
+          (completeMethod)="filterEmp($event)"
+          field="nom_prenom"
+        ></p-autoComplete>
+      </div>
+      <button (click)="addSeance()">Ajouter</button>
+    </p-dialog>
+  </div>
+</div>
+
+<div>
+  <!-- <div *ngIf="currentrdv.id_employe" pDraggable (onDragStart)="mydragStart(currentrdv)" (onDragEnd)="mydragEnd()">
+    <p>{{getSelectedEmp(currentrdv.id_employe).nom}}</p>
+    <p>{{getSelectedService(currentrdv.id_service).nom_service}}</p>
+  </div>
+  <div  pDroppable (onDrop)="mydrop()">
+    <p class="text-center surface-border border-bottom-1">Drop Zone</p>
+      <ul class="list-none flex flex-column gap-2 p-0 m-0" *ngIf="rdv.rdv_service" >
+          <li *ngFor="let service of rdv.rdv_service" class="p-2 border-round shadow-1">
+              {{getSelectedEmp(service.id_employe).nom}}
+              {{getSelectedService(service.id_service).nom_service}}
+          </li>
+      </ul>
+  </div> -->
 </div>
 
 <button (click)="addRdv()">Ajouter Rdv</button>

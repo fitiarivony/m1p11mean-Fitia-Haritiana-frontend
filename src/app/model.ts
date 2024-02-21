@@ -51,7 +51,8 @@ export interface Emp {
   prenom: string
   genre: string
   services: string[]
-  horaire: HoraireString[]
+  horaire: HoraireString[],
+  nom_prenom:string
 }
 export interface HoraireString {
   jour: number

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Employe, FormEmploye, Genre, Login } from '../model'
+import { RdvFull } from '../interfaces/rdv'
 @Injectable({
   providedIn: 'root'
 })
@@ -49,5 +50,16 @@ export class EmpService {
     const postUrl = `${this.apiUrl}`.concat('/favs')
     let val = this.http.get(postUrl)
     return val
+  }
+  list_rdv_emp () {
+    return this.http.get<any>('http://localhost:8000/rdv', {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+    })
+  }
+  filtre_rdv_emp (datedebut:Date|null,datefin:Date|null) {
+    const postUrl = `${this.apiUrl}`.concat('/rdv/filtre')
+    return this.http.post<RdvFull[]>(postUrl,{datedebut:datedebut,datefin:datefin}, {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+    })
   }
 }

@@ -1,13 +1,36 @@
-<table >
-  <thead>
-    <th>Client</th>
+
+<p-card [style]="{height: '150px', width:'600px' }">
+  <div class="m-0">
+    <div class="row row-cols-1 row-cols-lg-3" >
+      <div class="col">
+        Date de début:<input class="form-control " type="datetime-local" [(ngModel)]="datedebut">
+      </div>
+      <div class="col">
+        Date de fin:<input class="form-control " type="datetime-local" [(ngModel)]="datefin">
+      </div>
+      <div class="col">
+        <button class="p-2 btn btn-primary"  (onClick)="filtre_rdv()" severity="success"><i class="pi pi-search" style="font-size: 2rem"></i></button>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</p-card>
+<br>
+<p-table [value]="rdv" [tableStyle]="{ width: '30rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Client</th>
     <th>Date de rdv</th>
     <th>Service</th>
     <th>Etat</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of rdv">
-    <td>{{ item.id_client.nom_client }} {{ item.id_client.prenom_client }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>{{ item.id_client.nom_client }} {{ item.id_client.prenom_client }}</td>
     <td>{{ item.date_rdv | date:'medium' }}</td>
 
       <td>{{ item.id_service.nom_service }}</td>
@@ -19,6 +42,5 @@
       <td *ngIf="item.is_done"><button (click)="marquer_vita(item)"> Annuler</button></td>
 
     </tr>
-
-  </tbody>
-</table>
+  </ng-template>
+</p-table>

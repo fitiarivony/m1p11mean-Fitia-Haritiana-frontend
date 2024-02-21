@@ -91,11 +91,7 @@ export class Rdv_Service {
 
     return null
   }
-  list_rdv_emp () {
-    return this.http.get<RdvFull[]>('http://localhost:8000/rdv', {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
-    })
-  }
+
   check_disponibilite (rdv_service: RdvService[],idrdv:string|undefined) {
     if (!idrdv) {
       return this.http.post('http://localhost:8000/rdv/dispo/', {
