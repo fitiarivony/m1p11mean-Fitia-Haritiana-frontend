@@ -15,7 +15,10 @@
       <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===1">Tokony efa vita</td>
       <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===0">En cours normalement</td>
       <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===-1">A venir</td>
-     </tr>
+      <td *ngIf="!item.is_done"><button (click)="marquer_vita(item)"> Terminer</button></td>
+      <td *ngIf="item.is_done"><button (click)="marquer_vita(item)"> Annuler</button></td>
+
+    </tr>
 
   </tbody>
 </table>
