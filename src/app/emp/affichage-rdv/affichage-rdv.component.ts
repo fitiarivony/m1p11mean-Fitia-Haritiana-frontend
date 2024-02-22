@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Rdv, RdvFull } from 'src/app/interfaces/rdv';
 import { Service } from 'src/app/interfaces/service';
 import { EmpService } from 'src/app/services/emp.service';
@@ -7,7 +8,8 @@ import { Rdv_Service } from 'src/app/services/rdv.service';
 @Component({
   selector: 'app-affichage-rdv',
   templateUrl: './affichage-rdv.component.html',
-  styleUrls: ['./affichage-rdv.component.css']
+  styleUrls: ['./affichage-rdv.component.css'],
+  providers: [MessageService]
 })
 export class AffichageRdvComponent implements OnInit {
   rdv:RdvFull[]=[]
@@ -30,7 +32,7 @@ export class AffichageRdvComponent implements OnInit {
       }
     )
   }
-  constructor(private emp_service:EmpService, private rdv_service:Rdv_Service) {
+  constructor(private emp_service:EmpService, private rdv_service:Rdv_Service,private messageService: MessageService) {
 
   }
   onSelectService(event:any){
@@ -67,6 +69,11 @@ export class AffichageRdvComponent implements OnInit {
         let rdvs=[...this.rdv]
         rdvs[index].is_done=!item.is_done;
         this.rdv=rdvs;
+        if (item.is_done) {
+          this.messageService.add({ severity: 'success', detail: `Ce rendez-vous  est terminé` });
+        }else{
+          this.messageService.add({ severity: 'error', detail: 'Ce rendez-vous a été marqué pas encore terminé' });
+        }
       },
       error:err =>{console.log("error")}
     })
@@ -94,6 +101,7 @@ export class AffichageRdvComponent implements OnInit {
 
     })
   }
+
 
 
 }

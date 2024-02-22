@@ -9,9 +9,10 @@ import { Service } from '../interfaces/service'
 })
 export class Rdv_Service {
   constructor (private http: HttpClient) {}
+  private apiUrl='http://localhost:8000/rdv';
   prepare_prise_rdv () {
     return this.http.get<any>(
-      'http://localhost:8000/rdv/prise-rdv/' + localStorage.getItem('id')
+      `${this.apiUrl}`.concat('/prise-rdv/' + localStorage.getItem('id'))
     )
   }
   in_horaire (date: Date, horaire: HoraireString, duree: number) {
@@ -81,7 +82,7 @@ export class Rdv_Service {
 
     if (this.check_horaire(rdv, emps, services,undefined)) {
       console.log('Goooooo')
-      return this.http.post<Rdv>('http://localhost:8000/rdv', rdv, {
+      return this.http.post<Rdv>(`${this.apiUrl}`, rdv, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -94,22 +95,22 @@ export class Rdv_Service {
 
   check_disponibilite (rdv_service: RdvService[],idrdv:string|undefined) {
     if (!idrdv) {
-      return this.http.post('http://localhost:8000/rdv/dispo/', {
+      return this.http.post(`${this.apiUrl}`.concat('/dispo/'), {
         rdv_service: rdv_service
       })
     }
     console.log("Update");
-    return this.http.post('http://localhost:8000/rdv/dispo/'+idrdv, {
+    return this.http.post( `${this.apiUrl}`.concat('/dispo/'+idrdv), {
       rdv_service: rdv_service
     })
   }
   getTaches() {
-    return this.http.get<RdvFullSuivi>('http://localhost:8000/rdv/today/', {
+    return this.http.get<RdvFullSuivi>(`${this.apiUrl}`.concat('/today/'), {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
     });
   }
   suivi_tache(id_rdv:string,id_employe:string,id_service:string,value:boolean){
-    return this.http.post<boolean>('http://localhost:8000/rdv/suivi-tache',{
+    return this.http.post<boolean>(`${this.apiUrl}`.concat('/suivi-tache'),{
       id_rdv:id_rdv,
       id_employe:id_employe,
       id_service:id_service,
@@ -117,14 +118,14 @@ export class Rdv_Service {
     })
   }
   annulerRdv(idRdv:string){
-      return this.http.delete('http://localhost:8000/rdv/'+idRdv,{
+      return this.http.delete(`${this.apiUrl}`.concat('/'+idRdv),{
         headers:{
           'Authorization': 'Bearer '+localStorage.getItem('token'),
         }
       })
   }
   getRdvById(idRdv:string){
-    return this.http.get<any>('http://localhost:8000/rdv/'+idRdv,{
+    return this.http.get<any>(`${this.apiUrl}`.concat('/'+idRdv),{
       headers:{
         'Authorization': 'Bearer '+localStorage.getItem('token'),
       }
@@ -138,7 +139,7 @@ export class Rdv_Service {
 
     if (this.check_horaire(rdv, emps, services,id_rdv)) {
       console.log('Goooooo')
-      return this.http.put<Rdv>('http://localhost:8000/rdv/'+id_rdv, rdv, {
+      return this.http.put<Rdv>(`${this.apiUrl}`.concat('/'+id_rdv), rdv, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -149,7 +150,7 @@ export class Rdv_Service {
     return null
   }
   payerRdv(id_rdv:string){
-    return this.http.put("http://localhost:8000/rdv/payer/"+id_rdv,null,{
+    return this.http.put(`${this.apiUrl}`.concat("/payer/"+id_rdv),null,{
       headers:{
         Authorization:'Bearer ' + localStorage.getItem('token')
       }
