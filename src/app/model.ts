@@ -1,4 +1,4 @@
-import { Service } from "./interfaces/service"
+import { Service } from './interfaces/service'
 
 export interface Login {
   identifiant: string
@@ -55,7 +55,7 @@ export interface Emp {
 }
 export interface HoraireString {
   jour: number
-  debut: String,
+  debut: String
   fin: String
 }
 export interface ClientName {
@@ -69,12 +69,21 @@ export interface FormOffre {
   description: string
   service: string
   reduction: number
-  clientVises?:string[]
+  clientVises?: string[]
 }
 export interface Offre {
-  _id:string
+  _id: string
   nomOffreSpeciale: string
   description: string
   service: Service
   reduction: number
+}
+export interface AvgRdvElement{
+  _id: number
+  avgPrix: number
+  avgCount: number
+}
+export interface AvgRdvStat {
+  avgNbDay: AvgRdvElement[]
+  avgNbMonth: AvgRdvElement[]
 }
