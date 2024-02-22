@@ -8,13 +8,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class ManagerService {
   manager:Manager|null=null
+  private apiUrl="http://localhost:8000/managers";
   constructor(
     private http: HttpClient,
    ) { }
 
   login(manager:Manager):Observable<any>  {
 
-    let val=this.http.get<any>(`http://localhost:8000/managers?identifiant=${manager.identifiant}&mdp=${manager.mdp}`)
+    let val=this.http.post<any>(this.apiUrl,{identifiant:manager.identifiant,mdp:manager.mdp})
     return val;
   }
 

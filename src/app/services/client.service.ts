@@ -11,10 +11,10 @@ export class ClientService {
 
   constructor(private http: HttpClient) {}
   createClient(client:Client){
-    return this.http.post<Client>('http://localhost:8000/clients/sign-up',client,{headers: {'Content-Type': 'application/json'}});
+    return this.http.post<Client>(`${this.apiUrl}`.concat('/sign-up'),client,{headers: {'Content-Type': 'application/json'}});
   }
   loginClient(client:Client){
-    return this.http.post('http://localhost:8000/clients/sign-in',client,{headers: {'Content-Type': 'application/json'}});
+    return this.http.post(`${this.apiUrl}`.concat('/sign-in'),client,{headers: {'Content-Type': 'application/json'}});
   }
   getNames():Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/names')

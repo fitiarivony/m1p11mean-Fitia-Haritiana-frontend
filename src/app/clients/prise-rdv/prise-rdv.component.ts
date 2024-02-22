@@ -32,7 +32,6 @@ export class PriseRdvComponent implements OnInit {
   employe: Emp[] = [];
   service: Service[] = [];
 
-  draggedService: RdvService | null = null;
   filteredEmp: Emp[] = [];
 
   testService: Service | null = null;
@@ -62,32 +61,19 @@ export class PriseRdvComponent implements OnInit {
     this.filteredEmp = filtered;
   }
 
-  mydragStart(rdv_service: RdvService) {
-    this.draggedService = rdv_service;
-  }
-
-  mydrop() {
-    if (this.draggedService) {
-      this.draggedService = null;
-      this.addSeance();
-    }
-  }
-
-  mydragEnd() {
-    this.draggedService = null;
-  }
-
   mydragStartServe(service: Service) {
     this.testService = service;
   }
+
   mydropServe() {
     if (this.testService) {
-      this.draggedService = null;
       this.currentrdv.id_service = this.testService._id;
       this.onSelectService();
       this.showDialog();
+      this.testService = null;
     }
   }
+
   mydragEndServe() {
     this.testService = null;
   }
@@ -166,7 +152,6 @@ export class PriseRdvComponent implements OnInit {
   }
   addSeance() {
     try {
-      console.log('Ajouter seance');
       let rendez_vous = { ...this.rdv };
       rendez_vous.rdv_service = [...this.rdv.rdv_service];
       rendez_vous.rdv_service.push(this.currentrdv);
@@ -185,6 +170,7 @@ export class PriseRdvComponent implements OnInit {
     );
     this.check_date(rendez_vous);
   }
+
   monterOrdre(ind: number) {
     let rendez_vous = { ...this.rdv };
     rendez_vous.rdv_service = [...this.rdv.rdv_service];
@@ -194,6 +180,7 @@ export class PriseRdvComponent implements OnInit {
     rendez_vous.rdv_service[ind - 1] = hiakatra;
     this.check_date(rendez_vous);
   }
+
   descendreOrdre(ind: number) {
     let rendez_vous = { ...this.rdv };
     rendez_vous.rdv_service = [...this.rdv.rdv_service];
@@ -203,6 +190,7 @@ export class PriseRdvComponent implements OnInit {
     rendez_vous.rdv_service[ind] = hiakatra;
     this.check_date(rendez_vous);
   }
+
   ngOnInit() {
     this.rendez_vous_service.prepare_prise_rdv().subscribe({
       next: (data) => {
@@ -223,6 +211,7 @@ export class PriseRdvComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
+
   addRdv() {
     this.rendez_vous_service
       .add_rdv(this.rdv, this.employe, this.service)
@@ -252,5 +241,15 @@ export class PriseRdvComponent implements OnInit {
   }
   onSelectEmp(event: any) {
     this.currentrdv.id_employe = event._id;
+  }
+  hideDialog(){
+
+    this.currentrdv = {
+      id_employe: '',
+      id_service: '',
+      ordre: 0,
+      datedebut: new Date(),
+      datefin: new Date(),
+    };
   }
 }

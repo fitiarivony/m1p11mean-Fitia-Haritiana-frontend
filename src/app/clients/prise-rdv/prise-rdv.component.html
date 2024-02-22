@@ -1,8 +1,20 @@
-Date de rdv:<input
-  type="datetime-local"
-  [(ngModel)]="rdv.date_rdv"
-  (change)="onChangeDateRDV()"
-/>
+<div class="p-3 mb-4 bg-light rounded-3">
+  <div>
+    <h4 class="fw-bold">Prendre rendez-vous</h4>
+  </div>
+</div>
+
+<div class="form-floating mb-3">
+  <input
+    type="datetime-local"
+    class="form-control"
+    id="floatingInput"
+    style="width: 400px"
+    [(ngModel)]="rdv.date_rdv"
+    (change)="onChangeDateRDV()"
+  />
+  <label for="floatingInput">Date du rendez_vous</label>
+</div>
 
 <div class="row row-cols-1 row-cols-lg-2">
   <div class="col mb-3">
@@ -11,6 +23,7 @@ Date de rdv:<input
         <tr>
           <th>Service</th>
           <th>Prix</th>
+          <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-serve>
@@ -21,6 +34,12 @@ Date de rdv:<input
         >
           <td>{{ serve.nom_service }}</td>
           <td>{{ serve.prix }}</td>
+          <td>
+            <i
+              class="pi pi-arrows-alt"
+              style="font-size: 1rem; color: rgb(53, 179, 179)"
+            ></i>
+          </td>
         </tr>
       </ng-template>
     </p-table>
@@ -32,6 +51,10 @@ Date de rdv:<input
         <tr>
           <th>Service</th>
           <th>Prix</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rendez_vous let-rowIndex="rowIndex">
@@ -42,60 +65,70 @@ Date de rdv:<input
           </td>
 
           <td>{{ getSelectedService(rendez_vous.id_service).nom_service }}</td>
-          <td>{{ rowIndex + 1 }}</td>
-          <td><button (click)="deleteSeance(rendez_vous)">Retirer</button></td>
-
-          <td *ngIf="rowIndex != 0">
-            <button (click)="monterOrdre(rowIndex)"><i class="pi pi-search" style="font-size: 2rem"></i></button>
+          <td>
+            <span class="badge rounded-pill text-bg-info">{{
+              rowIndex + 1
+            }}</span>
           </td>
+          <td>
+            <button (click)="deleteSeance(rendez_vous)" class="btn btn-danger">
+              Retirer
+            </button>
+          </td>
+
+          <td *ngIf="rowIndex != 0 ;else elsecolumn">
+            <button
+              class="btn btn-link"
+              style="text-decoration: none"
+              (click)="monterOrdre(rowIndex)"
+            >
+              <i class="pi pi-angle-up" style="font-size: 2rem"></i>
+            </button>
+          </td>
+
           <td
             *ngIf="
               rowIndex != rdv.rdv_service.length - 1 &&
               rdv.rdv_service.length > 1
-            "
+            ;else elsecolumn"
           >
-            <button (click)="descendreOrdre(rowIndex)">Descendre</button>
+            <button
+              class="btn btn-link"
+              style="text-decoration: none"
+              (click)="descendreOrdre(rowIndex)"
+            >
+              <i class="pi pi-angle-down" style="font-size: 2rem"></i>
+            </button>
           </td>
+
+          <ng-template #elsecolumn>
+            <td></td>
+            <!-- Content to display when the condition is false -->
+          </ng-template>
         </tr>
       </ng-template>
     </p-table>
 
-    <!-- <table>
-        <thead>
-          <th>Employe</th>
-          <th>Service</th>
-          <th>Ordre</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let rendez_vous of rdv.rdv_service; index as ind;">
-            <td >
-             {{ getSelectedEmp(rendez_vous.id_employe).nom }} {{ getSelectedEmp(rendez_vous.id_employe).prenom}}
-
-            <td>{{ getSelectedService(rendez_vous.id_service).nom_service }}</td>
-            <td>{{ ind+1 }}</td>
-            <td><button (click)="deleteSeance(rendez_vous)">Retirer</button></td>
-
-            <td *ngIf="ind!=0;"><button (click)="monterOrdre(ind)">Remonter</button></td>
-            <td *ngIf="ind!=rdv.rdv_service.length-1 && rdv.rdv_service.length>1"><button (click)="descendreOrdre(ind)">Descendre</button></td>
-          </tr>
-        </tbody>
-      </table> -->
-
-    <div pDroppable (onDrop)="mydropServe()" style="width: 200px">
-      <p class="text-center surface-border border-bottom-1">
-        Drop service Zone
+    <div pDroppable (onDrop)="mydropServe()">
+      <p class="text-start surface-border border-bottom-1">
+        Mettez le service ici!
       </p>
       <p *ngIf="currentrdv.id_service">
         {{ getSelectedService(currentrdv.id_service).nom_service }}
       </p>
     </div>
     <p-dialog
-      header="Header"
+      header="Choisissez l'employé(e)"
       [(visible)]="visible"
       [modal]="true"
       [style]="{ width: '50vw', height: '300px' }"
+      [maximizable]="true"
+      (onHide)="hideDialog()"
     >
-      <div *ngIf="currentrdv.id_service">
+      <div *ngIf="currentrdv.id_service" class="mb-3">
+        <p>
+          Le service:{{ getSelectedService(currentrdv.id_service).nom_service }}
+        </p>
         <p-autoComplete
           (onSelect)="onSelectEmp($event)"
           [dropdown]="true"
@@ -104,25 +137,11 @@ Date de rdv:<input
           field="nom_prenom"
         ></p-autoComplete>
       </div>
-      <button (click)="addSeance()">Ajouter</button>
+      <button (click)="addSeance()" class="btn btn-success">Ajouter</button>
     </p-dialog>
   </div>
 </div>
 
-<div>
-  <!-- <div *ngIf="currentrdv.id_employe" pDraggable (onDragStart)="mydragStart(currentrdv)" (onDragEnd)="mydragEnd()">
-    <p>{{getSelectedEmp(currentrdv.id_employe).nom}}</p>
-    <p>{{getSelectedService(currentrdv.id_service).nom_service}}</p>
-  </div>
-  <div  pDroppable (onDrop)="mydrop()">
-    <p class="text-center surface-border border-bottom-1">Drop Zone</p>
-      <ul class="list-none flex flex-column gap-2 p-0 m-0" *ngIf="rdv.rdv_service" >
-          <li *ngFor="let service of rdv.rdv_service" class="p-2 border-round shadow-1">
-              {{getSelectedEmp(service.id_employe).nom}}
-              {{getSelectedService(service.id_service).nom_service}}
-          </li>
-      </ul>
-  </div> -->
-</div>
+<div></div>
 
-<button (click)="addRdv()">Ajouter Rdv</button>
+<button (click)="addRdv()" class="btn btn-success">Ajouter Rdv</button>
