@@ -23,6 +23,7 @@ import { HistoriqueRdvComponent } from './clients/historique-rdv/historique-rdv.
 import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component'
 import { AffichageRdvComponent } from './emp/affichage-rdv/affichage-rdv.component'
 import { UpdateRdvComponent } from './clients/update-rdv/update-rdv.component'
+import { MoyennesComponent } from './manager/stat/moyennes/moyennes.component'
 
 const routes: Routes = [
   { path: '', component: LoginEmpComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'services/update/:id', component: UpdateServiceComponent },
   { path: 'client/preference', component: GestionPreferenceComponent },
   { path: 'client/histo', component: HistoriqueRdvComponent },
+  { path: 'manager/stat', component: MoyennesComponent },
   {
     path: 'client/pref/service',
     component: GestionPreferenceServicesComponent

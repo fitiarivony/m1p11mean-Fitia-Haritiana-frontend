@@ -1,0 +1,59 @@
+<p>moyennes works!</p>
+<div class="row">
+  <div class="col-3">
+    <div style="display: block">
+      <canvas
+        baseChart
+        width="400"
+        height="400"
+        [type]="'line'"
+        [data]="avgNbMonthData"
+        [options]="lineChartOptions"
+        [legend]="lineChartLegend"
+      >
+      </canvas>
+    </div>
+  </div>
+  <div class="col-3">
+    <div style="display: block">
+      <canvas
+        baseChart
+        width="400"
+        height="400"
+        [type]="'line'"
+        [data]="avgCAMonthData"
+        [options]="lineChartOptions"
+        [legend]="lineChartLegend"
+      >
+      </canvas>
+    </div>
+  </div>
+  <div class="col-3">
+    <div style="display: block">
+      <canvas
+        baseChart
+        width="400"
+        height="400"
+        [type]="'line'"
+        [data]="avgNbDayData"
+        [options]="lineChartOptions"
+        [legend]="lineChartLegend"
+      >
+      </canvas>
+    </div>
+  </div>
+  <div class="col-3">
+    <div style="display: block">
+      <canvas
+        baseChart
+        width="400"
+        height="400"
+        [type]="'line'"
+        [data]="avgCADayData"
+        [options]="lineChartOptions"
+        [legend]="lineChartLegend"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>
