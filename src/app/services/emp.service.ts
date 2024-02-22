@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Employe, FormEmploye, Genre, Login } from '../model'
 import { RdvFull } from '../interfaces/rdv'
+import { Service } from '../interfaces/service'
 @Injectable({
   providedIn: 'root'
 })
@@ -56,9 +57,9 @@ export class EmpService {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     })
   }
-  filtre_rdv_emp (datedebut:Date|null,datefin:Date|null) {
+  filtre_rdv_emp (datedebut:Date|null,datefin:Date|null,services:Service[]) {
     const postUrl = `${this.apiUrl}`.concat('/rdv/filtre')
-    return this.http.post<RdvFull[]>(postUrl,{datedebut:datedebut,datefin:datefin}, {
+    return this.http.post<RdvFull[]>(postUrl,{datedebut:datedebut,datefin:datefin,services:services}, {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     })
   }

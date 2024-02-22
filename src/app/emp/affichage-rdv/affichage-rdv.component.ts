@@ -14,7 +14,8 @@ export class AffichageRdvComponent implements OnInit {
   datedebut:string="";
   datefin:string="";
   service:Service[]=[]
-
+  selectedServices:Service[]=[]
+  filteredServices:Service[]=[]
   ngOnInit(): void {
     this.emp_service.list_rdv_emp().subscribe(
       {
@@ -32,6 +33,25 @@ export class AffichageRdvComponent implements OnInit {
   constructor(private emp_service:EmpService, private rdv_service:Rdv_Service) {
 
   }
+  onSelectService(event:any){
+    this.selectedServices.push(event);
+    this.service=this.service.filter(service=>service._id!==event._id);
+  }
+  annuler(service:Service){
+    this.service.push(service);
+    this.selectedServices=this.selectedServices.filter(serve=>serve._id!==service._id);
+  }
+
+  filterService(event:any) {
+    let filtered: any[] = [];
+    let query = event.query;
+    for (const service of this.service) {
+        if (service.nom_service.toLowerCase().includes(query.toLowerCase())) {
+            filtered.push(service);
+        }
+    }
+    this.filteredServices = filtered;
+}
   tokony_efa_vita(datefin:Date,datedebut:Date){
     if(new Date(datefin)<new Date()) return 1
     if (new Date(datefin)>new Date() && new Date(datedebut)<new Date()) return 0
@@ -61,9 +81,9 @@ export class AffichageRdvComponent implements OnInit {
     if (this.datefin!=="")  {
       fin=new Date(this.datefin);
     }
-    this.emp_service.filtre_rdv_emp(debut,fin).subscribe({
+    this.emp_service.filtre_rdv_emp(debut,fin,this.selectedServices).subscribe({
       next:valiny=>{
-        // console.log(valiny);
+        console.log(valiny);
         this.rdv=valiny;
 
       },
