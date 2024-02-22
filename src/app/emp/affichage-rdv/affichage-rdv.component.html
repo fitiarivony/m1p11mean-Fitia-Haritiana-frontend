@@ -1,7 +1,7 @@
 
-<p-card [style]="{height: '150px', width:'600px' }">
+<p-card [style]="{height: '200px'}">
   <div class="m-0">
-    <div class="row row-cols-1 row-cols-lg-3" >
+    <div class="row row-cols-1 row-cols-lg-4" >
       <div class="col">
         Date de début:<input class="form-control " type="datetime-local" [(ngModel)]="datedebut">
       </div>
@@ -9,9 +9,27 @@
         Date de fin:<input class="form-control " type="datetime-local" [(ngModel)]="datefin">
       </div>
       <div class="col">
-        <button class="p-2 btn btn-primary"  (onClick)="filtre_rdv()" severity="success"><i class="pi pi-search" style="font-size: 2rem"></i></button>
+        <p-autoComplete
+        (onSelect)="onSelectService($event)"
+        [dropdown]="true"
+        [suggestions]="filteredServices"
+        (completeMethod)="filterService($event)"
+        field="nom_service"
+      ></p-autoComplete>
+      </div>
+      <div class="col mb-3">
+
+        <button class="p-2 btn btn-primary"  (click)="filtre_rdv()" severity="success"><i class="pi pi-search" style="font-size: 2rem"></i></button>
       </div>
 
+
+
+    </div>
+    <div>
+      <ul class="list-group list-group-horizontal">
+        <li *ngFor="let service of selectedServices" class="list-group-item">{{ service.nom_service }} <button class="btn btn-link" (click)="annuler(service)"><i class="pi pi-times-circle" style="color: red;" ></i></button></li>
+
+      </ul>
     </div>
 
 
@@ -19,7 +37,7 @@
   </div>
 </p-card>
 <br>
-<p-table [value]="rdv" [tableStyle]="{ width: '30rem' }">
+<p-table [value]="rdv" [tableStyle]="{ width: '50rem' }">
   <ng-template pTemplate="header">
     <tr>
       <th>Client</th>
@@ -38,8 +56,8 @@
       <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===1">Tokony efa vita</td>
       <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===0">En cours normalement</td>
       <td *ngIf="!item.is_done && tokony_efa_vita(item.datefin,item.datedebut)===-1">A venir</td>
-      <td *ngIf="!item.is_done"><button (click)="marquer_vita(item)"> Terminer</button></td>
-      <td *ngIf="item.is_done"><button (click)="marquer_vita(item)"> Annuler</button></td>
+      <td *ngIf="!item.is_done"><button class="btn btn-success" (click)="marquer_vita(item)"> Terminer</button></td>
+      <td *ngIf="item.is_done"><button class="btn btn-danger" (click)="marquer_vita(item)"> Annuler</button></td>
 
     </tr>
   </ng-template>

@@ -3,13 +3,17 @@ import { Rdv, RdvService } from 'src/app/interfaces/rdv';
 import { Service } from 'src/app/interfaces/service';
 import { Emp } from 'src/app/model';
 import { Rdv_Service } from 'src/app/services/rdv.service';
-import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import {
+  ConfirmationService,
+  MessageService,
+  ConfirmEventType,
+} from 'primeng/api';
 
 @Component({
   selector: 'app-prise-rdv',
   templateUrl: './prise-rdv.component.html',
   styleUrls: ['./prise-rdv.component.css'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService],
 })
 export class PriseRdvComponent implements OnInit {
   currentrdv: RdvService = {
@@ -29,41 +33,37 @@ export class PriseRdvComponent implements OnInit {
   service: Service[] = [];
 
   draggedService: RdvService | null = null;
-  filteredEmp:Emp[]=[]
+  filteredEmp: Emp[] = [];
 
-  testService:Service|null = null;
+  testService: Service | null = null;
 
-
-  visible: boolean=false;
+  visible: boolean = false;
 
   concatFields(service: Service): string {
     return `${service.nom_service} - ${service.prix}`;
   }
 
   showDialog() {
-      this.visible = true;
+    this.visible = true;
   }
 
-  closeDialog(){
-    this.visible=false;
+  closeDialog() {
+    this.visible = false;
   }
 
-
-
-
-  filterEmp(event:any) {
+  filterEmp(event: any) {
     let filtered: any[] = [];
     let query = event.query;
     for (const employe of this.fav_emp) {
-        if (employe.nom_prenom.toLowerCase().includes(query.toLowerCase())) {
-            filtered.push(employe);
-        }
+      if (employe.nom_prenom.toLowerCase().includes(query.toLowerCase())) {
+        filtered.push(employe);
+      }
     }
     this.filteredEmp = filtered;
-}
+  }
 
-  mydragStart(rdv_service:RdvService){
-    this.draggedService=rdv_service;
+  mydragStart(rdv_service: RdvService) {
+    this.draggedService = rdv_service;
   }
 
   mydrop() {
@@ -77,14 +77,13 @@ export class PriseRdvComponent implements OnInit {
     this.draggedService = null;
   }
 
-
-  mydragStartServe(service:Service){
-    this.testService=service;
+  mydragStartServe(service: Service) {
+    this.testService = service;
   }
   mydropServe() {
     if (this.testService) {
       this.draggedService = null;
-      this.currentrdv.id_service=this.testService._id;
+      this.currentrdv.id_service = this.testService._id;
       this.onSelectService();
       this.showDialog();
     }
@@ -175,10 +174,7 @@ export class PriseRdvComponent implements OnInit {
       this.closeDialog();
     } catch (error) {
       console.log(error);
-
     }
-
-
   }
 
   deleteSeance(rdv: RdvService) {
@@ -208,22 +204,25 @@ export class PriseRdvComponent implements OnInit {
     this.check_date(rendez_vous);
   }
   ngOnInit() {
-
-
     this.rendez_vous_service.prepare_prise_rdv().subscribe({
       next: (data) => {
-        let tab:Emp[]=data.employe;
-        tab.forEach((emp:Emp) => {emp.nom_prenom = emp.nom + " " + emp.prenom});
+        let tab: Emp[] = data.employe;
+        tab.forEach((emp: Emp) => {
+          emp.nom_prenom = emp.nom + ' ' + emp.prenom;
+        });
         this.employe = tab;
         this.service = data.service;
         this.fav_emp = tab;
-
       },
       error: (err) => console.log(err.message),
     });
   }
 
-  constructor(private rendez_vous_service: Rdv_Service,private confirmationService: ConfirmationService, private messageService: MessageService) {}
+  constructor(
+    private rendez_vous_service: Rdv_Service,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
   addRdv() {
     this.rendez_vous_service
       .add_rdv(this.rdv, this.employe, this.service)
@@ -251,7 +250,7 @@ export class PriseRdvComponent implements OnInit {
     }
     this.fav_emp = newData;
   }
-  onSelectEmp(event:any){
-    this.currentrdv.id_employe=event._id
+  onSelectEmp(event: any) {
+    this.currentrdv.id_employe = event._id;
   }
 }
