@@ -88,3 +88,21 @@ export interface AvgRdvStat {
   avgNbDay: AvgRdvElement[]
   avgNbMonth: AvgRdvElement[]
 }
+export interface TempsMoyen{
+  employe:{
+    _id:string,
+    nom:string,
+    prenom:string
+  },
+  tempsTravail:string,
+  isa:number
+}
+export interface BeneficeMois{
+  recette:number,
+  depense:number,
+  mois:number,
+  annee:number,
+  autre_depense:number,
+  daty:Date,
+  benefice:number,
+}

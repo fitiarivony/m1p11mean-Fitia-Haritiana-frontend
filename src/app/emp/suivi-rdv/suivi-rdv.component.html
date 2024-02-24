@@ -1,24 +1,24 @@
-<div>
+<p-card class="mb-4" [style]="{width:'800px', height:'100px'}">
   <h1>Comission de la journée:{{ rdv.total }}</h1>
-</div>
-<table>
-  <thead>
-    <th></th>
+</p-card>
+<p-table [value]="rdv.rdv"  [tableStyle]="{ width: '30rem' }">
+<ng-template pTemplate="header">
+  <th><i class="pi pi-check"></i></th>
     <th>Client</th>
     <th>Date de rdv</th>
     <th>Service</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of rdv.rdv">
-      <td>
-        <input class="form-check-input" [(ngModel)]="item.is_done" (change)="changeChecking(item)" type="checkbox" id="flexCheckDefault">
-      </td>
-    <td> {{ item.id_client.nom_client }} {{ item.id_client.prenom_client }}</td>
-    <td>{{ item.date_rdv | date:'medium' }}</td>
+</ng-template>
+<ng-template pTemplate="body" let-item>
+  <tr>
+  <td>
+    <input class="form-check-input" [(ngModel)]="item.is_done" (change)="changeChecking(item)" type="checkbox" id="flexCheckDefault">
+  </td>
+<td> {{ item.id_client.nom_client }} {{ item.id_client.prenom_client }}</td>
+<td>{{ item.date_rdv | date : "yyyy-MM-dd HH:mm"  }}</td>
 
-      <td>{{ item.id_service.nom_service }}</td>
+  <td>{{ item.id_service.nom_service }}</td>
 
-     </tr>
+ </tr>
+</ng-template>
+</p-table>
 
-  </tbody>
-</table>
