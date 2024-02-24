@@ -1,59 +1,86 @@
-<p>moyennes works!</p>
-<div class="row">
-  <div class="col-3">
-    <div style="display: block">
-      <canvas
-        baseChart
-        width="400"
-        height="400"
-        [type]="'line'"
-        [data]="avgNbMonthData"
-        [options]="lineChartOptions"
-        [legend]="lineChartLegend"
-      >
-      </canvas>
-    </div>
+<div class="row row-cols-1 row-cols-lg-2">
+  <div class="col">
+    <p-panel class="d-flex justify-content-center" header="Temps Moyen de travail des employé" [toggleable]="true">
+      <p-chart [height]="'400px'" [width]="'400px'" type="doughnut" [data]="dataTempsMoyen" [options]="options"></p-chart>
+  </p-panel>
   </div>
-  <div class="col-3">
-    <div style="display: block">
-      <canvas
-        baseChart
-        width="400"
-        height="400"
-        [type]="'line'"
-        [data]="avgCAMonthData"
-        [options]="lineChartOptions"
-        [legend]="lineChartLegend"
-      >
-      </canvas>
-    </div>
-  </div>
-  <div class="col-3">
-    <div style="display: block">
-      <canvas
-        baseChart
-        width="400"
-        height="400"
-        [type]="'line'"
-        [data]="avgNbDayData"
-        [options]="lineChartOptions"
-        [legend]="lineChartLegend"
-      >
-      </canvas>
-    </div>
-  </div>
-  <div class="col-3">
-    <div style="display: block">
-      <canvas
-        baseChart
-        width="400"
-        height="400"
-        [type]="'line'"
-        [data]="avgCADayData"
-        [options]="lineChartOptions"
-        [legend]="lineChartLegend"
-      >
-      </canvas>
-    </div>
-  </div>
+  <div class="col">
+    <p-panel class="d-flex justify-content-center" header="Bénéfice par mois" [toggleable]="true">
+    <p-chart type="bar" [height]="'400px'" [width]="'400px'" [data]="dataBeneficeMois" [options]="optionBeneficeMois"></p-chart>
+
+</p-panel>
 </div>
+  <div class="col">
+    <p-panel class="d-flex justify-content-center" header="Moyenne de nombre de réservation par mois" [toggleable]="true">
+        <div style="display: block">
+          <canvas
+            baseChart
+            width="400"
+            height="400"
+            [type]="'line'"
+            [data]="avgNbMonthData"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend"
+
+          >
+          </canvas>
+        </div>
+
+    </p-panel>
+  </div>
+
+  <div class="col">
+    <p-panel class="d-flex justify-content-center" header="Moyenne de nombre de réservation par jour" [toggleable]="true">
+      <canvas
+      baseChart
+      width="400"
+      height="400"
+      [type]="'line'"
+      [data]="avgNbDayData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+    >
+    </canvas>
+    </p-panel>
+    </div>
+
+<div class="col">
+  <p-panel class="d-flex justify-content-center" header="Chiffre d'affaire moyen par mois" [toggleable]="true">
+    <canvas
+  baseChart
+  width="400"
+  height="400"
+  [type]="'line'"
+  [data]="avgCAMonthData"
+  [options]="lineChartOptions"
+  [legend]="lineChartLegend"
+>
+</canvas>
+
+  </p-panel>
+</div>
+
+
+
+
+  <div class="col">
+    <p-panel class="d-flex justify-content-center" header="Moyenne de nombre de réservation par jour" [toggleable]="true">
+      <canvas
+      baseChart
+      width="400"
+      height="400"
+      [type]="'line'"
+      [data]="avgCADayData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+    >
+    </canvas>
+
+    </p-panel>
+  </div>
+
+</div>
+
+
+
+

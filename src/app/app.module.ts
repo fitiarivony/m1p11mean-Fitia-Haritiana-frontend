@@ -42,6 +42,9 @@ import { CardModule } from 'primeng/card';
 
 import { NgChartsModule } from 'ng2-charts';
 import { MoyennesComponent } from './manager/stat/moyennes/moyennes.component'
+import { ChartModule } from 'primeng/chart';
+import {PanelModule} from 'primeng/panel';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +89,9 @@ import { MoyennesComponent } from './manager/stat/moyennes/moyennes.component'
     DialogModule,
     ButtonModule,
     ToastModule,
-    CardModule
+    CardModule,
+    ChartModule,
+    PanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]

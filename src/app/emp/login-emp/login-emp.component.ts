@@ -22,6 +22,7 @@ export class LoginEmpComponent {
       {
         next: v => {
           localStorage.setItem('token',v.token.token)
+
           console.log(v)
         },
         error: v => {
