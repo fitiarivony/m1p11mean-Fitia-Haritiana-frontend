@@ -233,8 +233,8 @@ export class PriseRdvComponent implements OnInit {
         })
         this.employe = tab
         this.service = data.service
-        this.reduction = data.reduction
         this.fav_emp = tab
+        this.reduction = data.reduction
       },
       error: err => console.log(err.message)
     })
