@@ -1,11 +1,34 @@
-Nom:<input type="text" [(ngModel)]="client.nom_client" /> Prenom:<input
-  type="text"
-  [(ngModel)]="client.prenom_client"
-/>
-Numero:<input type="text" [(ngModel)]="client.numero" />
-Identifiant:<input
-  type="text"
-  [(ngModel)]="client.identifiant"
-/>
-Mot de passe:<input type="text" [(ngModel)]="client.mdp" />
-<input type="submit" value="Valider" (click)="createClient()" />
+
+<div class="row ">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold">Inscrivez-vous!!!</h4>
+      </div>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.nom_client" class="form-control" id="nom" >
+      <label for="nom">Nom</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.prenom_client" class="form-control" id="prenom" >
+      <label for="prenom">Prenom</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.numero" class="form-control" id="numero" >
+      <label for="numero">Numero</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.identifiant" class="form-control" id="identifiant" >
+      <label for="identifiant">Identifiant</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.mdp" class="form-control" id="mdp" >
+      <label for="mdp">Mot de passe </label>
+    </div>
+    <input type="submit" class="btn btn-success" value="Valider" (click)="createClient()" />
+
+  </div>
+  <div class="col-2"></div>
+</div>

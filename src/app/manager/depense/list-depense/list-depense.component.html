@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <a class="btn btn-success mb-3" routerLink="/depenses/create">Créer une dépense</a>
+    <p-table styleClass="p-datatable-gridlines" [value]="depenses">
+      <ng-template pTemplate="caption"> Liste des services </ng-template>
+      <ng-template pTemplate="header" >
+        <th class="text-center">Nom </th>
+        <th>Date depense </th>
+        <th>Prix </th>
+        <th>Motif</th>
+        <th></th>
+        <th></th>
+      </ng-template>
+      <ng-template pTemplate="body"  let-depense>
+        <tr>
+          <td> {{ depense.date_depense | date:'dd-MM-yyyy'}}</td>
+          <td> {{ depense.prix }}</td>
+          <td> {{ depense.motif }}</td>
+          <td ><a class="btn btn-warning" [routerLink]="'/depenses/update/' + depense._id">Mettre à jour</a></td>
+          <td>
+
+            <p-confirmPopup></p-confirmPopup>
+            <button class="btn btn-danger" (click)="confirm($event,depense._id)">Supprimer le service</button>
+          </td>
+        </tr>
+
+      </ng-template>
+    </p-table>
+
+  </div>
+  <div class="col-2"></div>
+</div>
+
+

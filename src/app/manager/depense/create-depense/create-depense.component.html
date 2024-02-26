@@ -1,0 +1,28 @@
+
+<div class="mb-3"></div>
+<div class="row ">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <p-panel header="Ajouter un service">
+
+    <div class="form-floating mb-3">
+      <input type="date" [(ngModel)]="depense.date_depense" class="form-control" id="date_depense" >
+      <label for="date_depense">Date de dépense</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" [(ngModel)]="depense.prix" id="prix" >
+      <label for="prix">Prix</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text"  class="form-control" [(ngModel)]="depense.motif" id="motif" >
+      <label for="motif">Motif </label>
+    </div>
+    <input type="submit" class="btn btn-success" value="Valider" (click)="createDepense()">
+  </p-panel>
+
+  </div>
+  <div class="col-3"></div>
+</div>
+
+
+

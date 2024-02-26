@@ -172,9 +172,14 @@ export class MoyennesComponent {
 
     benefice.forEach(element => {
       // console.log(element);
+
       element.benefice=element.recette-element.depense-element.autre_depense
+      element.benefice=element.benefice<0?0:element.benefice
       let daty=new Date();
       daty.setFullYear(element.annee,element.mois-1,1);
+      daty.setHours(0);
+      daty.setMinutes(0);
+      daty.setSeconds(0);
       element.daty=daty
       // return element
     });
@@ -189,7 +194,7 @@ export class MoyennesComponent {
       datasets: [
         {
           label: 'Bénéfice par mois en fonction des dépenses',
-            data: this.beneficemois.map(element=>element.recette),
+            data: this.beneficemois.map(element=>element.benefice),
             backgroundColor: 'rgb(255,56,70,1)',
             hoverBackgroundColor: 'rgb(255,56,70,1)',
         }
@@ -213,6 +218,7 @@ export class MoyennesComponent {
             displayFormats: {
               month: 'MM-yyyy'
             }
+
           },
           scaleLabel: {
             display: true,
@@ -220,14 +226,14 @@ export class MoyennesComponent {
           },
             min: beginningOfYear,
             max: endOfYear,
-
         },
         y: {
           scaleLabel: {
             display: true,
             labelString: 'Value'
-          }
+          },
         }
+
       },
 
       plugins: {
@@ -246,6 +252,8 @@ export class MoyennesComponent {
   ngOnInit () {
     this.statService.getAvgRdv().subscribe({
       next: valiny => {
+        console.log(valiny);
+
         this.tempsMoyen=valiny.tempsMoyen;
         this.initTemps_Moyen();
         this.initBeneficeMois(valiny.beneficemois);

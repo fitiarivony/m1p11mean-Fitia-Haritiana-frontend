@@ -109,3 +109,9 @@ export interface BeneficeMois{
   daty:Date,
   benefice:number,
 }
+export interface Depense{
+  _id:"",
+  date_depense:Date
+  prix:number,
+  motif:string
+}

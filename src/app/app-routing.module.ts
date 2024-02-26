@@ -24,33 +24,42 @@ import { SuiviRdvComponent } from './emp/suivi-rdv/suivi-rdv.component'
 import { AffichageRdvComponent } from './emp/affichage-rdv/affichage-rdv.component'
 import { UpdateRdvComponent } from './clients/update-rdv/update-rdv.component'
 import { MoyennesComponent } from './manager/stat/moyennes/moyennes.component'
+import { ListDepenseComponent } from './manager/depense/list-depense/list-depense.component'
+import { CreateDepenseComponent } from './manager/depense/create-depense/create-depense.component'
+import { UpdateDepenseComponent } from './manager/depense/update-depense/update-depense.component'
+import { AuthGuard } from './guards/auth.guard'
 
 const routes: Routes = [
   { path: '', component: LoginEmpComponent },
-  { path: 'emps', component: ListPersonnelComponent },
-  { path: 'emps/add', component: AddPersonnelComponent },
-  { path: 'emps/show/:id', component: FichePersonnelComponent },
-  { path: 'emps/edit/:id', component: UpdatePersonnelComponent },
-  { path: 'login-manager', component: LoginManagerComponent },
-  { path: 'services/list', component: ListServiceComponent },
-  { path: 'services/create', component: CreateServiceComponent },
-  { path: 'services/update/:id', component: UpdateServiceComponent },
-  { path: 'client/preference', component: GestionPreferenceComponent },
-  { path: 'client/histo', component: HistoriqueRdvComponent },
-  { path: 'manager/stat', component: MoyennesComponent },
+  { path: 'emps', component: ListPersonnelComponent,canActivate:[AuthGuard], data: { role: ['manager']  },title:'Liste du personnel' },
+  { path: 'emps/add', component: AddPersonnelComponent,canActivate:[AuthGuard], data: { role: ['manager']  },title:'Ajouter un employe' },
+  { path: 'emps/show/:id', component: FichePersonnelComponent,canActivate:[AuthGuard], data: { role: ['manager','employe']  } ,title:"Fiche de l'employé"},
+  { path: 'emps/edit/:id', component: UpdatePersonnelComponent,canActivate:[AuthGuard], data: { role: ['manager','employe']  } ,title:'Mettre à jour un employé'},
+  { path: 'login-manager', component: LoginManagerComponent, data:{ title:'Connexion du manager' } },
+  { path: 'services/list', component: ListServiceComponent ,canActivate:[AuthGuard], data: { role: ['manager']}  ,title:'Lister les services' },
+  { path: 'services/create', component: CreateServiceComponent ,canActivate:[AuthGuard], data: { role: ['manager']   },title:'Créer un service'},
+  { path: 'services/update/:id', component: UpdateServiceComponent ,canActivate:[AuthGuard], data: { role: ['manager']  },title:'Mettre à jour un service'},
+  { path: 'client/preference', component: GestionPreferenceComponent,canActivate:[AuthGuard], data: { role: ['client'] },title:'Préférence des employés'  },
+  { path: 'client/histo', component: HistoriqueRdvComponent,canActivate:[AuthGuard], data: { role: ['client']  } ,title:'Historique des rendez-vous'},
+  { path: 'manager/stat', component: MoyennesComponent, canActivate:[AuthGuard], data: { role: ['manager'] },title:'Statistiques' },
   {
     path: 'client/pref/service',
-    component: GestionPreferenceServicesComponent
+    component: GestionPreferenceServicesComponent,
+    canActivate:[AuthGuard], data: { role: ['client']},
+    title:"Préférence des services"
   },
-  { path: 'sign-up', component: InscriptionClientComponent },
-  { path: 'sign-in', component: LoginClientComponent },
-  { path: 'prise-rdv', component: PriseRdvComponent },
-  { path: 'offre/liste', component: ListeOffreComponent },
-  { path: 'offre/add', component: AddOffreComponent },
-  { path: 'offre/show/:id', component: ShowOffreComponent },
-  {path:'emp/rdv/suivi',component:SuiviRdvComponent},
-  { path: 'rdv/show', component: AffichageRdvComponent },
-  { path: 'rdv/update/:id', component: UpdateRdvComponent },
+  { path: 'sign-up', component: InscriptionClientComponent,title:'Inscription client'},
+  { path: 'sign-in', component: LoginClientComponent ,title:'Connexion client' },
+  { path: 'prise-rdv', component: PriseRdvComponent,canActivate:[AuthGuard], data: { role: ['client'] },title:'Prendre rendez-vous' },
+  { path: 'offre/liste', component: ListeOffreComponent,canActivate:[AuthGuard], data: { role: ['manager'] } ,title:'Liste des offres spéciales'},
+  { path: 'offre/add', component: AddOffreComponent,canActivate:[AuthGuard], data: { role: ['manager'] },title:'Créer une offre spéciale' },
+  { path: 'offre/show/:id', component: ShowOffreComponent,canActivate:[AuthGuard], data: { role: ['manager'] } ,title:'Fiche de cette offre spéciale'},
+  {path:'emp/rdv/suivi',component:SuiviRdvComponent ,canActivate:[AuthGuard], data: { role: ['employe'] },title:'Suivi de  rendez-vous'},
+  { path: 'rdv/show', component: AffichageRdvComponent ,canActivate:[AuthGuard], data: { role: ['employe'] },title:'Affichage des rendez-vous'},
+  { path: 'rdv/update/:id', component: UpdateRdvComponent,canActivate:[AuthGuard], data: { role: ['client'] } ,title:'Modifier le rendez-vous'},
+  { path: 'depenses/list', component: ListDepenseComponent ,canActivate:[AuthGuard], data: { role: ['manager'] },title:'Lister les dépenses' },
+  { path: 'depenses/create', component: CreateDepenseComponent,canActivate:[AuthGuard], data: { role: ['manager'] } ,title:'Enregistrer une dépense'},
+  { path: 'depenses/update/:id', component: UpdateDepenseComponent ,canActivate:[AuthGuard], data: { role: ['manager'] },title:'Mettre à jour la dépense'},
 ]
 
 @NgModule({

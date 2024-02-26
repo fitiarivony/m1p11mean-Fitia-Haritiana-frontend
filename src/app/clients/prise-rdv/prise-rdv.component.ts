@@ -7,7 +7,7 @@ import {
   ConfirmationService,
   MessageService,
   ConfirmEventType
-} from 'primeng/api'
+} from 'primeng/api';
 
 @Component({
   selector: 'app-prise-rdv',
@@ -174,21 +174,24 @@ export class PriseRdvComponent implements OnInit {
               datefin: new Date()
             }
           },
-          error: err => {
-            console.log(err)
-          }
-        })
+          error: (error:any) => {
+            console.log(error);
+            this.closeDialog();
+            this.messageService.add({ severity: 'error',  detail: error.error });
+          },
+        });
     }
   }
   addSeance () {
     try {
-      let rendez_vous = { ...this.rdv }
-      rendez_vous.rdv_service = [...this.rdv.rdv_service]
-      rendez_vous.rdv_service.push(this.currentrdv)
-      this.check_date(rendez_vous)
-      this.closeDialog()
-    } catch (error) {
-      console.log(error)
+      let rendez_vous = { ...this.rdv };
+      rendez_vous.rdv_service = [...this.rdv.rdv_service];
+      rendez_vous.rdv_service.push(this.currentrdv);
+      this.check_date(rendez_vous);
+      this.closeDialog();
+    } catch (error:any) {
+      this.closeDialog();
+      this.messageService.add({ severity: 'error',  detail: error.message });
     }
   }
 
