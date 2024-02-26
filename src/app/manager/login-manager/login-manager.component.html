@@ -1,3 +1,49 @@
-<input type="text" [(ngModel)]="manager.identifiant" placeholder="identifiant">
-<input type="text" placeholder="mdp" [(ngModel)]="manager.mdp" >
-<input type="submit" value="Valider" (click)="onSubmit()">
+
+<div class="row  my-5">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold">Connexion Manager</h4>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="Login" class="form-label">Login</label>
+      <input
+        type="text"
+        class="form-control"
+        name=""
+        id="Login"
+        aria-describedby="helpId"
+        [(ngModel)]="manager.identifiant"
+        placeholder="Login"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="Login" class="form-label">Mot de passe</label>
+      <input
+        type="text"
+        class="form-control"
+        name=""
+        id="Login"
+        aria-describedby="helpId"
+        [(ngModel)]="manager.mdp"
+        placeholder="Mot de passe"
+      />
+    </div>
+    <div class="d-grid gap-2">
+      <button
+        type="button"
+        name=""
+        id=""
+        class="btn btn-primary"
+        (click)="onSubmit()"
+      >
+        Connexion
+      </button>
+    </div>
+
+  </div>
+  <div class="col-4"></div>
+</div>

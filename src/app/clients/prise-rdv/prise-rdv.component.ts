@@ -6,7 +6,7 @@ import { Rdv_Service } from 'src/app/services/rdv.service';
 import {
   ConfirmationService,
   MessageService,
-  ConfirmEventType,
+
 } from 'primeng/api';
 
 @Component({
@@ -144,8 +144,10 @@ export class PriseRdvComponent implements OnInit {
               datefin: new Date(),
             };
           },
-          error: (err) => {
-            console.log(err);
+          error: (error:any) => {
+            console.log(error);
+            this.closeDialog();
+            this.messageService.add({ severity: 'error',  detail: error.error });
           },
         });
     }
@@ -157,8 +159,9 @@ export class PriseRdvComponent implements OnInit {
       rendez_vous.rdv_service.push(this.currentrdv);
       this.check_date(rendez_vous);
       this.closeDialog();
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      this.closeDialog();
+      this.messageService.add({ severity: 'error',  detail: error.message });
     }
   }
 

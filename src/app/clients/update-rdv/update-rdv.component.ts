@@ -4,11 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Rdv, RdvService } from 'src/app/interfaces/rdv';
 import { Emp } from 'src/app/model';
 import { Service } from 'src/app/interfaces/service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-rdv',
   templateUrl: './update-rdv.component.html',
   styleUrls: ['./update-rdv.component.css'],
+  providers:[MessageService]
 })
 export class UpdateRdvComponent implements OnInit {
   id_rdv:string="";
@@ -28,7 +30,49 @@ export class UpdateRdvComponent implements OnInit {
   employe: Emp[] = [];
   service: Service[] = [];
 
-  constructor(private rdvservice: Rdv_Service, private route: ActivatedRoute) {}
+  filteredEmp: Emp[] = [];
+
+  testService: Service | null = null;
+
+  visible: boolean = false;
+
+  showDialog() {
+    this.visible = true;
+  }
+
+  closeDialog() {
+    this.visible = false;
+  }
+
+  filterEmp(event: any) {
+    let filtered: any[] = [];
+    let query = event.query;
+    for (const employe of this.fav_emp) {
+      if (employe.nom_prenom.toLowerCase().includes(query.toLowerCase())) {
+        filtered.push(employe);
+      }
+    }
+    this.filteredEmp = filtered;
+  }
+
+  mydragStartServe(service: Service) {
+    this.testService = service;
+  }
+
+  mydropServe() {
+    if (this.testService) {
+      this.currentrdv.id_service = this.testService._id;
+      this.onSelectService();
+      this.showDialog();
+      this.testService = null;
+    }
+  }
+
+  mydragEndServe() {
+    this.testService = null;
+  }
+
+  constructor(private rdvservice: Rdv_Service, private route: ActivatedRoute,private messageService:MessageService) {}
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
@@ -53,9 +97,13 @@ export class UpdateRdvComponent implements OnInit {
       let id_rdv = params['id']; // Access the 'id' parameter from the URL
       this.rdvservice.getRdvById(id_rdv).subscribe({
         next: (data) => {
-          this.employe = data.employe;
+          let tab: Emp[] = data.employe;
+          tab.forEach((emp: Emp) => {
+            emp.nom_prenom = emp.nom + ' ' + emp.prenom;
+          });
+          this.employe = tab;
           this.service = data.service;
-          this.fav_emp = data.employe;
+          this.fav_emp = tab;
           this.rdv = data.rdv;
           this.id_rdv=data.rdv._id;
           this.rdv.date_rdv=this.formatDateTimeForInput(this.rdv.date_rdv);
@@ -132,17 +180,24 @@ export class UpdateRdvComponent implements OnInit {
             };
           },
           error: (err) => {
-            console.log(err);
+            console.log(err.message);
           },
         });
     }
   }
   addSeance() {
-    console.log('Ajouter seance');
-    let rendez_vous = { ...this.rdv };
-    rendez_vous.rdv_service = [...this.rdv.rdv_service];
-    rendez_vous.rdv_service.push(this.currentrdv);
-    this.check_date(rendez_vous);
+    try {
+      console.log('Ajouter seance');
+      let rendez_vous = { ...this.rdv };
+      rendez_vous.rdv_service = [...this.rdv.rdv_service];
+      rendez_vous.rdv_service.push(this.currentrdv);
+      this.check_date(rendez_vous);
+      this.closeDialog();
+    } catch (error:any) {
+      this.closeDialog();
+      this.messageService.add({ severity: 'error',  detail: error.message });
+    }
+
   }
 
   deleteSeance(rdv: RdvService) {
@@ -195,5 +250,18 @@ export class UpdateRdvComponent implements OnInit {
       }
     }
     this.fav_emp = newData;
+  }
+  onSelectEmp(event: any) {
+    this.currentrdv.id_employe = event._id;
+  }
+  hideDialog(){
+
+    this.currentrdv = {
+      id_employe: '',
+      id_service: '',
+      ordre: 0,
+      datedebut: new Date(),
+      datefin: new Date(),
+    };
   }
 }
