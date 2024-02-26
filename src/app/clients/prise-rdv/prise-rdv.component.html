@@ -16,7 +16,7 @@
   <label for="floatingInput">Date du rendez_vous</label>
 </div>
 
-<div class="row row-cols-1 row-cols-lg-2">
+<div class="row row-cols-1 row-cols-lg-3">
   <div class="col mb-3">
     <p-table [value]="service" [tableStyle]="{ width: '30rem' }">
       <ng-template pTemplate="header">
@@ -33,7 +33,13 @@
           (onDragEnd)="mydragEndServe()"
         >
           <td>{{ serve.nom_service }}</td>
-          <td>{{ serve.prix }}</td>
+          <ng-container *ngIf="(serve.pi !== undefined) && (serve.pi!==serve.prix); else elseTemplate">
+            <td> réduit à {{ serve.prix }} prix initial({{ serve.pi }})</td>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <td>{{ serve.prix }}</td>
+          </ng-template>
+
           <td>
             <i
               class="pi pi-arrows-alt"
@@ -41,7 +47,7 @@
             ></i>
           </td>
         </tr>
-      </ng-template>
+      </ng-template> 
     </p-table>
   </div>
 
@@ -76,7 +82,7 @@
             </button>
           </td>
 
-          <td *ngIf="rowIndex != 0 ;else elsecolumn">
+          <td *ngIf="rowIndex != 0; else elsecolumn">
             <button
               class="btn btn-link"
               style="text-decoration: none"
@@ -89,8 +95,9 @@
           <td
             *ngIf="
               rowIndex != rdv.rdv_service.length - 1 &&
-              rdv.rdv_service.length > 1
-            ;else elsecolumn"
+                rdv.rdv_service.length > 1;
+              else elsecolumn
+            "
           >
             <button
               class="btn btn-link"
@@ -139,6 +146,33 @@
       </div>
       <button (click)="addSeance()" class="btn btn-success">Ajouter</button>
     </p-dialog>
+  </div>
+  <div class="col">
+    <p-table [value]="reduction" [tableStyle]="{ width: '30rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Offre spéciale</th>
+          <th>Service</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-reduc let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ reduc.nomOffreSpeciale }}</td>
+          <td>{{ reduc.reduction }} % sur {{ reduc.service.nom_service }}</td>
+          <td>
+            <input
+              type="checkbox"
+              checked
+              [checked]="this.rdv.reduction.includes(reduc._id)"
+              name=""
+              id=""
+              (click)="updateReductionList(rowIndex)"
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>
 

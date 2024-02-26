@@ -26,7 +26,10 @@ export class AddOffreComponent {
     description: '',
     service: '',
     reduction: 0,
-    clientVises: []
+    dateDebut: '',
+    dateFin: '',
+    nombre: 1,
+    clientVises:[]
   }
   title = 'angular'
   public Editor = ClassicEditor

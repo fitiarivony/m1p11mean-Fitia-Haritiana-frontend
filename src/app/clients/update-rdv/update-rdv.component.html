@@ -6,7 +6,7 @@ Date de rdv:<input type="datetime-local" [(ngModel)]="rdv.date_rdv" (change)="on
     <th>Service</th>
     <th>Ordre</th>
   </thead>
-  <tbody>
+  <tbody> 
     <tr *ngFor="let rendez_vous of rdv.rdv_service; index as ind;">
       <td>
        {{ getSelectedEmp(rendez_vous.id_employe).nom }} {{ getSelectedEmp(rendez_vous.id_employe).prenom}}

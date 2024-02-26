@@ -71,6 +71,9 @@ export interface FormOffre {
   service: string
   reduction: number
   clientVises?: string[]
+  dateDebut:string
+  dateFin:string
+  nombre:number
 }
 export interface Offre {
   _id: string

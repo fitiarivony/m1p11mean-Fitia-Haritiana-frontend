@@ -1,10 +1,11 @@
-import { Employe } from "../model";
+import { Employe, Offre } from "../model";
 import { Client } from "./client";
 import { Service } from "./service";
 
 export interface Rdv{
   id_client:string;
   date_rdv:string;
+  reduction:string[]
   rdv_service:RdvService[]
 }
 export interface RdvService{

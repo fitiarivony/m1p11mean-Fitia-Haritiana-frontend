@@ -42,6 +42,42 @@
       />
       <small id="helpId" class="form-text text-muted">% du prix total</small>
     </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Début validité</label>
+      <input
+        type="datetime-local"
+        class="form-control"
+        name=""
+        id=""
+        aria-describedby="helpId"
+        placeholder=""
+        [(ngModel)]="formOffre.dateDebut"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Fin validité</label>
+      <input
+        type="datetime-local"
+        class="form-control"
+        name=""
+        id=""
+        aria-describedby="helpId"
+        placeholder=""
+        [(ngModel)]="formOffre.dateFin"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Nombre d'utilisation</label>
+      <input
+        type="number"
+        class="form-control"
+        name=""
+        id=""
+        aria-describedby="helpId"
+        placeholder=""
+        [(ngModel)]="formOffre.nombre"
+      />
+    </div>
 
     <label for="" class="form-label">Client(s) visé(s)</label>
     <div *ngFor="let item of nomClients" class="form-check">
@@ -49,15 +85,7 @@
       (click)="add(item._id)" />
       <label class="form-check-label" for=""> {{item.nom_client}} {{item.prenom_client}} </label>
     </div>
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        value=""
-        id=""
-      />
-      <label class="form-check-label" for=""> Checked checkbox </label>
-    </div>
+
 
     <div class="d-grid gap-2">
       <button
