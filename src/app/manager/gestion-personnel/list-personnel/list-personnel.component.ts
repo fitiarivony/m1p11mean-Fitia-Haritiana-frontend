@@ -1,14 +1,16 @@
 import { EmpService } from 'src/app/services/emp.service'
 import { Component } from '@angular/core'
 import { Employe } from 'src/app/model'
+import { ConfirmationService, MessageService } from 'primeng/api'
 
 @Component({
   selector: 'app-list-personnel',
   templateUrl: './list-personnel.component.html',
-  styleUrls: ['./list-personnel.component.css']
+  styleUrls: ['./list-personnel.component.css'],
+  providers:[ConfirmationService,MessageService]
 })
 export class ListPersonnelComponent {
-  constructor (private empService: EmpService) {
+  constructor (private empService: EmpService,private confirmationService: ConfirmationService,private messageService: MessageService) {
     this.getList()
   }
   listPersonnel: Employe[] = []
@@ -36,4 +38,22 @@ export class ListPersonnelComponent {
       }
     })
   }
+  confirm(event: any,_id:string) {
+    this.confirmationService.confirm({
+        target: event.target,
+        message: 'Êtes-vous sûre de supprimer cet employe?',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Oui',
+        rejectLabel: 'Non',
+        acceptButtonStyleClass:"p-button-success",
+        rejectButtonStyleClass:"p-button-danger",
+        accept: () => {
+          this.delete(_id);
+            this.messageService.add({ severity: 'info', detail: 'Vous avez supprimé cet employe' });
+        },
+        reject: () => {
+            this.messageService.add({ severity: 'error',  detail: 'La suppression de cet employe a été annulé' });
+        }
+    });
+}
 }

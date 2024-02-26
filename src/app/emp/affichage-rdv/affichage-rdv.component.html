@@ -1,68 +1,152 @@
 <div class="card">
   <p-toast> </p-toast>
 </div>
-<div class="p-3 mb-4 bg-light rounded-3">
-  <div>
-    <h4 class="fw-bold">Les rendez-vous</h4>
-  </div>
-</div>
-<div class="card" [style]="{ height: '150px', width: '700px' }">
-  <div class="card-body">
-    <div class="row row-cols-1 row-cols-lg-4">
-      <div class="col">
-        Date de début:<input
-          class="form-control"
-          type="datetime-local"
-          [(ngModel)]="datedebut"
-        />
-      </div>
-      <div class="col">
-        Date de fin:<input
-          class="form-control"
-          type="datetime-local"
-          [(ngModel)]="datefin"
-        />
-      </div>
-      <div class="col">
-        <p-autoComplete
-          (onSelect)="onSelectService($event)"
-          [dropdown]="true"
-          [suggestions]="filteredServices"
-          (completeMethod)="filterService($event)"
-          field="nom_service"
-        ></p-autoComplete>
-      </div>
-      <div class="col mb-3">
-        <button
-          class="p-2 btn btn-primary"
-          (click)="filtre_rdv()"
-          severity="success"
-        >
-          <i class="pi pi-search" style="font-size: 2rem"></i>
-        </button>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold">Les rendez-vous</h4>
       </div>
     </div>
 
-    <div>
-      <ul class="list-group list-group-horizontal">
-        <li
-          *ngFor="let service of selectedServices"
-          class="list-group-item badge"
-        >
-          {{ service.nom_service }}
-          <button class="btn btn-link badge" (click)="annuler(service)">
-            <i
-              class="pi pi-times-circle"
-              style="color: red; font-size: x-small"
-            ></i>
-          </button>
-        </li>
-      </ul>
+    <div class="card" [style]="{ height: '150px', width: '700px' }">
+      <div class="card-body">
+        <div class="row row-cols-1 row-cols-lg-4">
+          <div class="col">
+            Date de début:<input
+              class="form-control"
+              type="datetime-local"
+              [(ngModel)]="datedebut"
+            />
+          </div>
+          <div class="col">
+            Date de fin:<input
+              class="form-control"
+              type="datetime-local"
+              [(ngModel)]="datefin"
+            />
+          </div>
+          <div class="col">
+            <p-autoComplete
+              (onSelect)="onSelectService($event)"
+              [dropdown]="true"
+              [suggestions]="filteredServices"
+              (completeMethod)="filterService($event)"
+              field="nom_service"
+            ></p-autoComplete>
+          </div>
+          <div class="col mb-3">
+            <button
+              class="p-2 btn btn-primary"
+              (click)="filtre_rdv()"
+              severity="success"
+            >
+              <i class="pi pi-search" style="font-size: 2rem"></i>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <ul class="list-group list-group-horizontal">
+            <li
+              *ngFor="let service of selectedServices"
+              class="list-group-item badge"
+            >
+              {{ service.nom_service }}
+              <button class="btn btn-link badge" (click)="annuler(service)">
+                <i
+                  class="pi pi-times-circle"
+                  style="color: red; font-size: x-small"
+                ></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <br />
+    <p-dataView #dv [value]="rdv" [rows]="5" [paginator]="true" [style]="{width:'40rem'}">
+      <ng-template let-item pTemplate="listItem">
+        <div class="row cols-2 mb-2">
+          <div class="col">
+            <div class="mb-3"></div>
+              <div class="d-flex justify-content-center" style="height: 100px;">
+                  <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                      <h5 class=" text-600 mb-2">  {{ item.id_client.nom_client }} {{ item.id_client.prenom_client }} </h5>
+                      <span class="mb-3">{{ item.date_rdv | date : "yyyy-MM-dd HH:mm" }}</span>
+                      <div>
+                              <span class="fw-bold">{{ item.id_service.nom_service }}</span>
+                          <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag> -->
+                      </div>
+                  </div>
+
+                  <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                    <span class="badge bg-success" *ngIf="item.is_done" >
+                      Terminé <i class="pi pi-check" style="font-size: 0.5rem"></i>
+                    </span>
+                    <span class="badge bg-danger"
+                      *ngIf="
+                        !item.is_done && tokony_efa_vita(item.datefin, item.datedebut) === 1
+                      "
+                    >
+                      Inachevé <i class="pi pi-times" style="font-size: 0.5rem"></i>
+                    </span>
+                    <span
+                      *ngIf="
+                        !item.is_done && tokony_efa_vita(item.datefin, item.datedebut) === 0
+                      "
+                      style="color: rgb(38, 113, 198)"
+                    >
+                      En cours d'éxécution
+                      <i class="pi pi-spinner" style="font-size: 1rem"></i>
+                    </span>
+                    <span
+                      *ngIf="
+                        !item.is_done && tokony_efa_vita(item.datefin, item.datedebut) === -1
+                      "
+                      style="color: rgb(53, 57, 62)"
+                    >
+                      A venir
+                      <i class="pi pi-bell" style="font-size: 1rem"></i>
+                    </span>
+
+                  </div>
+              </div>
+          </div>
+          <div class="col ">
+            <div class="mb-3"></div>
+            <div *ngIf="!item.is_done">
+              <button
+                class="p-button-success"
+                pButton
+                pRipple
+                (click)="marquer_vita(item)"
+              >
+                Terminer
+              </button>
+            </div>
+            <div *ngIf="item.is_done">
+              <button
+                class="p-button-danger"
+                pButton
+                pRipple
+                (click)="marquer_vita(item)"
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+      </div>
+        </ng-template>
+    </p-dataView>
+
   </div>
+  <div class="col-2"></div>
 </div>
-<br />
-<p-table [value]="rdv" [tableStyle]="{ width: '50rem' }">
+
+
+<!-- <p-table [value]="rdv" [tableStyle]="{ width: '50rem' }">
   <ng-template pTemplate="header">
     <tr>
       <th>Client</th>
@@ -131,4 +215,4 @@
       </td>
     </tr>
   </ng-template>
-</p-table>
+</p-table> -->
