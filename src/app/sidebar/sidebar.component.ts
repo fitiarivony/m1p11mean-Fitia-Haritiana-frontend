@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit{
 
   constructor(public authService:AuthService){}
   ngOnInit(): void {
+
     if (localStorage.getItem('client')) {
       this.authService.isLoggedIn=true;
       this.authService.links=this.authService.clientLinks
