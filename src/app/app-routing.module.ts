@@ -39,13 +39,14 @@ const routes: Routes = [
   { path: 'services/list', component: ListServiceComponent ,canActivate:[AuthGuard], data: { role: ['manager']}  ,title:'Lister les services' },
   { path: 'services/create', component: CreateServiceComponent ,canActivate:[AuthGuard], data: { role: ['manager']   },title:'Créer un service'},
   { path: 'services/update/:id', component: UpdateServiceComponent ,canActivate:[AuthGuard], data: { role: ['manager']  },title:'Mettre à jour un service'},
-  { path: 'client/preference', component: GestionPreferenceComponent,canActivate:[AuthGuard], data: { role: ['client'] },title:'Prendre rendez-vous'  },
+  { path: 'client/preference', component: GestionPreferenceComponent,canActivate:[AuthGuard], data: { role: ['client'] },title:'Préférence des employés'  },
   { path: 'client/histo', component: HistoriqueRdvComponent,canActivate:[AuthGuard], data: { role: ['client']  } ,title:'Historique des rendez-vous'},
   { path: 'manager/stat', component: MoyennesComponent, canActivate:[AuthGuard], data: { role: ['manager'] },title:'Statistiques' },
   {
     path: 'client/pref/service',
     component: GestionPreferenceServicesComponent,
-    canActivate:[AuthGuard], data: { role: ['client']}
+    canActivate:[AuthGuard], data: { role: ['client']},
+    title:"Préférence des services"
   },
   { path: 'sign-up', component: InscriptionClientComponent,title:'Inscription client'},
   { path: 'sign-in', component: LoginClientComponent ,title:'Connexion client' },
