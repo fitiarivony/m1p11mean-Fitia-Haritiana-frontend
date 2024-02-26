@@ -1,7 +1,32 @@
 
-Nom service:<input type="text"[(ngModel)]="service.nom_service">
-Prix :<input type="number"[(ngModel)]="service.prix">
-Durée :<input (keypress)="onlyNumber()" type="number"[(ngModel)]="service.duree">
-Comission :<input type="number"[(ngModel)]="service.comission">
-<input type="submit" value="Valider" (click)="updateService()">
+<div class="mb-3"></div>
+<div class="row ">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <p-panel header="Ajouter un service">
+
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="service.nom_service" class="form-control" id="nom" >
+      <label for="nom">Nom service</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" [(ngModel)]="service.prix" id="prix" >
+      <label for="prix">Prix</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="time"  class="form-control" [(ngModel)]="dureeMinutes" id="duree" >
+      <label for="duree">Durée </label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" [(ngModel)]="service.comission" id="comission" >
+      <label for="comission">Commission</label>
+    </div>
+    <input type="submit" class="btn btn-success" value="Valider" (click)="updateService()">
+  </p-panel>
+
+  </div>
+  <div class="col-3"></div>
+</div>
+
+
 

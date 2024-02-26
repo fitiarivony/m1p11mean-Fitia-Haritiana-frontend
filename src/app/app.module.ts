@@ -44,7 +44,14 @@ import { NgChartsModule } from 'ng2-charts';
 import { MoyennesComponent } from './manager/stat/moyennes/moyennes.component'
 import { ChartModule } from 'primeng/chart';
 import {PanelModule} from 'primeng/panel';
-
+import {DataViewModule} from 'primeng/dataview'
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { SidebarModule } from 'primeng/sidebar';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { CreateDepenseComponent } from './manager/depense/create-depense/create-depense.component';
+import { ListDepenseComponent } from './manager/depense/list-depense/list-depense.component';
+import { UpdateDepenseComponent } from './manager/depense/update-depense/update-depense.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +78,11 @@ import {PanelModule} from 'primeng/panel';
     AffichageRdvComponent,
     SuiviRdvComponent,
     UpdateRdvComponent,
-    MoyennesComponent
+    MoyennesComponent,
+    SidebarComponent,
+    CreateDepenseComponent,
+    ListDepenseComponent,
+    UpdateDepenseComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +102,11 @@ import {PanelModule} from 'primeng/panel';
     ToastModule,
     CardModule,
     ChartModule,
-    PanelModule
+    PanelModule,
+    DataViewModule,
+    ConfirmPopupModule,
+    SidebarModule,
+    PanelMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

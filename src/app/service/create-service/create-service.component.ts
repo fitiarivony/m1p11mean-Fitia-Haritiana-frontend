@@ -16,12 +16,18 @@ export class CreateServiceComponent {
     duree:0,
     comission:0,
   }
+  dureeMinutes:number = 0
   onlyNumber(){
 
   }
 
   createService(){
-      this.serve_service.createService(this.service).subscribe(
+    let duree=this.service.duree.toString();
+   let sep=duree.split(':');
+    let minutes=parseInt(sep[0])*60+parseInt(sep[1]);
+    let service={...this.service};
+    service.duree=minutes;
+      this.serve_service.createService(service).subscribe(
         {
           next:service=>{
             this.router.navigate(['/services/list'])
