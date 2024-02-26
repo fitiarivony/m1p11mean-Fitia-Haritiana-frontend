@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Rdv_Service } from 'src/app/services/rdv.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Rdv, RdvService } from 'src/app/interfaces/rdv';
-import { Emp } from 'src/app/model';
+import { Emp, Offre } from 'src/app/model';
 import { Service } from 'src/app/interfaces/service';
 import { MessageService } from 'primeng/api';
 
@@ -24,8 +24,10 @@ export class UpdateRdvComponent implements OnInit {
   rdv: Rdv = {
     id_client: '',
     date_rdv: '',
+    reduction:[],
     rdv_service: [],
   };
+  reduction: Offre[] = []
   fav_emp: Emp[] = [];
   employe: Emp[] = [];
   service: Service[] = [];
@@ -103,7 +105,8 @@ export class UpdateRdvComponent implements OnInit {
           });
           this.employe = tab;
           this.service = data.service;
-          this.fav_emp = tab;
+          this.fav_emp = data.employe;
+          this.reduction = data.reduction
           this.rdv = data.rdv;
           this.id_rdv=data.rdv._id;
           this.rdv.date_rdv=this.formatDateTimeForInput(this.rdv.date_rdv);
@@ -111,6 +114,33 @@ export class UpdateRdvComponent implements OnInit {
         error: (err) => console.log(err.error),
       });
     });
+  }
+  updateReductionList (index: number) {
+    let reduction = this.reduction[index]
+    if (!this.rdv.reduction.includes(this.reduction[index]._id)) {
+      this.rdv.reduction.push(this.reduction[index]._id)
+      this.service.map(el => {
+        if (reduction.service._id === el._id) {
+          if (el.pi === undefined) el.pi = el.prix
+          if (el.reduc === undefined) el.reduc = 0
+          el.reduc += reduction.reduction
+          el.prix = (el.pi * (100 - el.reduc)) / 100
+        }
+      })
+    } else {
+      this.rdv.reduction.splice(
+        this.rdv.reduction.indexOf(this.reduction[index]._id),
+        1
+      )
+      this.service.map(el => {
+        if (reduction.service._id === el._id) {
+          if (el.pi === undefined) el.pi = el.prix
+          if (el.reduc === undefined) el.reduc = 0
+          el.reduc -= reduction.reduction
+          el.prix = (el.pi * (100 - el.reduc)) / 100
+        }
+      })
+    }
   }
 
   onChangeDateRDV() {

@@ -16,14 +16,17 @@ export class ShowOffreComponent {
   constructor (
     private serveService: ServeService,
     private offreSpecialeService: OffreSpecialeService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
   services: Service[] = []
   formOffre: FormOffre = {
     nomOffreSpeciale: '',
     description: '',
     service: '',
-    reduction: 0
+    reduction: 0,
+    dateDebut: '',
+    dateFin: '',
+    nombre: 0
   }
   _id: string = ''
   editing: boolean = false
@@ -35,8 +38,12 @@ export class ShowOffreComponent {
     this.serveService.listService().subscribe(data => {
       this.services = data
     })
-    this._id = localStorage.getItem("id")!
+    this.route.params.subscribe(params => {
+      this._id = params['id']
+    })
     this.offreSpecialeService.getOne(this._id).subscribe(data => {
+      console.log(data)
+
       this.formOffre = data
     })
   }
@@ -51,5 +58,4 @@ export class ShowOffreComponent {
   changeEditingStatus () {
     this.editing = !this.editing
   }
-
 }
