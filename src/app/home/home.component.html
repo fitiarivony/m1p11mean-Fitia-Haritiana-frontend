@@ -1,7 +1,94 @@
-<main>
-  <header class="brand-name">
-    <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true">
-  </header>
-  <section class="content">
-  </section>
-</main>
+<div class="container">
+
+  <main>
+    <div class="p-5 text-center bg-image" style="
+    background-image: url('../../assets/plage-d-antsinitia.jpg');background-size: cover;
+    height: 400px; background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center center;
+  ">
+  <div class="mask  h-100" style="background-color: rgba(0, 0, 0, 0.6);">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Bienvenue chez Ocean Beauty</h1>
+        <h4 class="mb-3">Plongez dans un monde où la beauté rencontre le raffinement.</h4>
+      </div>
+    </div>
+  </div>
+</div>
+  </main>
+  <div class="mb-3 d-flex justify-content-center"><a href="#serves" style="color: #5d6f91;"><i  class="fa fa-chevron-down fa-bounce mb-3" style="font-size: 7rem;"> </i></a></div>
+  <div class="mb-3"></div>
+  <div class="container ">
+    <div class="row ">
+      <div class="col-2"></div>
+      <div class="col-8" id="serves">
+        <section class="services mb-3">
+        <div class="p-3 mb-4 bg-light rounded-3">
+          <div>
+            <h4 class="fw-bold">Nos services</h4>
+          </div>
+        </div>
+        <p-table styleClass="p-datatable-gridlines" class="mb-3" [value]="services">
+          <!-- <ng-template pTemplate="caption"> Liste des services </ng-template> -->
+          <ng-template pTemplate="header" >
+            <tr>
+            <th class="text-center">Nom </th>
+            <th>Prix </th>
+            <th>Durée </th>
+            </tr>
+
+
+          </ng-template>
+          <ng-template pTemplate="body"  let-service>
+            <tr>
+              <td> {{ service.nom_service }}</td>
+              <td> {{ service.prix }}</td>
+              <td> {{ parseHour(service.duree) }}</td>
+
+            </tr>
+
+          </ng-template>
+        </p-table>
+      </section>
+        <section class="about">
+          <div class="p-3 mb-4 bg-light rounded-3">
+            <div>
+              <h4 class="fw-bold">A propos</h4>
+            </div>
+          </div>
+          <p-card>
+          <p class="mb-3">
+              <b>Ocean Salon</b> est un salon de beauté à Tananarive qui vous invite à une expérience unique de bien-être et de détente.
+              Notre mission est de vous sublimer en vous proposant des soins de haute qualité, personnalisés et adaptés à vos besoins.
+              Notre équipe d'expertes passionnées est à votre écoute pour vous prodiguer des conseils professionnels et vous accompagner dans votre quête de beauté.
+          </p>
+
+          <h3 class="mb-2">Nos valeurs :</h3>
+
+          <ul class="list-group list-group-horizontal mb-3">
+              <li class="list-group-item ">Professionnalisme</li>
+              <li class="list-group-item ">Passion</li>
+              <li class="list-group-item ">Écoute</li>
+              <li class="list-group-item ">Qualité</li>
+              <li class="list-group-item ">Respect</li>
+          </ul>
+
+          <p class="mb-3">
+             <b> Ocean Beauty</b> c'est bien plus qu'un simple salon de beauté, c'est un véritable havre de paix où vous pourrez vous ressourcer et prendre soin de vous.
+          </p>
+
+
+        </p-card>
+      </section>
+
+
+      </div>
+
+      <div class="col-2"></div>
+    </div>
+
+  </div>
+
+</div>
+

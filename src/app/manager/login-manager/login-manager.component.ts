@@ -12,8 +12,8 @@ import { ManagerService } from 'src/app/services/manager.service';
 export class LoginManagerComponent {
   constructor(private managerService: ManagerService,private router: Router,private authService:AuthService) {}
   manager:Manager={
-    identifiant:"",
-    mdp:"",
+    identifiant:"fitia",
+    mdp:"fitia123",
     _id:"",
     nom:"",
   }

@@ -3,3 +3,10 @@
       cursor: move;
   }
 }
+.custom-spinner {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+}

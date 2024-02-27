@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +12,7 @@ export class SidebarComponent implements OnInit{
   items: any = [];
   sidebarVisible:boolean = false;
 
-  constructor(public authService:AuthService){}
+  constructor(public authService:AuthService,private router:Router){}
   ngOnInit(): void {
 
     if (localStorage.getItem('client')) {
@@ -25,6 +26,7 @@ export class SidebarComponent implements OnInit{
       this.authService.links=this.authService.managersLink
     }
 
+
   }
   logout(){
     this.authService.logout().subscribe({
@@ -33,9 +35,19 @@ export class SidebarComponent implements OnInit{
       this.authService.links=[]
       localStorage.removeItem("id")
       localStorage.removeItem('token')
-      localStorage.removeItem('manager')
-      localStorage.removeItem('employe')
-      localStorage.removeItem('client')
+      if (localStorage.getItem('manager')) {
+        localStorage.removeItem('manager')
+        this.router.navigate(['/login-manager']);
+      }else if(localStorage.getItem('employe')){
+        localStorage.removeItem('employe')
+        this.router.navigate(['/']);
+      }else if (localStorage.getItem('client')) {
+        localStorage.removeItem('client')
+        this.router.navigate(['/sign-in'])
+      }
+
+
+
       },
       error:err=>{console.log(err)}
     })

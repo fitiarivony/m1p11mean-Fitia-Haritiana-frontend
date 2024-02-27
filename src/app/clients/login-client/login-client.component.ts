@@ -14,8 +14,8 @@ export class LoginClientComponent {
     _id: '',
     nom_client: '',
     prenom_client: '',
-    identifiant: '',
-    mdp: '',
+    identifiant: 'jean@gmail.com',
+    mdp: 'jean',
     numero: '',
   };
   constructor(private client_service: ClientService, private router: Router,private authService:AuthService) {}
@@ -28,7 +28,7 @@ export class LoginClientComponent {
         localStorage.setItem('client','1')
         localStorage.setItem('token',client.token.token)
         localStorage.setItem('id',client.admin._id)
-        // this.router.navigate(['/prise-rdv']);
+        this.router.navigate(['/client/histo']);
       },
       error: (err) => console.log(err.error),
     });

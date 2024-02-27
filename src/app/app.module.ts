@@ -52,6 +52,8 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { CreateDepenseComponent } from './manager/depense/create-depense/create-depense.component';
 import { ListDepenseComponent } from './manager/depense/list-depense/list-depense.component';
 import { UpdateDepenseComponent } from './manager/depense/update-depense/update-depense.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +84,8 @@ import { UpdateDepenseComponent } from './manager/depense/update-depense/update-
     SidebarComponent,
     CreateDepenseComponent,
     ListDepenseComponent,
-    UpdateDepenseComponent
+    UpdateDepenseComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +110,7 @@ import { UpdateDepenseComponent } from './manager/depense/update-depense/update-
     ConfirmPopupModule,
     SidebarModule,
     PanelMenuModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
