@@ -46,6 +46,22 @@ export class AuthService {
       },
     ],
   },
+  {
+    label: 'Offres spéciales',
+    icon: 'fa-regular fa-bell',
+    items: [
+      {
+        label: 'Créer une offre spéciale',
+        icon: 'pi pi-plus',
+        routerLink: ['/offre/add'],
+      },
+      {
+        label: 'Lister les offres spéciales',
+        icon: 'pi pi-list',
+        routerLink: ['/offre/liste'],
+      },
+    ],
+  },
     {
       label: 'Employé',
       icon: 'pi pi-user',
