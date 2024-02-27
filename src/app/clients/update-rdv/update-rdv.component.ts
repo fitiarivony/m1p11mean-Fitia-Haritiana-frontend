@@ -110,10 +110,30 @@ export class UpdateRdvComponent implements OnInit {
           this.rdv = data.rdv;
           this.id_rdv=data.rdv._id;
           this.rdv.date_rdv=this.formatDateTimeForInput(this.rdv.date_rdv);
+
+          this.initReduction()
         },
         error: (err) => console.log(err.error),
       });
     });
+  }
+  initReduction(){
+
+    this.rdv.reduction.map((red)=>{
+      this.reduction.map((reduction)=>{
+        if(reduction._id===red){
+          this.service.map(el => {
+            // console.log(reduction.service._id, el._id);
+            if (reduction.service._id === el._id) {
+              if (el.pi === undefined) el.pi = el.prix
+              if (el.reduc === undefined) el.reduc = 0
+              el.reduc += reduction.reduction
+              el.prix = (el.pi * (100 - el.reduc)) / 100
+            }
+          })
+        }
+      })
+    })
   }
   updateReductionList (index: number) {
     let reduction = this.reduction[index]
