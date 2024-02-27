@@ -238,6 +238,7 @@ export class PriseRdvComponent implements OnInit {
         this.employe = tab;
         this.service = data.service;
         this.fav_emp = tab;
+        this.reduction = data.reduction
         setTimeout(() => {
           // Marque  chargement comme terminé
           this.isLoading = false;
