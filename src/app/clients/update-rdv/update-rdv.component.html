@@ -18,7 +18,7 @@
   <label for="floatingInput">Date du rendez_vous</label>
 </div>
 
-<div class="row row-cols-1 row-cols-lg-2">
+<div class="row row-cols-1 row-cols-lg-3">
   <div class="col mb-3">
     <p-table [value]="service" [tableStyle]="{ width: '30rem' }">
       <ng-template pTemplate="header">
@@ -142,6 +142,35 @@
       <button (click)="addSeance()" class="btn btn-success">Ajouter</button>
     </p-dialog>
   </div>
+  <div class="col">
+    <p-table [value]="reduction" [tableStyle]="{ width: '30rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Offre spéciale</th>
+          <th>Service</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-reduc let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ reduc.nomOffreSpeciale }}</td>
+          <!-- <td>{{ reduc.reduction }} % sur </td> -->
+          <td>{{ reduc.reduction }} % sur {{ reduc.service.nom_service }}</td>
+          <td>
+            <input
+              type="checkbox"
+              checked
+              [checked]="this.rdv.reduction.includes(reduc._id)"
+              name=""
+              id=""
+              (click)="updateReductionList(rowIndex)"
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
 </div>
 
 <div></div>

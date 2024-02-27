@@ -242,7 +242,6 @@ export class PriseRdvComponent implements OnInit {
           // Marque  chargement comme terminé
           this.isLoading = false;
         }, 2000);
-
       },
       error: err => console.log(err.message)
     })
