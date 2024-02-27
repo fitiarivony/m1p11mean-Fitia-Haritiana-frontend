@@ -1,26 +1,33 @@
 <p-toast></p-toast>
 <div class="row">
+
   <div class="col-sm-0 col-lg-2"></div>
+
   <div class="col-sm-12 col-lg-8 mx-5">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold" style="color: #081c4d;">Gestion du personnel</h4>
+      </div>
+    </div>
     <a href="emps/add"><button class="btn btn-success mb-3">Ajouter un employé </button></a>
     <div class="table-responsive">
-      <table
-        class="table table-striped text-center table-borderless table-primary align-middle"
+      <p-table
+       [value]="listPersonnel"
       >
-        <thead class="table-light">
-          <h1>Liste des employés</h1>
+      <ng-template pTemplate="caption"> Liste du  personnel </ng-template>
+      <ng-template pTemplate="header" >
 
-          <tr>
+
             <th>Nom</th>
             <th>Prénom</th>
             <th>Date de naissance</th>
             <th>Genre</th>
             <th>Numéro CIN</th>
             <th colspan="2">Action</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider" >
-          <tr class="table-primary" *ngFor="let item of listPersonnel">
+
+      </ng-template>
+      <ng-template pTemplate="body"  let-item>
+          <tr>
             <td>{{ item.nom }}</td>
             <td>{{ item.prenom }}</td>
             <td>{{ item.dateDeNaissance | date : "yyyy-MM-dd " }}</td>
@@ -34,9 +41,8 @@
               <button class="btn btn-danger" (click)="confirm($event,item._id)">Supprimer</button>
             </td>
           </tr>
-        </tbody>
-        <tfoot></tfoot>
-      </table>
+      </ng-template>
+      </p-table>
     </div>
   </div>
   <div class="col-sm-0 col-lg-2"></div>

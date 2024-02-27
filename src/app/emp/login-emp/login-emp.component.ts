@@ -12,8 +12,8 @@ import { AuthService } from 'src/app/services/auth.service'
 export class LoginEmpComponent {
   constructor (private dataService: EmpService,private router: Router,private authService:AuthService) {}
   login: Login = {
-    identifiant: '',
-    mdp: ''
+    identifiant: 'rabekoto@gmail.com',
+    mdp: 'jean'
   }
   log () {
     const data = this.login
@@ -27,6 +27,23 @@ export class LoginEmpComponent {
           localStorage.setItem('id',v.admin._id);
           localStorage.setItem('employe','1')
           this.authService.isLoggedIn=true;
+          this.authService.employeLinks=[
+            {
+              label: 'Afficher les rendez-vous',
+              icon: 'pi pi-calendar',
+              routerLink: ['/rdv/show'],
+            },
+            {
+              label: 'Suivi des rendez-vous',
+              icon: 'pi pi-calendar-times',
+              routerLink: ['/emp/rdv/suivi'],
+            },
+            {
+              label: 'Profil et horaire',
+              icon: 'pi pi-user',
+              routerLink: ['/emps/show/'+localStorage.getItem('id')],
+            },
+          ];
           this.authService.links=this.authService.employeLinks;
           this.router.navigate(['/emp/rdv/suivi']);
           console.log(v)

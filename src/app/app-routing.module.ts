@@ -28,9 +28,11 @@ import { ListDepenseComponent } from './manager/depense/list-depense/list-depens
 import { CreateDepenseComponent } from './manager/depense/create-depense/create-depense.component'
 import { UpdateDepenseComponent } from './manager/depense/update-depense/update-depense.component'
 import { AuthGuard } from './guards/auth.guard'
+import { HomeComponent } from './home/home.component'
 
 const routes: Routes = [
-  { path: '', component: LoginEmpComponent },
+  { path: '', component: HomeComponent,title:'Accueil' },
+  { path: 'emp/login', component: LoginEmpComponent,title:'Connexion Employé' },
   { path: 'emps', component: ListPersonnelComponent,canActivate:[AuthGuard], data: { role: ['manager']  },title:'Liste du personnel' },
   { path: 'emps/add', component: AddPersonnelComponent,canActivate:[AuthGuard], data: { role: ['manager']  },title:'Ajouter un employe' },
   { path: 'emps/show/:id', component: FichePersonnelComponent,canActivate:[AuthGuard], data: { role: ['manager','employe']  } ,title:"Fiche de l'employé"},

@@ -1,7 +1,15 @@
-<div class="row">
-  <div class="col-4"></div>
-  <div class="col-4 my-5">
-    <div *ngFor="let item of historique" class="card">
+<div class="row ">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold" style="color: #081c4d;">Historique des rendez-vous</h4>
+      </div>
+    </div>
+
+  <div class="row row-cols-1 row-cols-lg-2">
+    <div class="col d-flex" *ngFor="let item of historique">
+    <div  class="card shadow mb-3 flex-fill" style="width: 20rem;">
       <div class="card-body">
         <div style="float: right;"  *ngIf="returnCancellable(item.date_rdv)">
           <button  class="btn btn-danger" (click)="annulerRdv(item._id)">Annuler</button>
@@ -9,21 +17,28 @@
         </div>
         <div style="float: right;"*ngIf="!returnCancellable(item.date_rdv)">
           <button *ngIf="!item.paye" class="btn btn-success" (click)="payerRdv(item._id)">Payer</button>
-          <div *ngIf="item.paye">Payé</div>
+          <div *ngIf="item.paye" style="color: rgb(20, 154, 65);">Payé <i class="pi pi-check"></i></div>
         </div>
         <h5 class="card-title">{{item.date_rdv.toLocaleString()}}</h5>
         <!-- <p class="card-text">Text</p> -->
-        <ul class="list-group list-group-flush">
-          <li *ngFor="let rdv of item.rdv_service" class="list-group-item">{{rdv.id_service.nom_service}}
+        <!-- <ul class="list-group list-group-horizontal"> -->
+          <!-- <li *ngFor="let rdv of item.rdv_service" class="list-group-item"> -->
+            <span  *ngFor="let rdv of item.rdv_service"
+              class="badge  m-1 rounded-pill" style="background-color: #5E7CE2;"
+              >  {{rdv.id_service.nom_service}}</span
+            >
 
-          </li>
+
+
+          <!-- </li> -->
 
           <!-- <li class="list-group-item">A second item</li>
           <li class="list-group-item">A third item</li> -->
-        </ul>
+        <!-- </ul> -->
       </div>
     </div>
-
   </div>
-  <div class="col-4"></div>
+  </div>
+</div>
+<div class="col-2"></div>
 </div>

@@ -3,3 +3,6 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "~@fortawesome/fontawesome-free/css/all.css";
+body, .p-component{
+  font-family: ' Playfair Display', sans-serif !important;
+}

@@ -38,7 +38,8 @@ export class PriseRdvComponent implements OnInit {
 
   testService: Service | null = null
 
-  visible: boolean = false
+  visible: boolean = false;
+  isLoading: boolean = true;
 
   concatFields (service: Service): string {
     return `${service.nom_service} - ${service.prix}`
@@ -224,17 +225,23 @@ export class PriseRdvComponent implements OnInit {
     this.check_date(rendez_vous)
   }
 
-  ngOnInit () {
+
+  ngOnInit() {
+    this.isLoading=true;
+
     this.rendez_vous_service.prepare_prise_rdv().subscribe({
       next: data => {
         let tab: Emp[] = data.employe
         tab.forEach((emp: Emp) => {
-          emp.nom_prenom = emp.nom + ' ' + emp.prenom
-        })
-        this.employe = tab
-        this.service = data.service
-        this.fav_emp = tab
-        this.reduction = data.reduction
+          emp.nom_prenom = emp.nom + ' ' + emp.prenom;
+        });
+        this.employe = tab;
+        this.service = data.service;
+        this.fav_emp = tab;
+        setTimeout(() => {
+          // Marque  chargement comme terminé
+          this.isLoading = false;
+        }, 2000);
       },
       error: err => console.log(err.message)
     })

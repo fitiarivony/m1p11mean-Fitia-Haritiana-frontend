@@ -1,3 +1,20 @@
+<div class="container" *ngIf="isLoading" >
+
+  <p-progressSpinner
+  [style]="{'margin-top':'200px','border-color':'green'}"
+  styleClass="custom-spinner d-flex justify-content-center"
+  strokeWidth="8"
+  fill="#EEEEEE"
+
+  animationDuration=".5s"
+
+>
+</p-progressSpinner>
+</div>
+
+<div class="mx-2" *ngIf="!isLoading">
+
+
 <div class="p-3 mb-4 bg-light rounded-3">
   <div>
     <h4 class="fw-bold">Prendre rendez-vous</h4>
@@ -18,7 +35,7 @@
 
 <div class="row row-cols-1 row-cols-lg-3">
   <div class="col mb-3">
-    <p-table [value]="service" [tableStyle]="{ width: '30rem' }">
+    <p-table [value]="service" class="shadow rounded" [tableStyle]="{ width: '20rem' }">
       <ng-template pTemplate="header">
         <tr>
           <th>Service</th>
@@ -179,3 +196,4 @@
 <div></div>
 
 <button (click)="addRdv()" class="btn btn-success">Ajouter Rdv</button>
+</div>
