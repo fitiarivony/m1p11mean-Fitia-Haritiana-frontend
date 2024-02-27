@@ -48,6 +48,42 @@
         />
         <small id="helpId" class="form-text text-muted">% du prix total</small>
       </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Début validité</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          [(ngModel)]="formOffre.dateDebut"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Fin validité</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          [(ngModel)]="formOffre.dateFin"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Nombre d'utilisation</label>
+        <input
+          type="number"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          [(ngModel)]="formOffre.nombre"
+        />
+      </div>
       <div class="d-grid gap-2">
         <button
           type="button"
@@ -59,6 +95,18 @@
           Valider
         </button>
       </div>
+      <div class="d-grid gap-2">
+        <button
+          type="button"
+          name=""
+          id=""
+          class="btn btn-primary mx-5"
+          (click)="changeEditingStatus()"
+        >
+          Annuler
+        </button>
+
+      </div>
     </ng-container>
     <ng-template #elseTemplate>
       <h1>Offre spéciale</h1>
@@ -68,11 +116,6 @@
         </h3>
       </div>
       <div class="mb-3">
-        <!-- <ckeditor
-          [editor]="Editor"
-          [(ngModel)]="formOffre.description"
-        ></ckeditor> -->
-        <!-- <ng-container *ngComponentOutlet=""></ng-container> -->
         <div [innerHTML]="formOffre.description"></div>
       </div>
       <div class="mb-3">
@@ -90,7 +133,24 @@
           {{ formOffre.reduction }}% du prix total
         </p>
       </div>
-
+      <div class="mb-3">
+        <label for="" class="form-label">Début validité</label>
+        <p >
+          {{ formOffre.dateDebut | date:"dd-MM-yyyy hh:mm" }}
+        </p>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Fin validité</label>
+        <p name="identifiant" id="identifiant">
+          {{ formOffre.dateFin | date:"dd-MM-yyyy hh:mm" }}
+        </p>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Nombre d'utilisation</label>
+        <p name="identifiant" id="identifiant">
+          {{ formOffre.nombre }}
+        </p>
+      </div>
       <div class="">
         <button
           type="button"
@@ -101,7 +161,9 @@
         >
           Modifier
         </button>
+
       </div>
+
     </ng-template>
   </div>
   <div class="col-3"></div>

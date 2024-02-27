@@ -56,6 +56,11 @@ export class ShowOffreComponent {
       })
   }
   changeEditingStatus () {
+    this.offreSpecialeService.getOne(this._id).subscribe(data => {
+      console.log(data)
+
+      this.formOffre = data
+    })
     this.editing = !this.editing
   }
 }
