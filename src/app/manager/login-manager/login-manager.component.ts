@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Manager } from 'src/app/interfaces/manager';
 import { AuthService } from 'src/app/services/auth.service';
 import { ManagerService } from 'src/app/services/manager.service';
@@ -7,10 +8,11 @@ import { ManagerService } from 'src/app/services/manager.service';
 @Component({
   selector: 'app-login-manager',
   templateUrl: './login-manager.component.html',
-  styleUrls: ['./login-manager.component.css']
+  styleUrls: ['./login-manager.component.css'],
+  providers:[MessageService]
 })
 export class LoginManagerComponent {
-  constructor(private managerService: ManagerService,private router: Router,private authService:AuthService) {}
+  constructor(private managerService: ManagerService,private router: Router,private authService:AuthService,private messageService:MessageService) {}
   manager:Manager={
     identifiant:"fitia",
     mdp:"fitia123",
@@ -34,7 +36,7 @@ export class LoginManagerComponent {
           this.authService.links=this.authService.managersLink;
           this.router.navigate(['/services/list']);
       },error :err =>{
-        console.log(err.error);
+        this.messageService.add({ severity: 'error',  detail: err.error.error });
       }
     });
 
