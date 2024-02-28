@@ -12,11 +12,11 @@
     <div  class="card shadow mb-3 flex-fill" style="width: 20rem;">
       <div class="card-body">
         <div style="float: right;"  *ngIf="returnCancellable(item.date_rdv)">
-          <button  class="btn btn-danger" (click)="annulerRdv(item._id)">Annuler</button>
-          <a class="btn btn-warning" [routerLink]="'/rdv/update/' + item._id">Modifier</a>
+          <button  class="btn btn-danger rounded-pill m-1" (click)="annulerRdv(item._id)">Annuler</button>
+          <a class="btn btn-warning rounded-pill" [routerLink]="'/rdv/update/' + item._id">Modifier</a>
         </div>
         <div style="float: right;"*ngIf="!returnCancellable(item.date_rdv)">
-          <button *ngIf="!item.paye" class="btn btn-success" (click)="payerRdv(item._id)">Payer</button>
+          <button *ngIf="!item.paye" class="btn btn-success rounded-pill" (click)="payerRdv(item._id)">Payer</button>
           <div *ngIf="item.paye" style="color: rgb(20, 154, 65);">Payé <i class="pi pi-check"></i></div>
         </div>
         <h5 class="card-title">{{item.date_rdv.toLocaleString()}}</h5>

@@ -44,6 +44,7 @@ export interface RdvFull{
   is_done:boolean,
   datedebut:Date,
   datefin:Date,
+  prix:number,
 }
 export interface RdvFullSuivi{
   rdv:RdvFull[],

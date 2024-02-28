@@ -1,5 +1,5 @@
 <p-sidebar [(visible)]="sidebarVisible">
-  <ng-template pTemplate="header"><h2>Bienvenue chez Beauty Salon!</h2></ng-template>
+  <ng-template pTemplate="header"><h2>Bienvenue chez Ocean Salon!</h2></ng-template>
   <ng-template pTemplate="content">
     <p-panelMenu
       [model]="authService.links"
@@ -8,9 +8,10 @@
   </ng-template>
   <ng-template pTemplate="footer">
     <div>Créé par</div>
-    <div class="fw-bold">RANDRIANASOLO Haritiana Bryan</div>
-    <div>et</div>
     <div class="fw-bold">ANDRIAMAMONJY Fitia Arivony</div>
+    <div>et</div>
+    <div class="fw-bold">RANDRIANASOLO Haritiana Bryan</div>
+
   </ng-template>
 </p-sidebar>
 <div class="card flex justify-content-center"></div>
@@ -24,7 +25,7 @@
     >
       <i class="pi pi-bars"></i>
     </button>
-    <div><h1 ><img src="../../assets/logo.png" width="50" alt=""><a  style="text-decoration: none;color: #4472CA;" routerLink="/">Ocean Salon</a></h1></div>
+    <div><h1 ><a  style="text-decoration: none;color: #4472CA;" routerLink="/"><img src="../../assets/logo.png" width="50" alt="">Ocean Salon</a></h1></div>
     <div *ngIf="!authService.isLoggedIn">
       <ul class="nav justify-content-end">
 

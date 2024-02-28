@@ -35,20 +35,12 @@ export class SidebarComponent implements OnInit{
       this.authService.links=[]
       localStorage.removeItem("id")
       localStorage.removeItem('token')
-      if (localStorage.getItem('manager')) {
-        localStorage.removeItem('manager')
-        this.router.navigate(['/login-manager']);
-      }else if(localStorage.getItem('employe')){
-        localStorage.removeItem('employe')
-        this.router.navigate(['/']);
-      }else if (localStorage.getItem('client')) {
-        localStorage.removeItem('client')
-        this.router.navigate(['/sign-in'])
-      }
-
-
-
+      localStorage.removeItem('manager')
+      localStorage.removeItem('employe')
+      localStorage.removeItem('client')
+      this.router.navigate(['/'])
       },
+
       error:err=>{console.log(err)}
     })
   }

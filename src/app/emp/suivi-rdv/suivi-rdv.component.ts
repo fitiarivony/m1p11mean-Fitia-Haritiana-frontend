@@ -42,7 +42,7 @@ export class SuiviRdvComponent implements OnInit {
             this.rdv.total =
               this.rdv.total +
               signe *
-                (item.id_service.prix * (item.id_service.comission / 100));
+                (item.prix * (item.id_service.comission / 100));
             console.log('Nety');
           }
         },
