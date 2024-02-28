@@ -33,6 +33,7 @@ export class PriseRdvComponent implements OnInit {
   employe: Emp[] = []
   service: Service[] = []
   reduction: Offre[] = []
+  reducs: Offre[]=[]
 
   filteredEmp: Emp[] = []
 
@@ -155,7 +156,7 @@ export class PriseRdvComponent implements OnInit {
           next: val => {
             console.log('Mety eh')
             console.log(rendez_vous.rdv_service)
-            this.reduction=this.reduction.filter(el=>el.dateDebut<rendez_vous.date_rdv && el.dateFin>rendez_vous.date_rdv)
+            this.reduction=this.reducs.filter(el=>el.dateDebut<rendez_vous.date_rdv && el.dateFin>rendez_vous.date_rdv)
             let idValable:string[]=[]
             this.reduction.map((el: Offre)=>{
               idValable.push(el._id)
@@ -272,6 +273,7 @@ export class PriseRdvComponent implements OnInit {
         this.service = data.service;
         this.fav_emp = tab;
         this.reduction = data.reduction
+        this.reducs=data.reduction
         setTimeout(() => {
           // Marque  chargement comme terminé
           this.isLoading = false;

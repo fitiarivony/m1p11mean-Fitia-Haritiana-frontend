@@ -28,6 +28,7 @@ export class UpdateRdvComponent implements OnInit {
     rdv_service: [],
   };
   reduction: Offre[] = []
+  reducs: Offre[]=[]
   fav_emp: Emp[] = [];
   employe: Emp[] = [];
   service: Service[] = [];
@@ -107,6 +108,8 @@ export class UpdateRdvComponent implements OnInit {
           this.service = data.service;
           this.fav_emp = data.employe;
           this.reduction = data.reduction
+          this.reducs=data.reduction
+          this.reduction=this.reducs.filter(el=>el.dateDebut<data.rdv.date_rdv && el.dateFin>data.rdv.date_rdv)
           this.rdv = data.rdv;
           this.id_rdv=data.rdv._id;
           this.rdv.date_rdv=this.formatDateTimeForInput(this.rdv.date_rdv);
@@ -192,7 +195,7 @@ export class UpdateRdvComponent implements OnInit {
           next: (val) => {
             console.log('Mety eh');
             console.log(rendez_vous.rdv_service);
-            this.reduction=this.reduction.filter(el=>el.dateDebut<rendez_vous.date_rdv && el.dateFin>rendez_vous.date_rdv)
+            this.reduction=this.reducs.filter(el=>el.dateDebut<rendez_vous.date_rdv && el.dateFin>rendez_vous.date_rdv)
             let idValable:string[]=[]
             this.reduction.map((el: Offre)=>{
               idValable.push(el._id)
