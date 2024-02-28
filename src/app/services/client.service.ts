@@ -23,27 +23,51 @@ export class ClientService {
   }
   getFavEmp(id:string):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/fav-emps/').concat(id)
-    let val = this.http.get(postUrl,{headers: {'Content-Type': 'application/json'}})
+    let val = this.http.get(postUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   setFavEmp(id:string, fav_emps:string[]):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/fav-emps/').concat(id)
-    let val = this.http.post(postUrl, fav_emps,{headers: {'Content-Type': 'application/json'}})
+    let val = this.http.post(postUrl, fav_emps, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   getFavServ(id:string):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/fav-serv/').concat(id)
-    let val = this.http.get(postUrl,{headers: {'Content-Type': 'application/json'}})
+    let val = this.http.get(postUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   setFavServ(id:string, fav_emps:string[]):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/fav-serv/').concat(id)
-    let val = this.http.post(postUrl, fav_emps,{headers: {'Content-Type': 'application/json'}})
+    let val = this.http.post(postUrl, fav_emps, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   getHistorique(id:string):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/histo/').concat(id)
-    let val = this.http.get(postUrl,{headers: {'Content-Type': 'application/json'}})
+    let val = this.http.get(postUrl, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
 }

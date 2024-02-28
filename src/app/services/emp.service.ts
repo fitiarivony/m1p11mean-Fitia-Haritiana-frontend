@@ -20,37 +20,67 @@ export class EmpService {
   }
   getAll (): Observable<any> {
     const postUrl = `${this.apiUrl}`
-    let val = this.http.get(postUrl)
+    let val = this.http.get(postUrl, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   getAllNames (): Observable<any> {
     const postUrl = `${this.apiUrl}`.concat('/names')
-    let val = this.http.get(postUrl)
+    let val = this.http.get(postUrl, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   inscription (data: FormEmploye): Observable<any> {
     const postUrl = `${this.apiUrl}`
-    let val = this.http.post(postUrl, data)
+    let val = this.http.post(postUrl, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   update (data: FormEmploye, id:string): Observable<any> {
     const postUrl = `${this.apiUrl}`.concat('/').concat(id)
-    let val = this.http.put(postUrl, data)
+    let val = this.http.put(postUrl, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   getOne(id:string):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/').concat(id)
-    let val = this.http.get(postUrl)
+    let val = this.http.get(postUrl, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   delete(id:string):Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/').concat(id)
-    let val = this.http.delete(postUrl)
+    let val = this.http.delete(postUrl, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   getFavEmp():Observable<any>{
     const postUrl = `${this.apiUrl}`.concat('/favs')
-    let val = this.http.get(postUrl)
+    let val = this.http.get(postUrl, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
     return val
   }
   list_rdv_emp () {
