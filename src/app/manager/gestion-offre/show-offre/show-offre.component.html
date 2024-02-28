@@ -2,6 +2,7 @@
   <div class="col-3"></div>
   <div class="col-6">
     <ng-container *ngIf="editing; else elseTemplate">
+      <p-toast></p-toast>
       <h1>Offre spéciale</h1>
       <div class="mb-3">
         <label for="" class="form-label">Nom de l'offre</label>
@@ -44,6 +45,7 @@
           id=""
           aria-describedby="helpId"
           placeholder=""
+          (keypress)="onlyNumber($event)"
           [(ngModel)]="formOffre.reduction"
         />
         <small id="helpId" class="form-text text-muted">% du prix total</small>

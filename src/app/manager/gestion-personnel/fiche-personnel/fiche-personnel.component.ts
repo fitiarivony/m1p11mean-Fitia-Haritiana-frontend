@@ -41,6 +41,16 @@ export class FichePersonnelComponent {
     private serveService: ServeService,
     private messageService: MessageService
   ) {}
+  onlyPositiveInteger(event: KeyboardEvent): void {
+    const inputChar = event.key;
+
+    const target = event.target as HTMLInputElement ;
+
+    // Allow only digits and check if the resulting value is greater than 0
+    if (!/^\d$/.test(inputChar) || (target && target.value && parseInt(target.value + inputChar, 10) <= 0)) {
+      event.preventDefault();
+    }
+  }
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
     this.serveService.listService().subscribe({

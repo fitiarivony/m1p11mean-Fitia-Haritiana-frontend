@@ -82,6 +82,7 @@
               class="form-control"
               name="cin"
               id="cin"
+              (keypress)="onlyPositiveInteger($event)"
               placeholder="Numéro de CIN"
               [(ngModel)]="newEmp.numeroCIN"
             />

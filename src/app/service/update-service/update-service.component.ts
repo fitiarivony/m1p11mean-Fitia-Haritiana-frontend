@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 import { Service } from 'src/app/interfaces/service';
 import { ServeService } from '../../services/serve.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ValidatorField, ValidatorOperatorField } from 'src/app/model';
+import { DevDuetValidator } from 'src/app/validator';
 
 @Component({
   selector: 'app-update-service',
   templateUrl: './update-service.component.html',
-  styleUrls: ['./update-service.component.css']
+  styleUrls: ['./update-service.component.css'],
+  providers:[MessageService]
 })
 export class UpdateServiceComponent {
   service:Service={
@@ -17,8 +21,10 @@ export class UpdateServiceComponent {
     comission:0,
   }
   dureeMinutes:string="";
-  onlyNumber(){
-
+  onlyNumber(event: KeyboardEvent): void {
+    if (!/[\d.]/.test(event.key)) {
+      event.preventDefault();
+    }
   }
   updateService(){
     let service={...this.service}
@@ -27,13 +33,36 @@ export class UpdateServiceComponent {
     let minutes=parseInt(sep[0])*60+parseInt(sep[1]);
     service.duree=minutes;
   console.log(service);
+  const validator:ValidatorOperatorField[]=[
+    {
+      champ:'nom_service',valeur:'',errorMessage:'Le nom du service est obligatoire',operator:'='
+    },
+    {
+      champ:'prix',valeur:0,errorMessage:'Le prix du service est obligatoire',operator:">"
+    },
+    {
+      champ:'duree',valeur:0,errorMessage:'La durée du service doit être supérieur à 0',operator:">"
+    },
+    {
+      champ:'comission',valeur:0,errorMessage:'La commission du service doit être supérieur à 0',operator:">"
+    },
+    {
+      champ:'comission',valeur:100,errorMessage:'La commission du service doit être inférieur à 100',operator:"<"
+    },
 
-      this.serveService.updateService(service).subscribe({
-        next:valiny=>{
-          this.router.navigate(['/services/list']);
-        },
-        error:err=>console.log(err.error)
-      })
+  ]
+  let data:any=service
+  const validationErrors: string[] = DevDuetValidator.validateAdvanceData(data, validator);
+  if (validationErrors.length > 0) {
+    this.messageService.add({severity:'error', detail: validationErrors.join(',')});
+  }else{
+    this.serveService.updateService(service).subscribe({
+      next:valiny=>{
+        this.router.navigate(['/services/list']);
+      },
+      error:err=>console.log(err.error)
+    })
+  }
   }
   ngOnInit(){
     this.route.params.subscribe(params => {
@@ -48,7 +77,7 @@ export class UpdateServiceComponent {
     });
     // this.serveService.getServiceById()
   }
-  constructor(private serveService:ServeService,private route: ActivatedRoute,private router:Router) {
+  constructor(private serveService:ServeService,private route: ActivatedRoute,private router:Router,private messageService:MessageService) {
 
   }
   parseHour(diffMs:number){

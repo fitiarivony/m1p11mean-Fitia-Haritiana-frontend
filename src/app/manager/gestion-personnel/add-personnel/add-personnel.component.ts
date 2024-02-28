@@ -23,6 +23,17 @@ export class AddPersonnelComponent {
     services: [],
     horaire: []
   }
+  onlyPositiveInteger(event: KeyboardEvent): void {
+    const inputChar = event.key;
+
+    const target = event.target as HTMLInputElement ;
+
+    // Allow only digits and check if the resulting value is greater than 0
+    if (!/^\d$/.test(inputChar) || (target && target.value && parseInt(target.value + inputChar, 10) <= 0)) {
+      event.preventDefault();
+    }
+  }
+
   genres: Genre[] = []
   constructor (
     private genreService: GenreService,
@@ -43,7 +54,7 @@ export class AddPersonnelComponent {
     const validator: ValidatorField[] = [
       { champ: 'identifiant', valeur: '', errorMessage: 'Identifiant requis.' },
       { champ: 'mdp', valeur: '', errorMessage: 'Mot de passe requis.' },
-      { champ: 'dateDeNaissance', valeur: '', errorMessage: 'Date of Birth requis.' },
+      { champ: 'dateDeNaissance', valeur: '', errorMessage: 'Date de naissance requis.' },
       { champ: 'nom', valeur: '', errorMessage: 'Nom requis.' },
       { champ: 'numeroCIN', valeur: '', errorMessage: 'Numero CIN requis.' },
       { champ: 'prenom', valeur: '', errorMessage: 'Prenom requis.' },

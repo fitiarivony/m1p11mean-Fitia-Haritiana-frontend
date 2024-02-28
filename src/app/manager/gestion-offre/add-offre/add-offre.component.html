@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="row">
   <div class="col-3"></div>
   <div class="col-6">
@@ -38,6 +39,7 @@
         id=""
         aria-describedby="helpId"
         placeholder=""
+        (keypress)="onlyNumber($event)"
         [(ngModel)]="formOffre.reduction"
       />
       <small id="helpId" class="form-text text-muted">% du prix total</small>

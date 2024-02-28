@@ -122,5 +122,11 @@ export interface ValidatorField {
   champ: string;
   valeur: any;
   errorMessage: string;
-}
 
+}
+export interface ValidatorOperatorField {
+  champ: string;
+  valeur: any;
+  errorMessage: string;
+  operator:string;
+}

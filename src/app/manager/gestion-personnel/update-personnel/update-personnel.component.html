@@ -64,6 +64,7 @@
               name="cin"
               id="cin"
               placeholder="Numéro de CIN"
+              (keypress)="onlyPositiveInteger($event)"
               [(ngModel)]="newEmp.numeroCIN"
             />
           </div>

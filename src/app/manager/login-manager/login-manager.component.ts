@@ -31,7 +31,7 @@ export class LoginManagerComponent {
         next:manager=>{
           localStorage.setItem('token',manager.token.token);
           localStorage.setItem('manager','1')
-
+          localStorage.setItem('id',manager.token.id_admin);
           this.authService.isLoggedIn=true;
           this.authService.links=this.authService.managersLink;
           this.router.navigate(['/services/list']);

@@ -11,12 +11,13 @@
     <p-table styleClass="p-datatable-gridlines" [value]="depenses">
       <ng-template pTemplate="caption"> Liste des dépenses </ng-template>
       <ng-template pTemplate="header" >
-        <th class="text-center">Nom </th>
-        <th>Date depense </th>
-        <th>Prix </th>
-        <th>Motif</th>
-        <th></th>
-        <th></th>
+        <tr>
+          <th>Date depense </th>
+          <th>Prix </th>
+          <th>Motif</th>
+          <th colspan="2">Actions</th>
+        </tr>
+
       </ng-template>
       <ng-template pTemplate="body"  let-depense>
         <tr>
