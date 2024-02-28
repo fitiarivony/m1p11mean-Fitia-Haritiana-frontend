@@ -55,11 +55,31 @@ export class ShowOffreComponent {
         this.changeEditingStatus()
       })
   }
+  padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+  formatDateTimeForInput(date: string) {
+    if (date === undefined) return '';
+    const dt = new Date(date);
+    return (
+      [
+        dt.getFullYear(),
+        this.padTo2Digits(dt.getMonth() + 1),
+        this.padTo2Digits(dt.getDate()),
+      ].join('-') +
+      ' ' +
+      [
+        this.padTo2Digits(dt.getHours()),
+        this.padTo2Digits(dt.getMinutes()),
+      ].join(':')
+    );
+  }
+
   changeEditingStatus () {
     this.offreSpecialeService.getOne(this._id).subscribe(data => {
-      console.log(data)
-
       this.formOffre = data
+      this.formOffre.dateDebut=this.formatDateTimeForInput(this.formOffre.dateDebut)
+      this.formOffre.dateFin=this.formatDateTimeForInput(this.formOffre.dateFin)
     })
     this.editing = !this.editing
   }

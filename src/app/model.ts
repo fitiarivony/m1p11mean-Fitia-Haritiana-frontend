@@ -81,6 +81,9 @@ export interface Offre {
   description: string
   service: Service
   reduction: number
+  dateDebut:string
+  dateFin:string
+  nombre:number
 }
 export interface AvgRdvElement{
   _id: number

@@ -117,6 +117,15 @@ export class UpdateRdvComponent implements OnInit {
       });
     });
   }
+  initService(){
+    this.service.map(el => {
+      // console.log(reduction.service._id, el._id);
+        if (el.pi === undefined) el.pi = el.prix
+        if (el.reduc === undefined) el.reduc = 0
+        el.reduc = 0
+        el.prix = (el.pi * (100 - el.reduc)) / 100
+    })
+  }
   initReduction(){
 
     this.rdv.reduction.map((red)=>{
@@ -183,7 +192,14 @@ export class UpdateRdvComponent implements OnInit {
           next: (val) => {
             console.log('Mety eh');
             console.log(rendez_vous.rdv_service);
-
+            this.reduction=this.reduction.filter(el=>el.dateDebut<rendez_vous.date_rdv && el.dateFin>rendez_vous.date_rdv)
+            let idValable:string[]=[]
+            this.reduction.map((el: Offre)=>{
+              idValable.push(el._id)
+            })
+            this.rdv.reduction=this.rdv.reduction.filter(el=>idValable.includes(el))
+            this.initService()
+            this.initReduction()
             this.rdv.rdv_service = [...rendez_vous.rdv_service];
             this.currentrdv = {
               id_employe: '',

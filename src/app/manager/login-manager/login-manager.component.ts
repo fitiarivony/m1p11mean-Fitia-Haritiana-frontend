@@ -34,7 +34,7 @@ export class LoginManagerComponent {
           this.authService.links=this.authService.managersLink;
           this.router.navigate(['/services/list']);
       },error :err =>{
-        console.log(err.message);
+        console.log(err.error);
       }
     });
 
