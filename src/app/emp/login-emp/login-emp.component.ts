@@ -4,13 +4,15 @@ import { LoginEmpService } from '../login-emp.service'
 import { EmpService } from 'src/app/services/emp.service'
 import { Router } from '@angular/router'
 import { AuthService } from 'src/app/services/auth.service'
+import { MessageService } from 'primeng/api'
 @Component({
   selector: 'app-login-emp',
   templateUrl: './login-emp.component.html',
-  styleUrls: ['./login-emp.component.css']
+  styleUrls: ['./login-emp.component.css'],
+  providers:[MessageService]
 })
 export class LoginEmpComponent {
-  constructor (private dataService: EmpService,private router: Router,private authService:AuthService) {}
+  constructor (private dataService: EmpService,private router: Router,private authService:AuthService, private messageService: MessageService) {}
   login: Login = {
     identifiant: 'rabekoto@gmail.com',
     mdp: 'jean'
@@ -18,7 +20,7 @@ export class LoginEmpComponent {
   log () {
     const data = this.login
     let log = this.dataService.postData(data)
-    console.log(log)
+    // console.log(log)
 
     this.dataService.postData(data).subscribe(
       {
@@ -49,7 +51,13 @@ export class LoginEmpComponent {
           console.log(v)
         },
         error: v => {
-          console.log(v)
+          console.log(v.error)
+          if(v.error==="Login erroné")
+            this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Login erroné'});
+          else if(v.error==="Mot de passe eronné")
+            this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Mot de passe erroné'});
+
+
         }
       }
     )

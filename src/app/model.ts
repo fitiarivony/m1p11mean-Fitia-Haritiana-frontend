@@ -118,3 +118,9 @@ export interface Depense{
   prix:number,
   motif:string
 }
+export interface ValidatorField {
+  champ: string;
+  valeur: any;
+  errorMessage: string;
+}
+

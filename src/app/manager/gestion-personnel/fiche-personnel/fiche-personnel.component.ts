@@ -1,16 +1,19 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { FormEmploye, Genre, Horaire } from 'src/app/model'
+import { FormEmploye, Genre, Horaire, ValidatorField } from 'src/app/model'
 import { EmpService } from 'src/app/services/emp.service'
 import { GenreService } from 'src/app/services/genre.service'
 import { Injectable } from '@angular/core'
 import { ServeService } from 'src/app/services/serve.service'
 import { Service } from 'src/app/interfaces/service'
+import { DevDuetValidator } from 'src/app/validator'
+import { MessageService } from 'primeng/api'
 
 @Component({
   selector: 'app-fiche-personnel',
   templateUrl: './fiche-personnel.component.html',
-  styleUrls: ['./fiche-personnel.component.css']
+  styleUrls: ['./fiche-personnel.component.css'],
+  providers:[MessageService]
 })
 export class FichePersonnelComponent {
   editing: boolean = false
@@ -35,7 +38,8 @@ export class FichePersonnelComponent {
     private genreService: GenreService,
     private empService: EmpService,
     private route: ActivatedRoute,
-    private serveService: ServeService
+    private serveService: ServeService,
+    private messageService: MessageService
   ) {}
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
@@ -59,22 +63,43 @@ export class FichePersonnelComponent {
   }
   submit () {
     const data = this.newEmp
-    this.empService.update(data, this._id!).subscribe({
-      next: v => {
-        this.newEmp=v
-        this.genres.map((g: Genre) => {
-          if (g._id === this.newEmp.genre) {
-            console.log(g.nomGenre)
-            this.nomGenre = g.nomGenre
-          }
-        })
-        // this.location.
-        this.editing = false
-      },
-      error: v => {
-        console.log(v)
-      }
-    })
+    const validator: ValidatorField[] = [
+      { champ: 'identifiant', valeur: '', errorMessage: 'Identifiant requis.' },
+      { champ: 'mdp', valeur: '', errorMessage: 'Mot de passe requis.' },
+      { champ: 'dateDeNaissance', valeur: '', errorMessage: 'Date of Birth requis.' },
+      { champ: 'nom', valeur: '', errorMessage: 'Nom requis.' },
+      { champ: 'numeroCIN', valeur: '', errorMessage: 'Numero CIN requis.' },
+      { champ: 'prenom', valeur: '', errorMessage: 'Prenom requis.' },
+      { champ: 'genre', valeur: '', errorMessage: 'Genre requis.' }
+    ];
+
+    // Validate the data
+    const validationErrors: string[] = DevDuetValidator.validateData(data, validator);
+
+    // Check if there are validation errors
+    if (validationErrors.length > 0) {
+      this.messageService.add({severity:'error', summary: 'Erreur', detail: validationErrors.join('\n')});
+      // console.log(validationErrors);
+    } else {
+      console.log("Data is valid!");
+      this.empService.update(data, this._id!).subscribe({
+        next: v => {
+          this.newEmp=v
+          this.genres.map((g: Genre) => {
+            if (g._id === this.newEmp.genre) {
+              console.log(g.nomGenre)
+              this.nomGenre = g.nomGenre
+            }
+          })
+          // this.location.
+          this.editing = false
+        },
+        error: v => {
+          console.log(v)
+        }
+      })
+    }
+
   }
   getToUpdate () {
     // Retrieve the URL parameter using the ActivatedRoute service
