@@ -18,20 +18,13 @@ export class Rdv_Service {
   in_horaire (date: Date, horaire: HoraireString, duree: number) {
     let farany = new Date(date)
     farany.setMinutes(duree + farany.getMinutes())
-
-    let debutHeureMinute = horaire.debut.split(':')
-    let finHeureMinute = horaire.fin.split(':')
-    let begin = new Date(date)
-    let end = new Date(date)
-    begin.setHours(parseInt(debutHeureMinute[0]))
-    begin.setMinutes(parseInt(debutHeureMinute[1]))
-
-    end.setHours(parseInt(finHeureMinute[0]))
-    end.setMinutes(parseInt(finHeureMinute[1]))
+    let begin = new Date(`${date.getFullYear()}-${('0'+(date.getMonth()+1)).slice(-2)}-${('0'+date.getDate()).slice(-2)}T${horaire.debut.toString()}`)
+    let end = new Date(`${date.getFullYear()}-${('0'+(date.getMonth()+1)).slice(-2)}-${('0'+date.getDate()).slice(-2)}T${horaire.fin.toString()}`)
     return this.interieur_interval(date, farany, begin, end)
   }
   interieur_interval (a_start: Date, a_end: Date, b_start: Date, b_end: Date) {
     //A interieur de B
+    // console.log("A:",a_start,a_end,"B",b_start,b_end);
     return a_start > b_start && a_end < b_end
   }
 
