@@ -1,0 +1,34 @@
+<p-toast></p-toast>
+<div class="row ">
+  <div class="col-lg-2 col-1"></div>
+  <div class="col-lg-8 col-10">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold">Inscrivez-vous!!!</h4>
+      </div>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.nom_client" class="form-control" id="nom" >
+      <label for="nom">Nom</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.prenom_client" class="form-control" id="prenom" >
+      <label for="prenom">Prenom</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="client.numero" (keypress)="onlyPositiveInteger($event)" class="form-control" id="numero" >
+      <label for="numero">Numero</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="email" [(ngModel)]="client.identifiant" class="form-control" id="identifiant" >
+      <label for="identifiant">Identifiant</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="password" [(ngModel)]="client.mdp" class="form-control" id="mdp" >
+      <label for="mdp">Mot de passe </label>
+    </div>
+    <input type="submit" class="btn btn-success rounded-pill" value="Valider" (click)="createClient()" />
+
+  </div>
+  <div class="col-lg-2 col-1 "></div>
+</div>

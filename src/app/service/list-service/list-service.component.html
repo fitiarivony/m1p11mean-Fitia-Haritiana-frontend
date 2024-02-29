@@ -1,0 +1,45 @@
+<p-toast></p-toast>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8 col-12">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold" style="color: #081c4d;">Gestions des services</h4>
+      </div>
+    </div>
+    <a class="btn btn-success mb-3" routerLink="/services/create">Créer un service</a>
+    <p-table styleClass="p-datatable-gridlines" [value]="services">
+      <ng-template pTemplate="caption"> Liste des services </ng-template>
+      <ng-template pTemplate="header" >
+        <tr>
+          <th class="text-center">Nom </th>
+        <th>Prix </th>
+        <th>Durée </th>
+        <th>Comission</th>
+        <th colspan="2">Actions</th>
+
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body"  let-service>
+        <tr>
+          <td> {{ service.nom_service }}</td>
+          <td> {{ service.prix }}</td>
+          <td> {{ parseHour(service.duree) }}</td>
+          <td> {{ service.comission }}</td>
+          <td ><a class="btn btn-warning" [routerLink]="'/services/update/' + service._id">Mettre à jour</a></td>
+          <td>
+
+            <p-confirmPopup></p-confirmPopup>
+            <button class="btn btn-danger" (click)="confirm($event,service._id)">Supprimer le service</button>
+          </td>
+        </tr>
+
+      </ng-template>
+    </p-table>
+
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+
+

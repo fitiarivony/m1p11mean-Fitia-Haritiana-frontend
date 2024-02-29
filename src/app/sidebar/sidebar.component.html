@@ -1,0 +1,61 @@
+<p-toast></p-toast>
+<p-sidebar [(visible)]="sidebarVisible">
+  <ng-template pTemplate="header"><h2>Bienvenue chez Ocean Salon!</h2></ng-template>
+  <ng-template pTemplate="content">
+    <p-panelMenu
+      [model]="authService.links"
+      [style]="{ width: '300px' }"
+    ></p-panelMenu>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div>Créé par</div>
+    <div class="fw-bold">ANDRIAMAMONJY Fitia Arivony</div>
+    <div>et</div>
+    <div class="fw-bold">RANDRIANASOLO Haritiana Bryan</div>
+
+  </ng-template>
+</p-sidebar>
+<div class="card flex justify-content-center"></div>
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
+  <div class="container">
+    <button
+      class="btn btn-link"
+      style="text-decoration: none"
+      *ngIf="authService.isLoggedIn"
+      (click)="sidebarVisible = true"
+    >
+      <i class="pi pi-bars"></i>
+    </button>
+    <div><h1 ><a  style="text-decoration: none;color: #4472CA;" routerLink="/"><img src="../../assets/logo.png" width="50" alt="">Ocean Salon</a></h1></div>
+    <div *ngIf="!authService.isLoggedIn">
+      <ul class="nav justify-content-end">
+
+        <li class="nav-item" >
+          <a class="nav-link" style="color: #4472CA;" routerLink="/sign-in"><i class="fa-solid fa-user"></i></a>
+        </li>
+
+        <li class="nav-item" >
+          <a class="nav-link" style="color: #4472CA;" routerLink="/sign-up"><i class="fa-solid fa-user-plus"></i></a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" style="color: #4472CA;" routerLink="/login-manager"> <i class="fa-solid fa-user-tie"></i></a>
+        </li>
+
+        <li class="nav-item" >
+          <a class="nav-link" style="color: #4472CA;" routerLink="/emp/login"> <i class="fa-solid fa-user-gear"></i></a>
+        </li>
+
+
+      </ul>
+
+
+
+
+    </div>
+    <div *ngIf="authService.isLoggedIn">
+      <button (click)="logout()" class="btn btn-link" style="text-decoration: none">
+        <i class="pi pi-power-off" ></i>
+      </button>
+    </div>
+  </div>
+</nav>

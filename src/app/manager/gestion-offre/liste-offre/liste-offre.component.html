@@ -1,0 +1,40 @@
+<p-toast></p-toast>
+<div class="row">
+  <div class="col-lg-3 col-1"></div>
+  <div class="col-lg-6 col-10">
+    <div class="p-3 mb-4 bg-light rounded-3">
+      <div>
+        <h4 class="fw-bold" style="color: #081c4d;">Gestion des offres</h4>
+      </div>
+    </div>
+    <a href="/offre/add"><button class="btn btn-success mb-3">Ajouter</button></a>
+
+    <div class="table-responsive">
+      <p-table
+      styleClass="p-datatable-gridlines" [value]="offres"
+      >
+      <ng-template pTemplate="caption"> Liste des offres </ng-template>
+      <ng-template pTemplate="header" >
+          <tr>
+            <th>Titre</th>
+            <th>Service</th>
+            <th>Réduction</th>
+            <th></th>
+          </tr>
+        </ng-template>
+
+        <ng-template  pTemplate="body"  let-item>
+          <tr >
+            <td scope="row">{{ item.nomOffreSpeciale }}</td>
+            <td>{{ item.service.nom_service }}</td>
+            <td>{{ item.reduction }} %</td>
+            <td>
+              <a href="/offre/show/{{item._id}}"><button class="btn btn-primary">Fiche</button></a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <div class="col-lg-3 col-1"></div>
+</div>

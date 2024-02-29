@@ -1,0 +1,172 @@
+<div class="row">
+  <div class="col-lg-3 col-1"></div>
+  <div class="col-lg-6 col-10">
+    <ng-container *ngIf="editing; else elseTemplate">
+      <p-toast></p-toast>
+      <h1>Offre spéciale</h1>
+      <div class="mb-3">
+        <label for="" class="form-label">Nom de l'offre</label>
+        <input
+          type="text"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          [(ngModel)]="formOffre.nomOffreSpeciale"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Description</label>
+        <ckeditor
+          [editor]="Editor"
+          [(ngModel)]="formOffre.description"
+        ></ckeditor>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Service</label>
+        <select
+          class="form-select"
+          name=""
+          id=""
+          [(ngModel)]="formOffre.service"
+        >
+          <option *ngFor="let item of services" [value]="item._id">
+            {{ item.nom_service }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Réduction</label>
+        <input
+          type="number"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          (keypress)="onlyNumber($event)"
+          [(ngModel)]="formOffre.reduction"
+        />
+        <small id="helpId" class="form-text text-muted">% du prix total</small>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Début validité</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          [(ngModel)]="formOffre.dateDebut"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Fin validité</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          [(ngModel)]="formOffre.dateFin"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Nombre d'utilisation</label>
+        <input
+          type="number"
+          class="form-control"
+          name=""
+          id=""
+          aria-describedby="helpId"
+          placeholder=""
+          [(ngModel)]="formOffre.nombre"
+        />
+      </div>
+      <div class="d-grid gap-2">
+        <button
+          type="button"
+          name=""
+          id=""
+          class="btn btn-primary mx-5"
+          (click)="submit()"
+        >
+          Valider
+        </button>
+      </div>
+      <div class="d-grid gap-2">
+        <button
+          type="button"
+          name=""
+          id=""
+          class="btn btn-primary mx-5"
+          (click)="changeEditingStatus()"
+        >
+          Annuler
+        </button>
+
+      </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <h1>Offre spéciale</h1>
+      <div class="mb-3">
+        <h3 name="identifiant" id="identifiant">
+          {{ formOffre.nomOffreSpeciale }}
+        </h3>
+      </div>
+      <div class="mb-3">
+        <div [innerHTML]="formOffre.description"></div>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label fw-bold">Service</label>
+
+        <ng-container *ngFor="let item of services">
+          <ng-container *ngIf="formOffre.service === item._id">
+            <p name="identifiant" id="identifiant">{{ item.nom_service }}</p>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label fw-bold">Réduction</label>
+        <p name="identifiant" id="identifiant">
+          {{ formOffre.reduction }}% du prix total
+        </p>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Début validité</label>
+        <p >
+          {{ formOffre.dateDebut | date:"dd-MM-yyyy HH:mm " }}
+        </p>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Fin validité</label>
+        <p name="identifiant" id="identifiant">
+          {{ formOffre.dateFin | date:"dd-MM-yyyy HH:mm" }}
+        </p>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Nombre d'utilisation</label>
+        <p name="identifiant" id="identifiant">
+          {{ formOffre.nombre }}
+        </p>
+      </div>
+      <div class="">
+        <button
+          type="button"
+          name=""
+          id=""
+          class="btn btn-primary"
+          (click)="changeEditingStatus()"
+        >
+          Modifier
+        </button>
+
+      </div>
+
+    </ng-template>
+  </div>
+  <div class="col-lg-3 col-1"></div>
+</div>

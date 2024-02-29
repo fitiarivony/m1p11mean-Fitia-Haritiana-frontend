@@ -1,0 +1,14 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #EBF5FF;
+
+}
+
+
+footer {
+  margin-top: auto;
+
+}
+

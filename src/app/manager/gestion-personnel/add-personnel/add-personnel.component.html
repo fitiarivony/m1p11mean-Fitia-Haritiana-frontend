@@ -1,0 +1,115 @@
+<p-toast></p-toast>
+<div class="row my-5">
+  <div class="col-lg-3 col-1"></div>
+  <div class="col-lg-6 col-10">
+    <h1>Inscription</h1>
+    <div class="container">
+      <!-- <form> -->
+        <div class="mb-3 row">
+          <label for="inputName" class="col-4 col-form-label">Nom</label>
+          <div class="col-8">
+            <input
+              type="text"
+              class="form-control"
+              name="inputName"
+              id="inputName"
+              placeholder="Nom"
+              [(ngModel)]="newEmp.nom"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="inputLastName" class="col-4 col-form-label">Prenom</label>
+          <div class="col-8">
+            <input
+              type="text"
+              class="form-control"
+              name="inputLastName"
+              id="inputLastName"
+              placeholder="Prenom"
+              [(ngModel)]="newEmp.prenom"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="ddn" class="col-4 col-form-label"
+            >Date de naissance</label
+          >
+          <div class="col-8">
+            <input
+              type="date"
+              class="form-control"
+              name="ddn"
+              id="ddn"
+              placeholder="date de naissance"
+              [(ngModel)]="newEmp.dateDeNaissance"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="identifiant" class="col-4 col-form-label"
+            >Identifiant</label
+          >
+          <div class="col-8">
+            <input
+              type="text"
+              class="form-control"
+              name="identifiant"
+              id="identifiant"
+              placeholder="Identifiant"
+              [(ngModel)]="newEmp.identifiant"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="mdp" class="col-4 col-form-label">Mot de passe</label>
+          <div class="col-8">
+            <input
+              type="password"
+              class="form-control"
+              name="mdp"
+              id="mdp"
+              placeholder="Mot de passe"
+              [(ngModel)]="newEmp.mdp"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="cin" class="col-4 col-form-label">Numéro de CIN</label>
+          <div class="col-8">
+            <input
+              type="number"
+              class="form-control"
+              name="cin"
+              id="cin"
+              (keypress)="onlyPositiveInteger($event)"
+              placeholder="Numéro de CIN"
+              [(ngModel)]="newEmp.numeroCIN"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="genre" class="col-4 col-form-label">Genre</label>
+          <div class="col-8">
+            <select
+              class="form-select"
+              name=""
+              id=""
+              [(ngModel)]="newEmp.genre"
+            >
+              <option *ngFor="let genre of genres" [value]="genre._id">
+                {{ genre.nomGenre }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <div class="offset-sm-4 col-sm-8">
+            <button type="submit" class="btn btn-primary" (click)="submit()">Inscrire</button>
+          </div>
+        </div>
+      <!-- </form> -->
+    </div>
+  </div>
+  <div class="col-lg-3 col-1"></div>
+</div>

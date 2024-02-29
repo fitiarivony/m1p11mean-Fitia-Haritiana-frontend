@@ -1,0 +1,32 @@
+<p-toast></p-toast>
+<div class="mb-3"></div>
+<div class="row ">
+  <div class="col-lg-3 col-1"></div>
+  <div class="col-lg-6 col-10">
+    <p-panel header="Modifier un service">
+
+    <div class="form-floating mb-3">
+      <input type="text" [(ngModel)]="service.nom_service" class="form-control" id="nom" >
+      <label for="nom">Nom service</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" (keypress)="onlyNumber($event)" [(ngModel)]="service.prix" id="prix" >
+      <label for="prix">Prix</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="time"  class="form-control" [(ngModel)]="dureeMinutes" id="duree" >
+      <label for="duree">Durée </label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" (keypress)="onlyNumber($event)"  class="form-control" [(ngModel)]="service.comission" id="comission" >
+      <label for="comission">Commission</label>
+    </div>
+    <input type="submit" class="btn btn-success rounded-pill"  value="Valider" (click)="updateService()">
+  </p-panel>
+
+  </div>
+  <div class="col-lg-3 col-1"></div>
+</div>
+
+
+
