@@ -20,7 +20,7 @@
           <button *ngIf="!item.paye" class="btn btn-success rounded-pill" (click)="payerRdv(item._id)">Payer</button>
           <div *ngIf="item.paye" style="color: rgb(20, 154, 65);">Payé <i class="pi pi-check"></i></div>
         </div>
-        <h5 class="card-title">{{item.date_rdv.toLocaleString()}}</h5>
+        <h5 class="card-title">{{item.date_rdv | date : "yyyy-MM-dd HH:mm" }}</h5>
         <!-- <p class="card-text">Text</p> -->
         <!-- <ul class="list-group list-group-horizontal"> -->
           <!-- <li *ngFor="let rdv of item.rdv_service" class="list-group-item"> -->

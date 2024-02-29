@@ -108,6 +108,7 @@ export class UpdateRdvComponent implements OnInit {
       let id_rdv = params['id']; // Access the 'id' parameter from the URL
       this.rdvservice.getRdvById(id_rdv).subscribe({
         next: (data) => {
+          console.log(data.rdv);
           let tab: Emp[] = data.employe;
           tab.forEach((emp: Emp) => {
             emp.nom_prenom = emp.nom + ' ' + emp.prenom;
@@ -197,7 +198,8 @@ export class UpdateRdvComponent implements OnInit {
         datefin: new Date(),
       };
     } else {
-      this.rdvservice
+      try {
+        this.rdvservice
         .check_horaire(rendez_vous, this.employe, this.service,this.id_rdv)
         .subscribe({
           next: (val) => {
@@ -226,6 +228,10 @@ export class UpdateRdvComponent implements OnInit {
             this.messageService.add({severity: 'error', detail:err.error})
           },
         });
+      } catch (error:any) {
+        this.messageService.add({severity: 'error', detail:error.message})
+      }
+
     }
   }
 
@@ -241,7 +247,8 @@ export class UpdateRdvComponent implements OnInit {
         datefin: new Date(),
       };
     } else {
-      this.rdvservice
+      try{
+        this.rdvservice
         .check_horaire(rendez_vous, this.employe, this.service,this.id_rdv)
         .subscribe({
           next: (val) => {
@@ -262,6 +269,10 @@ export class UpdateRdvComponent implements OnInit {
             this.messageService.add({severity: 'error', detail:err.error})
           },
         });
+      }catch(error:any){
+        this.messageService.add({severity: 'error', detail:error.message})
+      }
+
     }
   }
   addSeance() {
@@ -306,12 +317,19 @@ export class UpdateRdvComponent implements OnInit {
     this.check_date(rendez_vous);
   }
   updateRdv() {
-    this.rdvservice.update_rdv(this.rdv, this.employe, this.service,this.id_rdv)?.subscribe({
-      next: (data) => {
-        this.router.navigate(['/client/histo'])
-      },
-      error: (err) =>this.messageService.add({severity: 'error', detail:err.error})
-    });
+    try{
+      this.rdvservice.update_rdv(this.rdv, this.employe, this.service,this.id_rdv)?.subscribe({
+        next: (data) => {
+          this.router.navigate(['/client/histo'])
+        },
+        error: (err) =>{
+          this.messageService.add({severity: 'error', detail:err.error})
+        }
+      });
+    }catch(error:any){
+      this.messageService.add({severity: 'error', detail:error.message})
+    }
+
   }
   buttonSelectService(_id:string){
     this.currentrdv.id_service = _id
