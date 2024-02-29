@@ -202,10 +202,6 @@ export class MoyennesComponent {
         }
       ]
     }
-    const currentDate = new Date();
-    const beginningOfYear = new Date(this.beneficemois[0].annee, 0, 1);
-    // Get the end of the year
-    const endOfYear = new Date(this.beneficemois[this.beneficemois.length-1].annee, 11, 31);
 
     this.optionBeneficeMois={
       title: {
@@ -226,8 +222,6 @@ export class MoyennesComponent {
             display: true,
             labelString: 'Date'
           },
-            min: beginningOfYear,
-            max: endOfYear,
         },
         y: {
           scaleLabel: {
