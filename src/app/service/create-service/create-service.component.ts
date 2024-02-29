@@ -62,6 +62,7 @@ export class CreateServiceComponent {
              next:service=>{
                this.router.navigate(['/services/list'])
              },error:err=>{
+              this.messageService.add({severity: 'error', detail:err.error});
                console.log(err.message);
              }
            }
