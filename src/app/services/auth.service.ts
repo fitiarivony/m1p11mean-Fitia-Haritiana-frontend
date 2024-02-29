@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl='http://localhost:8000/token';
+  private apiUrl='https://m1p11mean-fitia-haritiana-backend.onrender.com/token';
   isLoggedIn: boolean = false;
   links:any=[];
   managersLink= [

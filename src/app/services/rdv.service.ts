@@ -9,7 +9,7 @@ import { Service } from '../interfaces/service'
 })
 export class Rdv_Service {
   constructor (private http: HttpClient) {}
-  private apiUrl='http://localhost:8000/rdv';
+  private apiUrl='https://m1p11mean-fitia-haritiana-backend.onrender.com/rdv';
   prepare_prise_rdv () {
     return this.http.get<any>(
       `${this.apiUrl}`.concat('/prise-rdv/' + localStorage.getItem('id'))

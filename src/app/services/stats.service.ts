@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class StatsService {
 
-  private apiUrl = 'http://localhost:8000/rdv'
+  private apiUrl = 'https://m1p11mean-fitia-haritiana-backend.onrender.com/rdv'
   constructor(private http: HttpClient) {}
   getAvgRdv (): Observable<any> {
     const postUrl = `${this.apiUrl}`.concat('/avg')

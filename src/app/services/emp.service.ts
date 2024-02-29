@@ -9,8 +9,8 @@ import { Service } from '../interfaces/service'
 })
 
 export class EmpService {
-  private apiUrl = 'http://localhost:8000/emp'
-  private rdvUrl='http://localhost:8000/rdv'
+  private apiUrl = 'https://m1p11mean-fitia-haritiana-backend.onrender.com/emp'
+  private rdvUrl='https://m1p11mean-fitia-haritiana-backend.onrender.com/rdv'
   constructor (private http: HttpClient) {}
 
   postData (data: Login): Observable<any> {

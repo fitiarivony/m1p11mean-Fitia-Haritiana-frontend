@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class ManagerService {
   manager:Manager|null=null
-  private apiUrl="http://localhost:8000/managers";
+  private apiUrl="https://m1p11mean-fitia-haritiana-backend.onrender.com/managers";
   constructor(
     private http: HttpClient,
    ) { }

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ServeService {
   constructor(private http: HttpClient) {}
   services: Service[] | [] = [];
-  private apiUrl='http://localhost:8000/services';
+  private apiUrl='https://m1p11mean-fitia-haritiana-backend.onrender.com/services';
   listService() {
     let val = this.http.get<Service[]>(`${this.apiUrl}`);
     return val;

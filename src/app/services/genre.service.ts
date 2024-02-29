@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GenreService {
-  private apiUrl = 'http://localhost:8000/genre'
+  private apiUrl = 'https://m1p11mean-fitia-haritiana-backend.onrender.com/genre'
 
   constructor (private http: HttpClient) {}
 

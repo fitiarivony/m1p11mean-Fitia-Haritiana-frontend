@@ -8,7 +8,7 @@ import { FormOffre, Offre } from '../model';
 })
 export class OffreSpecialeService {
 
-  private apiUrl = 'http://localhost:8000/offres'
+  private apiUrl = 'https://m1p11mean-fitia-haritiana-backend.onrender.com/offres'
   constructor(private http: HttpClient) { }
   getAll (): Observable<any> {
     const postUrl = `${this.apiUrl}`

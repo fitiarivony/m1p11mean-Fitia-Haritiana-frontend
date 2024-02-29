@@ -7,7 +7,7 @@ import { Login } from '../model'
   providedIn: 'root'
 })
 export class LoginEmpService {
-  private apiUrl = 'http://localhost:8000/emp/login'
+  private apiUrl = 'https://m1p11mean-fitia-haritiana-backend.onrender.com/emp/login'
 
   constructor (private http: HttpClient) {}
 

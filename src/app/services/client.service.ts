@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClientService {
-  private apiUrl = 'http://localhost:8000/clients'
+  private apiUrl = 'https://m1p11mean-fitia-haritiana-backend.onrender.com/clients'
 
   constructor(private http: HttpClient) {}
   createClient(client:Client){

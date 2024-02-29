@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class DepenseService {
 
   constructor(private http: HttpClient) {}
-  private apiUrl='http://localhost:8000/depense';
+  private apiUrl='https://m1p11mean-fitia-haritiana-backend.onrender.com/depense';
   listDepense() {
     let val = this.http.get<Depense[]>(`${this.apiUrl}`);
     return val;
