@@ -158,7 +158,8 @@ export class PriseRdvComponent implements OnInit {
         datefin: new Date()
       }
     } else {
-      this.rendez_vous_service
+      try {
+        this.rendez_vous_service
         .check_horaire(rendez_vous, this.employe, this.service, undefined)
         .subscribe({
           next: val => {
@@ -184,9 +185,15 @@ export class PriseRdvComponent implements OnInit {
           error: err => {
             // console.log(err)
             // alert(err)
+
+
             this.messageService.add({severity: 'error', detail:err.error});
           }
         })
+      } catch (error:any) {
+        this.messageService.add({severity: 'error', detail:error.message});
+      }
+
     }
   }
 
@@ -202,7 +209,8 @@ export class PriseRdvComponent implements OnInit {
         datefin: new Date()
       }
     } else {
-      this.rendez_vous_service
+      try{
+        this.rendez_vous_service
         .check_horaire(rendez_vous, this.employe, this.service, undefined)
         .subscribe({
           next: val => {
@@ -224,6 +232,10 @@ export class PriseRdvComponent implements OnInit {
             this.messageService.add({ severity: 'error',  detail: error.error });
           },
         });
+      }catch(error:any){
+        this.messageService.add({ severity: 'error',  detail: error.message });
+      }
+
     }
   }
   addSeance () {
@@ -329,12 +341,18 @@ export class PriseRdvComponent implements OnInit {
    if (validationErrorMessages.length > 0) {
       this.messageService.add({severity:'error', detail:validationErrorMessages.join(',')})
    }
-   else{ this.rendez_vous_service
+   else{
+    try {
+      this.rendez_vous_service
       .add_rdv(this.rdv, this.employe, this.service)
       ?.subscribe({
         next: data =>  {},
         error: err => this.messageService.add({severity: 'error', detail:err.error})
       })
+    } catch (error:any) {
+      this.messageService.add({severity: 'error', detail:error.message})
+    }
+
     }
   }
 

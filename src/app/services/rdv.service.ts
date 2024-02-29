@@ -59,7 +59,7 @@ export class Rdv_Service {
         }
       }
       if (!inside_horaire) {
-        throw new Error('Tsy anatin horaire')
+        throw new Error("L'employé n'est pas disponible")
       }
       // console.log('Check disponibilité')
       let farany = new Date(date)
@@ -80,9 +80,12 @@ export class Rdv_Service {
     }
     // console.log(emps)
 
+
     if (this.check_horaire(rdv, emps, services,undefined)) {
       // console.log('Goooooo')
-      return this.http.post<Rdv>(`${this.apiUrl}`, rdv, {
+      let rendez_vous:any={...rdv}
+      rendez_vous.date_rdv=new Date(rendez_vous.date_rdv)
+      return this.http.post<Rdv>(`${this.apiUrl}`, rendez_vous, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token')
