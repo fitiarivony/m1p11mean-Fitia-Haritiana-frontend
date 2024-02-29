@@ -15,7 +15,7 @@ export class LoginEmpComponent {
   constructor (private dataService: EmpService,private router: Router,private authService:AuthService, private messageService: MessageService) {}
   login: Login = {
     identifiant: 'rabekoto@gmail.com',
-    mdp: 'jean'
+    mdp: 'koto'
   }
   log () {
     const data = this.login

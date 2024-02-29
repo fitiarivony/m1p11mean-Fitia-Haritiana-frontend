@@ -16,7 +16,7 @@ export class LoginClientComponent {
     _id: '',
     nom_client: '',
     prenom_client: '',
-    identifiant: 'jean@gmail.com',
+    identifiant: 'fitiarivony2002@gmail.com',
     mdp: 'jean',
     numero: '',
   };
