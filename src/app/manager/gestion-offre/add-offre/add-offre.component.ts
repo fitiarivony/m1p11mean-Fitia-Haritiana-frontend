@@ -90,7 +90,10 @@ export class AddOffreComponent {
     if (validationErrors.length > 0 ) {
       this.messageService.add({severity: 'error', detail: validationErrors.join(',')})
     }else{
-      this.offreSpecialeService.post(this.formOffre).subscribe(data => {
+      let forme:any={...this.formOffre}
+      forme.dateDebut=new Date(forme.dateDebut)
+      forme.dateFin=new Date(forme.dateFin)
+      this.offreSpecialeService.post(forme).subscribe(data => {
         // console.log(data)
         this.router.navigate(['/offre/liste'])
       })
