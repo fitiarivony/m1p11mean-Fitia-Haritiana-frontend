@@ -91,8 +91,11 @@ export class ShowOffreComponent {
     if (validationErrors.length > 0) {
         this.messageService.add({severity: "error", detail: validationErrors.join(", ")});
     }else{
+      let forme:any={...this.formOffre}
+      forme.dateDebut=new Date(forme.dateDebut)
+      forme.dateFin=new Date(forme.dateFin)
       this.offreSpecialeService
-      .update(this.formOffre, this._id)
+      .update(forme, this._id)
       .subscribe(data => {
         // console.log(data)
         this.changeEditingStatus()
