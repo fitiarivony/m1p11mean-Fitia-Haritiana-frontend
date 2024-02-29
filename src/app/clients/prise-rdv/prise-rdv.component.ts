@@ -10,6 +10,7 @@ import {
 } from 'primeng/api';
 import { DevDuetValidator } from 'src/app/validator'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-prise-rdv',
@@ -308,7 +309,8 @@ export class PriseRdvComponent implements OnInit {
     private rendez_vous_service: Rdv_Service,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private router:Router
   ) {
     this.breakpointObserver.observe([
       Breakpoints.HandsetPortrait,
@@ -346,7 +348,7 @@ export class PriseRdvComponent implements OnInit {
       this.rendez_vous_service
       .add_rdv(this.rdv, this.employe, this.service)
       ?.subscribe({
-        next: data =>  {},
+        next: data =>  { this.router.navigate(['/client/histo']) },
         error: err => this.messageService.add({severity: 'error', detail:err.error})
       })
     } catch (error:any) {
