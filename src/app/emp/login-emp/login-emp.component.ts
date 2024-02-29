@@ -48,10 +48,10 @@ export class LoginEmpComponent {
           ];
           this.authService.links=this.authService.employeLinks;
           this.router.navigate(['/emp/rdv/suivi']);
-          console.log(v)
+          // console.log(v)
         },
         error: v => {
-          console.log(v.error)
+          // console.log(v.error)
           if(v.error==="Login erroné")
             this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Login erroné'});
           else if(v.error==="Mot de passe eronné")

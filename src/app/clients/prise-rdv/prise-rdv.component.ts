@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core'
 import { Rdv, RdvService } from 'src/app/interfaces/rdv'
 import { Service } from 'src/app/interfaces/service'
-import { Emp, Offre } from 'src/app/model'
+import { Emp, Offre, ValidatorOperatorField } from 'src/app/model'
 import { Rdv_Service } from 'src/app/services/rdv.service'
 import {
   ConfirmationService,
   MessageService,
   ConfirmEventType
 } from 'primeng/api';
+import { DevDuetValidator } from 'src/app/validator'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-prise-rdv',
@@ -41,6 +43,8 @@ export class PriseRdvComponent implements OnInit {
 
   visible: boolean = false;
   isLoading: boolean = true;
+  isMobileScreen: boolean = false;
+
 
   concatFields (service: Service): string {
     return `${service.nom_service} - ${service.prix}`
@@ -131,7 +135,11 @@ export class PriseRdvComponent implements OnInit {
       this.testService = null
     }
   }
-
+  buttonSelectService(_id:string){
+    this.currentrdv.id_service = _id
+    this.onSelectService()
+    this.showDialog()
+  }
   mydragEndServe () {
     this.testService = null
   }
@@ -140,7 +148,7 @@ export class PriseRdvComponent implements OnInit {
     let rendez_vous = { ...this.rdv }
     rendez_vous.rdv_service = [...this.rdv.rdv_service]
     if (this.rdv.date_rdv === '') {
-      console.log('Tsis daty')
+      // console.log('Tsis daty')
       this.rdv.rdv_service = [...rendez_vous.rdv_service]
       this.currentrdv = {
         id_employe: '',
@@ -154,8 +162,8 @@ export class PriseRdvComponent implements OnInit {
         .check_horaire(rendez_vous, this.employe, this.service, undefined)
         .subscribe({
           next: val => {
-            console.log('Mety eh')
-            console.log(rendez_vous.rdv_service)
+            // console.log('Mety eh')
+            // console.log(rendez_vous.rdv_service)
             this.reduction=this.reducs.filter(el=>el.dateDebut<rendez_vous.date_rdv && el.dateFin>rendez_vous.date_rdv)
             let idValable:string[]=[]
             this.reduction.map((el: Offre)=>{
@@ -174,8 +182,9 @@ export class PriseRdvComponent implements OnInit {
             }
           },
           error: err => {
-            console.log(err)
-            alert(err)
+            // console.log(err)
+            // alert(err)
+            this.messageService.add({severity: 'error', detail:err.error});
           }
         })
     }
@@ -183,7 +192,7 @@ export class PriseRdvComponent implements OnInit {
 
   check_date (rendez_vous: Rdv) {
     if (this.rdv.date_rdv === '') {
-      console.log('Tsis daty')
+      // console.log('Tsis daty')
       this.rdv.rdv_service = [...rendez_vous.rdv_service]
       this.currentrdv = {
         id_employe: '',
@@ -197,8 +206,8 @@ export class PriseRdvComponent implements OnInit {
         .check_horaire(rendez_vous, this.employe, this.service, undefined)
         .subscribe({
           next: val => {
-            console.log('Mety eh')
-            console.log(rendez_vous.rdv_service)
+            // console.log('Mety eh')
+            // console.log(rendez_vous.rdv_service)
 
             this.rdv.rdv_service = [...rendez_vous.rdv_service]
             this.currentrdv = {
@@ -210,7 +219,7 @@ export class PriseRdvComponent implements OnInit {
             }
           },
           error: (error:any) => {
-            console.log(error);
+            // console.log(error);
             this.closeDialog();
             this.messageService.add({ severity: 'error',  detail: error.error });
           },
@@ -279,23 +288,54 @@ export class PriseRdvComponent implements OnInit {
           this.isLoading = false;
         }, 2000);
       },
-      error: err => console.log(err.message)
+      error: err =>   this.messageService.add({severity: 'error', detail:err.error})
     })
   }
 
   constructor (
     private rendez_vous_service: Rdv_Service,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    this.breakpointObserver.observe([
+      Breakpoints.HandsetPortrait,
+      Breakpoints.HandsetLandscape
+    ]).subscribe(result => {
+      this.isMobileScreen = result.matches;
+    });
+  }
 
   addRdv () {
-    this.rendez_vous_service
+   let validators:ValidatorOperatorField[]=[
+    {
+      champ:'date_rdv',
+      errorMessage:'La date de rendez-vous est obligatoire',
+      valeur:'',
+      operator:'='
+    },
+    {
+      champ:'rdv_service',
+      errorMessage:'Le service à faire pour le rendez-vous est obligatoire',
+      valeur:'',
+      operator:'array'
+    },
+
+   ]
+   let validationErrorMessages=DevDuetValidator.validateAdvanceData(this.rdv,validators);
+   if(new Date(this.rdv.date_rdv)<=new Date() || isNaN(new Date(this.rdv.date_rdv).valueOf())){
+    validationErrorMessages.push("La date de rendez-vous doit être supérieur qu'en ce moment")
+   }
+   if (validationErrorMessages.length > 0) {
+      this.messageService.add({severity:'error', detail:validationErrorMessages.join(',')})
+   }
+   else{ this.rendez_vous_service
       .add_rdv(this.rdv, this.employe, this.service)
       ?.subscribe({
-        next: data => console.log(data),
-        error: err => console.log(err.error)
+        next: data =>  {},
+        error: err => this.messageService.add({severity: 'error', detail:err.error})
       })
+    }
   }
 
   getSelectedEmp (id: string) {

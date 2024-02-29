@@ -5,10 +5,12 @@ import { EmpService } from 'src/app/services/emp.service'
 import { GenreService } from 'src/app/services/genre.service'
 
 import { ActivatedRoute } from '@angular/router'
+import { MessageService } from 'primeng/api'
 @Component({
   selector: 'app-update-personnel',
   templateUrl: './update-personnel.component.html',
-  styleUrls: ['./update-personnel.component.css']
+  styleUrls: ['./update-personnel.component.css'],
+  providers:[MessageService]
 })
 export class UpdatePersonnelComponent {
   @Input() newEmp: FormEmploye = {
@@ -29,7 +31,8 @@ export class UpdatePersonnelComponent {
     private genreService: GenreService,
     private empService: EmpService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private messageService: MessageService
   ) {}
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
@@ -38,7 +41,8 @@ export class UpdatePersonnelComponent {
         this.genres = v
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
   }
@@ -58,11 +62,12 @@ export class UpdatePersonnelComponent {
     const data = this.newEmp
     this.empService.update(data, this._id!).subscribe({
       next: v => {
-        console.log(v)
+        // console.log(v)
         // this.location.
       },
       error: v => {
-        console.log(v)
+        // console.log(v)
+        this.messageService.add({severity: 'error', detail:v.error})
       }
     })
   }

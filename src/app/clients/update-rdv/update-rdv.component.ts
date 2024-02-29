@@ -5,6 +5,7 @@ import { Rdv, RdvService } from 'src/app/interfaces/rdv';
 import { Emp, Offre } from 'src/app/model';
 import { Service } from 'src/app/interfaces/service';
 import { MessageService } from 'primeng/api';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-update-rdv',
@@ -38,7 +39,7 @@ export class UpdateRdvComponent implements OnInit {
   testService: Service | null = null;
 
   visible: boolean = false;
-
+  isMobileScreen:boolean = false;
   showDialog() {
     this.visible = true;
   }
@@ -75,7 +76,14 @@ export class UpdateRdvComponent implements OnInit {
     this.testService = null;
   }
 
-  constructor(private rdvservice: Rdv_Service, private route: ActivatedRoute,private messageService:MessageService) {}
+  constructor(private rdvservice: Rdv_Service, private route: ActivatedRoute,private messageService:MessageService,private router:Router,private breakpointObserver:BreakpointObserver) {
+    this.breakpointObserver.observe([
+      Breakpoints.HandsetPortrait,
+      Breakpoints.HandsetLandscape
+    ]).subscribe(result => {
+      this.isMobileScreen = result.matches;
+    });
+  }
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
@@ -179,7 +187,7 @@ export class UpdateRdvComponent implements OnInit {
     let rendez_vous = { ...this.rdv };
     rendez_vous.rdv_service = [...this.rdv.rdv_service];
     if (this.rdv.date_rdv === '') {
-      console.log('Tsis daty');
+      // console.log('Tsis daty');
       this.rdv.rdv_service = [...rendez_vous.rdv_service];
       this.currentrdv = {
         id_employe: '',
@@ -193,8 +201,8 @@ export class UpdateRdvComponent implements OnInit {
         .check_horaire(rendez_vous, this.employe, this.service,this.id_rdv)
         .subscribe({
           next: (val) => {
-            console.log('Mety eh');
-            console.log(rendez_vous.rdv_service);
+            // console.log('Mety eh');
+            // console.log(rendez_vous.rdv_service);
             this.reduction=this.reducs.filter(el=>el.dateDebut<rendez_vous.date_rdv && el.dateFin>rendez_vous.date_rdv)
             let idValable:string[]=[]
             this.reduction.map((el: Offre)=>{
@@ -213,8 +221,9 @@ export class UpdateRdvComponent implements OnInit {
             };
           },
           error: (err) => {
-            console.log(err);
-            alert(err);
+            // console.log(err);
+            // alert(err);
+            this.messageService.add({severity: 'error', detail:err.error})
           },
         });
     }
@@ -222,7 +231,7 @@ export class UpdateRdvComponent implements OnInit {
 
   check_date(rendez_vous: Rdv) {
     if (this.rdv.date_rdv === '') {
-      console.log('Tsis daty');
+      // console.log('Tsis daty');
       this.rdv.rdv_service = [...rendez_vous.rdv_service];
       this.currentrdv = {
         id_employe: '',
@@ -236,8 +245,8 @@ export class UpdateRdvComponent implements OnInit {
         .check_horaire(rendez_vous, this.employe, this.service,this.id_rdv)
         .subscribe({
           next: (val) => {
-            console.log('Mety eh');
-            console.log(rendez_vous.rdv_service);
+            // console.log('Mety eh');
+            // console.log(rendez_vous.rdv_service);
 
             this.rdv.rdv_service = [...rendez_vous.rdv_service];
             this.currentrdv = {
@@ -249,14 +258,15 @@ export class UpdateRdvComponent implements OnInit {
             };
           },
           error: (err) => {
-            console.log(err.message);
+            // console.log(err.message);
+            this.messageService.add({severity: 'error', detail:err.error})
           },
         });
     }
   }
   addSeance() {
     try {
-      console.log('Ajouter seance');
+      // console.log('Ajouter seance');
       let rendez_vous = { ...this.rdv };
       rendez_vous.rdv_service = [...this.rdv.rdv_service];
       rendez_vous.rdv_service.push(this.currentrdv);
@@ -297,9 +307,16 @@ export class UpdateRdvComponent implements OnInit {
   }
   updateRdv() {
     this.rdvservice.update_rdv(this.rdv, this.employe, this.service,this.id_rdv)?.subscribe({
-      next: (data) => console.log(data),
-      error: (err) => console.log(err.error),
+      next: (data) => {
+        this.router.navigate(['/client/histo'])
+      },
+      error: (err) =>this.messageService.add({severity: 'error', detail:err.error})
     });
+  }
+  buttonSelectService(_id:string){
+    this.currentrdv.id_service = _id
+    this.onSelectService()
+    this.showDialog()
   }
 
   getSelectedEmp(id: string) {

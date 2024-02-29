@@ -4,11 +4,13 @@ import { Component } from '@angular/core';
 import { FullRdv, Rdv, RdvService } from 'src/app/interfaces/rdv';
 import { ClientService } from 'src/app/services/client.service';
 import { Rdv_Service } from 'src/app/services/rdv.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-historique-rdv',
   templateUrl: './historique-rdv.component.html',
   styleUrls: ['./historique-rdv.component.css'],
+  providers:[MessageService]
 })
 export class HistoriqueRdvComponent {
   historique: FullRdv[] = [];
@@ -16,7 +18,8 @@ export class HistoriqueRdvComponent {
   constructor(
     private clientService: ClientService,
     private rdvservice: Rdv_Service,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {}
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -30,7 +33,8 @@ export class HistoriqueRdvComponent {
         this.historique = v;
       },
       error: (err) => {
-        console.log(err);
+        this.messageService.add({severity: 'error', detail:err.error});
+        // console.log(err);
       },
     });
   }
@@ -41,7 +45,7 @@ export class HistoriqueRdvComponent {
         this.historique = historiques.filter((h) => h._id != idRdv);
       },
       error: (err) => {
-        console.log(err.error);
+        this.messageService.add({severity: 'error', detail:err.error})
       },
     });
   }
@@ -49,7 +53,7 @@ export class HistoriqueRdvComponent {
     return new Date(date_rdv) > new Date();
   }
   payerRdv(idRdv: string) {
-    console.log('Je paie');
+    // console.log('Je paie');
     let filteredArray = this.historique.filter(obj => obj._id === idRdv);
     // Get the index of an object in the array
     let index = this.historique.indexOf(filteredArray[0]);
@@ -59,9 +63,9 @@ export class HistoriqueRdvComponent {
         let historiques=[...this.historique]
         historiques[index].paye=true;
         this.historique=historiques;
-        console.log(val)
+        // console.log(val)
       },
-      error: (err) => console.log(err.error),
+      error: (err) =>   this.messageService.add({severity: 'error', detail:err.error}),
     });
 
 

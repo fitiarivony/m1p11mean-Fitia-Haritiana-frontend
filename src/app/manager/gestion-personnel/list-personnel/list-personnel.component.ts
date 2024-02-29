@@ -17,11 +17,12 @@ export class ListPersonnelComponent {
   delete (id: string) {
     this.empService.delete(id).subscribe({
       next: v => {
-        console.log(v)
+        // console.log(v)
         this.getList()
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
   }
@@ -34,7 +35,8 @@ export class ListPersonnelComponent {
         this.listPersonnel = v
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
   }

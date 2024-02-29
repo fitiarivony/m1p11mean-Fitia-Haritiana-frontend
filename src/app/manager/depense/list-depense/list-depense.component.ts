@@ -17,7 +17,8 @@ export class ListDepenseComponent {
       next:depenses=>{
         this.depenses=depenses;
       },error :err =>{
-        console.log(err.message);
+        this.messageService.add({severity: 'error', detail:err.error})
+        // console.log(err.message);
       }
     })
   }
@@ -26,7 +27,7 @@ export class ListDepenseComponent {
       next:code=>{
         this.depenses=this.depenses.filter(service=>service._id!=_id)
       },
-      error:err=>console.log(err.message)
+      error:err=>this.messageService.add({severity: 'error', detail:err.error})
     });
 
   }

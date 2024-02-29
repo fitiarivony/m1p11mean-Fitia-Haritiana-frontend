@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="p-3 mb-4 bg-light rounded-3">
   <div>
     <h4 class="fw-bold" style="color: #081c4d;">Gestions du profil et horaire</h4>
@@ -7,7 +8,7 @@
   <!-- <form> -->
   <div class="mb-3 row">
     <label for="inputName" class="col-4 col-form-label fw-bolder">Nom</label>
-    <div class="col-8">
+    <div class="col-lg-8 col-10">
       <label name="inputName" id="inputName">{{ newEmp.nom }}</label>
     </div>
   </div>
@@ -52,10 +53,10 @@
     </div>
   </div>
   <div class="mb-3 row">
-    <div class="col-4">
+    <div class="col-lg-4 col-2">
       <label for="genre" class="col-form-label fw-bolder">Horaires</label>
     </div>
-    <div class="col-8">
+    <div class="col-lg-8 col-10">
       <div class="table-responsive">
         <p-table styleClass="p-datatable-gridlines" class="shadow-lg"
         [value]="newEmp.horaire"

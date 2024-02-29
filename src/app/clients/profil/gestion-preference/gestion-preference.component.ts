@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { MessageService } from 'primeng/api'
 import { EmployeName } from 'src/app/model'
 import { ClientService } from 'src/app/services/client.service'
 import { EmpService } from 'src/app/services/emp.service'
@@ -6,7 +7,8 @@ import { EmpService } from 'src/app/services/emp.service'
 @Component({
   selector: 'app-gestion-preference',
   templateUrl: './gestion-preference.component.html',
-  styleUrls: ['./gestion-preference.component.css']
+  styleUrls: ['./gestion-preference.component.css'],
+  providers:[MessageService]
 })
 export class GestionPreferenceComponent {
   employeName: EmployeName[] = []
@@ -15,7 +17,8 @@ export class GestionPreferenceComponent {
   favoriteEmp: string[] = []
   constructor (
     private clientService: ClientService,
-    private empservice: EmpService
+    private empservice: EmpService,
+    private messageService: MessageService
   ) {}
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
@@ -24,7 +27,8 @@ export class GestionPreferenceComponent {
         this.employeName = v
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
     this.clientService.getFavEmp(localStorage.getItem('id')!).subscribe({
@@ -32,7 +36,8 @@ export class GestionPreferenceComponent {
         this.favoriteEmp = v
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
   }
@@ -51,11 +56,12 @@ export class GestionPreferenceComponent {
       .setFavEmp(localStorage.getItem('id')!, this.favoriteEmp)
       .subscribe({
         next: v => {
-          console.log(v)
+          // console.log(v)
           this.changeEditingStatus()
         },
         error: err => {
-          console.log(err)
+          // console.log(err)
+          this.messageService.add({severity: 'error', detail:err.error})
         }
       })
   }

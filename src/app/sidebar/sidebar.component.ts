@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
+  providers:[MessageService]
 })
 export class SidebarComponent implements OnInit{
   links: any = [];
   items: any = [];
   sidebarVisible:boolean = false;
 
-  constructor(public authService:AuthService,private router:Router){}
+  constructor(public authService:AuthService,private router:Router,private messageService:MessageService){}
   ngOnInit(): void {
 
     if (localStorage.getItem('client')) {
@@ -30,7 +32,7 @@ export class SidebarComponent implements OnInit{
   }
   logout(){
     this.authService.logout().subscribe({
-      next:valiny=>{console.log("Nety");
+      next:valiny=>{
       this.authService.isLoggedIn=false
       this.authService.links=[]
       localStorage.removeItem("id")
@@ -41,7 +43,10 @@ export class SidebarComponent implements OnInit{
       this.router.navigate(['/'])
       },
 
-      error:err=>{console.log(err)}
+      error:err=>{
+
+        this.messageService.add({severity: 'error', detail:err.error})
+      }
     })
   }
 

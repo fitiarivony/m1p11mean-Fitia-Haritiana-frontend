@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { MessageService } from 'primeng/api'
 import { Service } from 'src/app/interfaces/service'
 import { FormEmploye, Genre } from 'src/app/model'
 import { EmpService } from 'src/app/services/emp.service'
@@ -8,7 +9,8 @@ import { GenreService } from 'src/app/services/genre.service'
 @Component({
   selector: 'app-show-personnel',
   templateUrl: './show-personnel.component.html',
-  styleUrls: ['./show-personnel.component.css']
+  styleUrls: ['./show-personnel.component.css'],
+  providers:[MessageService]
 })
 export class ShowPersonnelComponent {
   @Input() newEmp: FormEmploye = {
@@ -32,7 +34,8 @@ export class ShowPersonnelComponent {
   constructor (
     private genreService: GenreService,
     private empService: EmpService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {}
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
@@ -41,14 +44,15 @@ export class ShowPersonnelComponent {
         this.genres = v
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
     let serv = this.newEmp.services
     let serviceDispo: string[] = []
     serv.map(v => {
       this.services.map(s => {
-        console.log(s._id, v)
+        // console.log(s._id, v)
 
         if (s._id === v) {
           serviceDispo.push(s.nom_service)
@@ -61,10 +65,11 @@ export class ShowPersonnelComponent {
     const data = this.newEmp
     this.empService.update(data, this._id!).subscribe({
       next: v => {
-        console.log(v)
+        // console.log(v)
       },
       error: v => {
-        console.log(v)
+        // console.log(v)
+        this.messageService.add({severity: 'error', detail:v.error})
       }
     })
   }

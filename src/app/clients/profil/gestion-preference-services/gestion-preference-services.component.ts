@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Service } from 'src/app/interfaces/service';
 import { EmployeName } from 'src/app/model';
 import { ClientService } from 'src/app/services/client.service';
@@ -8,14 +9,15 @@ import { ServeService } from 'src/app/services/serve.service';
 @Component({
   selector: 'app-gestion-preference-services',
   templateUrl: './gestion-preference-services.component.html',
-  styleUrls: ['./gestion-preference-services.component.css']
+  styleUrls: ['./gestion-preference-services.component.css'],
+  providers:[MessageService]
 })
 export class GestionPreferenceServicesComponent {
   employeName: Service[] = []
   editing: boolean = false
   idPersonne: string = ''
   favoriteEmp: string[] = []
-  constructor (private serveService: ServeService, private clientService: ClientService) {}
+  constructor (private serveService: ServeService, private clientService: ClientService,private messageService:MessageService) {}
   ngOnInit () {
     // Call a function to get the URL parameter on component initialization
     this.serveService.listService().subscribe({
@@ -23,7 +25,8 @@ export class GestionPreferenceServicesComponent {
         this.employeName = v
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
     this.clientService.getFavServ(localStorage.getItem('id')!).subscribe({

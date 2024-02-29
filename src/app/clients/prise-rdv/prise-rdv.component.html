@@ -44,7 +44,8 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-serve>
-        <tr
+
+        <tr *ngIf="!isMobileScreen"
           pDraggable
           (onDragStart)="mydragStartServe(serve)"
           (onDragEnd)="mydragEndServe()"
@@ -64,6 +65,21 @@
             ></i>
           </td>
         </tr>
+        <tr *ngIf="isMobileScreen">
+          <td>{{ serve.nom_service }}</td>
+          <ng-container *ngIf="(serve.pi !== undefined) && (serve.pi!==serve.prix); else elseTemplate">
+            <td> réduit à {{ serve.prix }} prix initial({{ serve.pi }})</td>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <td>{{ serve.prix }}</td>
+          </ng-template>
+
+          <td>
+            <button class="btn btn-success rounded-pill" (click)="buttonSelectService(serve._id)">Ajouter</button>
+          </td>
+
+        </tr>
+
       </ng-template>
     </p-table>
   </div>
@@ -180,6 +196,7 @@
           <td>
             <input
               type="checkbox"
+              class="form-check-input"
               checked
               [checked]="this.rdv.reduction.includes(reduc._id)"
               name=""

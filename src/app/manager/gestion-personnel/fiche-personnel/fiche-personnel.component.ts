@@ -58,7 +58,7 @@ export class FichePersonnelComponent {
         this.services = v
       },
       error: err => {
-        console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
     this.genreService.getAll().subscribe({
@@ -66,7 +66,7 @@ export class FichePersonnelComponent {
         this.genres = v
       },
       error: err => {
-        console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
     this.getToUpdate()
@@ -91,13 +91,13 @@ export class FichePersonnelComponent {
       this.messageService.add({severity:'error', summary: 'Erreur', detail: validationErrors.join('\n')});
       // console.log(validationErrors);
     } else {
-      console.log("Data is valid!");
+      // console.log("Data is valid!");
       this.empService.update(data, this._id!).subscribe({
         next: v => {
           this.newEmp=v
           this.genres.map((g: Genre) => {
             if (g._id === this.newEmp.genre) {
-              console.log(g.nomGenre)
+              // console.log(g.nomGenre)
               this.nomGenre = g.nomGenre
             }
           })
@@ -105,7 +105,7 @@ export class FichePersonnelComponent {
           this.editing = false
         },
         error: v => {
-          console.log(v)
+          this.messageService.add({severity: 'error', detail:v.error})
         }
       })
     }
@@ -122,13 +122,14 @@ export class FichePersonnelComponent {
         this.newEmp = v
         this.genres.map((g: Genre) => {
           if (g._id === this.newEmp.genre) {
-            console.log(g.nomGenre)
+            // console.log(g.nomGenre)
             this.nomGenre = g.nomGenre
           }
         })
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
   }
@@ -138,7 +139,7 @@ export class FichePersonnelComponent {
   add (id: string) {
     let temp = this.newEmp.services
     temp = temp.filter(v => v !== id)
-    console.log(temp)
+    // console.log(temp)
     if (this.newEmp.services.length === temp.length) {
       temp.push(id)
     }

@@ -47,7 +47,8 @@ export class CreateDepenseComponent {
           next:depense=>{
             this.router.navigate(['/depenses/list'])
           },error:err=>{
-            console.log(err.message);
+            this.messageService.add({severity: 'error', detail:err.error})
+            // console.log(err.message);
           }
         }
       )

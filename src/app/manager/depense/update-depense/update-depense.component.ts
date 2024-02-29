@@ -46,7 +46,7 @@ export class UpdateDepenseComponent {
         next:valiny=>{
           this.router.navigate(['/depenses/list']);
         },
-        error:err=>console.log(err.error)
+        error:err=>this.messageService.add({severity: 'error', detail:err.error})
       })
     }
 
@@ -58,7 +58,7 @@ export class UpdateDepenseComponent {
         next:valiny=>{
           this.depense=valiny
         },
-        error:err=>console.log(err.error)
+        error:err=>this.messageService.add({severity: 'error', detail:err.error})
       })
     });
     // this.serveService.getServiceById()

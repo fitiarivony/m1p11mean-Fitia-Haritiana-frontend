@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     }
     if (requiredRole.length > 0) {
       let principal=requiredRole[0]
-      console.log(principal);
+      // console.log(principal);
 
       if (principal==="client") {
         this.router.navigate(['/sign-in']);

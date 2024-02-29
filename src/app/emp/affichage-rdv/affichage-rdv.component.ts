@@ -25,10 +25,10 @@ export class AffichageRdvComponent implements OnInit {
 
           this.rdv=rendez_vous.donnee;
           this.service=rendez_vous.service
-          console.log(rendez_vous);
+          // console.log(rendez_vous);
 
         },
-        error:err=>console.log(err.error)
+        error:err=>this.messageService.add({severity: 'error', detail:err.error})
       }
     )
   }
@@ -75,7 +75,7 @@ export class AffichageRdvComponent implements OnInit {
           this.messageService.add({ severity: 'error', detail: 'Ce rendez-vous a été marqué pas encore terminé' });
         }
       },
-      error:err =>{console.log("error")}
+      error:err =>this.messageService.add({severity: 'error', detail:err.error})
     })
   }
 
@@ -90,12 +90,13 @@ export class AffichageRdvComponent implements OnInit {
     }
     this.emp_service.filtre_rdv_emp(debut,fin,this.selectedServices).subscribe({
       next:valiny=>{
-        console.log(valiny);
+        // console.log(valiny);
         this.rdv=valiny;
 
       },
       error:err=>{
-        console.log(err);
+        // console.log(err);
+        this.messageService.add({severity: 'error', detail:err.error})
 
       }
 

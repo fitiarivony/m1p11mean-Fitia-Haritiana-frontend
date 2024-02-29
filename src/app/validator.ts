@@ -29,6 +29,8 @@ export class DevDuetValidator{
       return data[field.champ].length<=0
     }else if(field.operator==="<"){
       return data[field.champ]>=field.valeur
+    }else if(field.operator===">="){
+      return data[field.champ]<field.valeur
     }
     return data[field.champ] === field.valeur
   }

@@ -4,11 +4,13 @@ import { AvgRdvStat, BeneficeMois, TempsMoyen } from 'src/app/model'
 import { StatsService } from 'src/app/services/stats.service'
 import { Chart } from 'chart.js';
 import 'chartjs-adapter-date-fns';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-moyennes',
   templateUrl: './moyennes.component.html',
   styleUrls: ['./moyennes.component.css'],
+  providers:[MessageService]
 })
 export class MoyennesComponent {
   title = 'ng2-charts-demo'
@@ -121,7 +123,7 @@ export class MoyennesComponent {
    dataBeneficeMois:{}={};
    optionBeneficeMois:any;
 
-  constructor (private statService: StatsService) {}
+  constructor (private statService: StatsService,private messageService:MessageService) {}
   initTemps_Moyen(){
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
@@ -184,7 +186,7 @@ export class MoyennesComponent {
       // return element
     });
     benefice=benefice.sort((a, b) =>- b.daty.getTime() + a.daty.getTime());
-    console.log(benefice);
+    // console.log(benefice);
 
     this.beneficemois=benefice;
      const documentStyle = getComputedStyle(document.documentElement);
@@ -252,7 +254,7 @@ export class MoyennesComponent {
   ngOnInit () {
     this.statService.getAvgRdv().subscribe({
       next: valiny => {
-        console.log(valiny);
+        // console.log(valiny);
 
         this.tempsMoyen=valiny.tempsMoyen;
         this.initTemps_Moyen();
@@ -343,7 +345,8 @@ export class MoyennesComponent {
         }
       },
       error: err => {
-        console.log(err)
+        // console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
   }

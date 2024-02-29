@@ -51,7 +51,7 @@ export class ShowOffreComponent {
       this._id = params['id']
     })
     this.offreSpecialeService.getOne(this._id).subscribe(data => {
-      console.log(data)
+      // console.log(data)
 
       this.formOffre = data
     })
@@ -94,7 +94,7 @@ export class ShowOffreComponent {
       this.offreSpecialeService
       .update(this.formOffre, this._id)
       .subscribe(data => {
-        console.log(data)
+        // console.log(data)
         this.changeEditingStatus()
       })
     }

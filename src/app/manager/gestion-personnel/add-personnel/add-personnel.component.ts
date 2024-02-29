@@ -4,6 +4,7 @@ import { FormEmploye, Genre, ValidatorField } from 'src/app/model'
 import { GenreService } from 'src/app/services/genre.service'
 import { MessageService } from 'primeng/api'
 import { DevDuetValidator } from 'src/app/validator'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-add-personnel',
@@ -38,14 +39,15 @@ export class AddPersonnelComponent {
   constructor (
     private genreService: GenreService,
     private empService: EmpService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router:Router
   ) {
     genreService.getAll().subscribe({
       next: v => {
         this.genres = v
       },
       error: err => {
-        console.log(err)
+        this.messageService.add({severity: 'error', detail:err.error})
       }
     })
   }
@@ -63,19 +65,21 @@ export class AddPersonnelComponent {
 
     // Validate the data
     const validationErrors: string[] = DevDuetValidator.validateData(data, validator);
-
+   let today=new Date().getFullYear()
+    if(today-new Date(data.dateDeNaissance).getFullYear() <=18)validationErrors.push("L'employé doit être majeur");
     // Check if there are validation errors
     if (validationErrors.length > 0) {
       this.messageService.add({severity:'error', summary: 'Erreur', detail: validationErrors.join('\n')});
       // console.log(validationErrors);
     } else {
-      console.log("Data is valid!");
+      // console.log("Data is valid!");
       this.empService.inscription(data).subscribe({
         next: v => {
-          console.log(v)
+          // console.log(v)
+          this.router.navigate(['/emps'])
         },
         error: v => {
-          console.log(v)
+          this.messageService.add({severity: 'error', detail:v.error})
         }
       })
     }

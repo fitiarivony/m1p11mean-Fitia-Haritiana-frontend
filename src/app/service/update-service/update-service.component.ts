@@ -32,7 +32,7 @@ export class UpdateServiceComponent {
    let sep=duree.split(':');
     let minutes=parseInt(sep[0])*60+parseInt(sep[1]);
     service.duree=minutes;
-  console.log(service);
+  // console.log(service);
   const validator:ValidatorOperatorField[]=[
     {
       champ:'nom_service',valeur:'',errorMessage:'Le nom du service est obligatoire',operator:'='
@@ -60,7 +60,7 @@ export class UpdateServiceComponent {
       next:valiny=>{
         this.router.navigate(['/services/list']);
       },
-      error:err=>console.log(err.error)
+      error:err=>this.messageService.add({severity: 'error', detail:err.error})
     })
   }
   }
@@ -72,7 +72,7 @@ export class UpdateServiceComponent {
           this.service=valiny
           this.dureeMinutes=this.parseHour(valiny.duree);
         },
-        error:err=>console.log(err.error)
+        error:err=>this.messageService.add({severity: 'error', detail:err.error})
       })
     });
     // this.serveService.getServiceById()

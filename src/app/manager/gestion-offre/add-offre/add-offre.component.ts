@@ -91,8 +91,8 @@ export class AddOffreComponent {
       this.messageService.add({severity: 'error', detail: validationErrors.join(',')})
     }else{
       this.offreSpecialeService.post(this.formOffre).subscribe(data => {
-        console.log(data)
-        // this.router.navigate(['/offre/liste'])
+        // console.log(data)
+        this.router.navigate(['/offre/liste'])
       })
     }
 
@@ -100,7 +100,7 @@ export class AddOffreComponent {
   add (id: string) {
     let temp = [...this.formOffre.clientVises!]
     temp = temp.filter(v => v !== id)
-    console.log(temp)
+    // console.log(temp)
     if (this.formOffre.clientVises!.length === temp.length) {
       temp.push(id)
     }

@@ -37,7 +37,7 @@ export class Rdv_Service {
 
   check_horaire (rdv: Rdv, emps: Emp[], services: Service[],idrdv: string|undefined) {
     let date = new Date(rdv.date_rdv)
-    console.log('Taille', rdv.rdv_service.length)
+    // console.log('Taille', rdv.rdv_service.length)
 
     for (const element of rdv.rdv_service) {
       let employe = element
@@ -52,7 +52,7 @@ export class Rdv_Service {
       )
       let inside_horaire = false
       for (const horaire of horaires) {
-        console.log('check horaire')
+        // console.log('check horaire')
         if (this.in_horaire(date, horaire, service.duree)) {
           inside_horaire = true
           break
@@ -61,7 +61,7 @@ export class Rdv_Service {
       if (!inside_horaire) {
         throw new Error('Tsy anatin horaire')
       }
-      console.log('Check disponibilité')
+      // console.log('Check disponibilité')
       let farany = new Date(date)
       farany.setMinutes(service.duree + farany.getMinutes())
       let manomboka = new Date(date)
@@ -69,7 +69,7 @@ export class Rdv_Service {
       element.datefin = farany
       date.setMinutes(service.duree + date.getMinutes())
     }
-    console.log('Nety horaire')
+    // console.log('Nety horaire')
 
     return this.check_disponibilite(rdv.rdv_service,idrdv)
   }
@@ -78,10 +78,10 @@ export class Rdv_Service {
     for (let index = 0; index < rdv.rdv_service.length; index++) {
       rdv.rdv_service[index].ordre = index + 1
     }
-    console.log(emps)
+    // console.log(emps)
 
     if (this.check_horaire(rdv, emps, services,undefined)) {
-      console.log('Goooooo')
+      // console.log('Goooooo')
       return this.http.post<Rdv>(`${this.apiUrl}`, rdv, {
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export class Rdv_Service {
         rdv_service: rdv_service
       })
     }
-    console.log("Update");
+    // console.log("Update");
     return this.http.post( `${this.apiUrl}`.concat('/dispo/'+idrdv), {
       rdv_service: rdv_service
     })
@@ -135,10 +135,10 @@ export class Rdv_Service {
     for (let index = 0; index < rdv.rdv_service.length; index++) {
       rdv.rdv_service[index].ordre = index + 1
     }
-    console.log(emps)
+    // console.log(emps)
 
     if (this.check_horaire(rdv, emps, services,id_rdv)) {
-      console.log('Goooooo')
+      // console.log('Goooooo')
       return this.http.put<Rdv>(`${this.apiUrl}`.concat('/'+id_rdv), rdv, {
         headers: {
           'Content-Type': 'application/json',
